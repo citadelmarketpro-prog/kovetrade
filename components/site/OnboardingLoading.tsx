@@ -118,7 +118,7 @@ const OnboardingLoading = () => {
                 transition={{ delay: 0.2 }}
               >
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
-                  SCOPS
+                  KOVE
                   <span className="text-blue-500">TRADE</span>
                 </h1>
               </motion.div>

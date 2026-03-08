@@ -19,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://scopstrade.com"),
+  metadataBase: new URL("https://kovetrade.com"),
   title: {
     default: "KoveTrade - Copy Futures, Options & Contracts with Precision",
     template: "%s | KoveTrade",
@@ -68,10 +68,10 @@ export default function RootLayout({
 
         {/* LiveChat - Jovo */}
 
-        <Script
+        {/* <Script
           src="//code.jivosite.com/widget/jZikVtEDhl"
           strategy="afterInteractive"
-        />
+        /> */}
       </body>
     </html>
   );
