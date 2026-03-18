@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
+import { Zap, Shield, BarChart2, Globe, Rocket, Monitor, Eye, SlidersHorizontal, Layers, Headphones, BookOpen, Sparkles } from "lucide-react";
 import {
   motion,
   useScroll,
@@ -138,7 +139,6 @@ export default function Home() {
       <HeroSection />
       <MarqueeTicker />
       <StatsSection />
-      <TrustedBrandsSection />
       <AboutSection />
       <UniqueSection />
       <PlatformSection />
@@ -147,6 +147,7 @@ export default function Home() {
       <FeaturesSection />
       <TestimonialsSection />
       <CTASection />
+      <TrustedBrandsSection />
       <Footer />
     </div>
   );
@@ -389,7 +390,7 @@ function HeroSection() {
                 href="/register"
                 className="group relative overflow-hidden rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/30 text-center"
               >
-                <span className="relative z-10">Start for Free</span>
+                <span className="relative z-10">Get Started</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Link>
               <Link
@@ -514,95 +515,150 @@ function StatsSection() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// §  TRUSTED BRANDS MARQUEE
+// §  LIQUIDITY PROVIDERS
 // ═══════════════════════════════════════════════════════════════
 
-/**
- * ─── BRAND LOGOS ───────────────────────────────────────────────
- * Set `logo` to an image path (e.g. "/images/brands/accenture.png")
- * and the image will render instead of the text name.
- * ───────────────────────────────────────────────────────────────
- */
-const BRANDS_ROW_1: { name: string; logo: string | null }[] = [
-  { name: "Accenture",    logo: null },
-  { name: "Airtable",     logo: null },
-  { name: "Monday.com",   logo: null },
-  { name: "Databricks",   logo: null },
-  { name: "Amazon",       logo: null },
-  { name: "Barclays",     logo: null },
-  { name: "Spotify",      logo: null },
-  { name: "Salesforce",   logo: null },
-];
+const LP_ROW_1 = ["Alfa_bank","Banco_de_brazil","Bank_of_ireland","Bank_of_montreal","Bank_of_america","Bank_of_china","Bank_of_scotland","Bawag","Bayern_LB","BBVA","BCV","BNP_Paribas","Citibank","Barclays","HSBC","JP_morgan","Basler_kantonalbank","The_royal_bank_of_scotland","UBS","Westpac_australia_first_bank","merrill","Abbey","ABN_mro","ADCB"];
+const LP_ROW_2 = ["DNB_asa","DZ_bank","Eco_bank","Erste_bank","Fifth_third_bank","Fortis","Goldman_sachs","Handelsbanken","Helaba","Berenberg","BHF_bank","CIBC","Citizens_bank_logo","Commerzbank","Credit_agricole","Credit_europe_bank","Credit_suisse","Danske_bank","DBS_bank","Dexia_banque"];
+const LP_ROW_3 = ["Societe_generale","HSH_nordbank","ING","Intesa_san_paolo","Investec","Itau","LGT","Mizuho","MUFG","Nedbank","Nomura","Nordea","Oberbank","Post_finance","Postbank","Rabobank","Raiffeisen_bank_russia","RBC","Scotia_bank","SEB"];
 
-const BRANDS_ROW_2: { name: string; logo: string | null }[] = [
-  { name: "Goldman Sachs",    logo: null },
-  { name: "JP Morgan",        logo: null },
-  { name: "Stripe",           logo: null },
-  { name: "Coinbase",         logo: null },
-  { name: "BlackRock",        logo: null },
-  { name: "Fidelity",         logo: null },
-  { name: "Interactive",      logo: null },
-  { name: "Vanguard",         logo: null },
-];
+const LP_POSITIONS: Record<string, string> = {
+  Abbey:"0 0",ABN_mro:"0 -2.5625rem",ADCB:"0 -5.125rem",Alfa_bank:"0 -7.6875rem",
+  Banco_de_brazil:"-13.1875rem 0",Bank_of_america:"-13.1875rem -2.5625rem",Bank_of_china:"-13.1875rem -5.125rem",Bank_of_ireland:"-13.1875rem -7.6875rem",Bank_of_montreal:"-13.1875rem -10.25rem",
+  Bank_of_scotland:"0 -12.8125rem",Barclays:"-13.1875rem -12.8125rem",Basler_kantonalbank:"0 -15.375rem",Bawag:"-13.1875rem -15.375rem",Bayern_LB:"0 -17.9375rem",BBVA:"-13.1875rem -17.9375rem",BCV:"0 -20.5rem",
+  Berenberg:"-13.1875rem -20.5rem",BHF_bank:"0 -23.0625rem",BNP_Paribas:"-13.1875rem -23.0625rem",
+  CIBC:"-26.375rem 0",Citibank:"-26.375rem -2.5625rem",Citizens_bank_logo:"-26.375rem -5.125rem",Commerzbank:"-26.375rem -7.6875rem",Credit_agricole:"-26.375rem -10.25rem",Credit_europe_bank:"-26.375rem -12.8125rem",Credit_suisse:"-26.375rem -15.375rem",Danske_bank:"-26.375rem -17.9375rem",DBS_bank:"-26.375rem -20.5rem",Dexia_banque:"-26.375rem -23.0625rem",
+  DNB_asa:"0 -25.625rem",DZ_bank:"-13.1875rem -25.625rem",Eco_bank:"-26.375rem -25.625rem",Erste_bank:"0 -28.1875rem",Fifth_third_bank:"-13.1875rem -28.1875rem",Fortis:"-26.375rem -28.1875rem",Goldman_sachs:"0 -30.75rem",Handelsbanken:"-13.1875rem -30.75rem",Helaba:"-26.375rem -30.75rem",
+  HSBC:"0 -33.3125rem",HSH_nordbank:"-13.1875rem -33.3125rem",ING:"-26.375rem -33.3125rem",Intesa_san_paolo:"0 -35.875rem",Investec:"-13.1875rem -35.875rem",Itau:"-26.375rem -35.875rem",
+  JP_morgan:"-39.5625rem 0",LGT:"-39.5625rem -2.5625rem",merrill:"-39.5625rem -5.125rem",Mizuho:"-39.5625rem -7.6875rem",MUFG:"-39.5625rem -10.25rem",Nedbank:"-39.5625rem -12.8125rem",Nomura:"-39.5625rem -15.375rem",Nordea:"-39.5625rem -17.9375rem",Oberbank:"-39.5625rem -20.5rem",Post_finance:"-39.5625rem -25.625rem",Postbank:"-39.5625rem -28.1875rem",Rabobank:"-39.5625rem -30.75rem",Raiffeisen_bank_russia:"-39.5625rem -33.3125rem",RBC:"-39.5625rem -35.875rem",
+  Scotia_bank:"0 -38.4375rem",SEB:"-13.1875rem -38.4375rem",Societe_generale:"-26.375rem -38.4375rem",The_royal_bank_of_scotland:"-39.5625rem -38.4375rem",UBS:"0 -41rem",Westpac_australia_first_bank:"-13.1875rem -41rem",
+};
 
-function BrandPill({ name, logo }: { name: string; logo: string | null }) {
+function LpLogo({ name }: { name: string }) {
   return (
-    <div className="flex items-center justify-center gap-2.5 shrink-0 px-6 py-3.5 rounded-full bg-gray-100 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] mx-2.5 select-none min-w-[140px]">
-      {logo ? (
-        <Image src={logo} alt={name} width={100} height={28} className="h-6 w-auto object-contain opacity-70 dark:opacity-60 grayscale" />
-      ) : (
-        <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400 whitespace-nowrap">{name}</span>
-      )}
-    </div>
-  );
-}
-
-
-function BrandsRow({ brands, direction }: { brands: typeof BRANDS_ROW_1; direction: "left" | "right" }) {
-  const [paused, setPaused] = useState(false);
-  const animClass = direction === "left" ? "marquee-left" : "marquee-right";
-
-  return (
-    <div
-      className="relative overflow-hidden py-2"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      {/* Fade edges */}
-      <div className="absolute left-0 inset-y-0 w-20 bg-gradient-to-r from-white dark:from-[#0a0b0d] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 inset-y-0 w-20 bg-gradient-to-l from-white dark:from-[#0a0b0d] to-transparent z-10 pointer-events-none" />
-      <div
-        className={`flex ${animClass}`}
-        style={{ animationPlayState: paused ? "paused" : "running" }}
-      >
-        {/* Duplicate for seamless loop */}
-        {[...brands, ...brands, ...brands].map((b, i) => (
-          <BrandPill key={`${b.name}-${i}`} name={b.name} logo={b.logo} />
-        ))}
+    <div className="flex-shrink-0 px-3 py-4">
+      <div className="w-[160px] md:w-[220px] h-[48px] md:h-[70px] bg-white rounded-xl flex items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-300 relative overflow-hidden">
+        <div
+          className="absolute top-1/2 left-1/2 w-[210px] h-[40px] -translate-x-1/2 -translate-y-1/2 scale-[0.58] md:scale-[0.78]"
+          style={{
+            backgroundImage: "url(/logos_au.png)",
+            backgroundSize: "52.75rem 43.5625rem",
+            backgroundPosition: LP_POSITIONS[name] ?? "0 0",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
       </div>
     </div>
   );
 }
 
 function TrustedBrandsSection() {
+  const row1Ref = useRef<HTMLDivElement>(null);
+  const row2Ref = useRef<HTMLDivElement>(null);
+  const row3Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const animateRow = (el: HTMLDivElement, speed: number, dir: "ltr" | "rtl") => {
+      let x = 0;
+      let prev: number;
+      const tick = (ts: number) => {
+        const dt = prev ? ts - prev : 0;
+        prev = ts;
+        const firstChild = el.children[0] as HTMLElement | null;
+        if (!firstChild) return;
+        if (x > firstChild.getBoundingClientRect().width) {
+          dir === "ltr" ? el.appendChild(firstChild) : el.insertBefore(el.lastElementChild!, el.firstElementChild);
+          x = 0;
+        } else {
+          x += (speed / 1000) * dt;
+        }
+        el.style.transform = `translateX(${dir === "rtl" ? x : -x}px)`;
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    if (row1Ref.current) animateRow(row1Ref.current, 50, "ltr");
+    if (row2Ref.current) animateRow(row2Ref.current, 45, "rtl");
+    if (row3Ref.current) animateRow(row3Ref.current, 40, "ltr");
+  }, []);
+
   return (
-    <section className="py-16 sm:py-20 bg-white dark:bg-[#0a0b0d] border-y border-gray-100 dark:border-white/[0.04] overflow-hidden">
-      <div className="mx-auto max-w-3xl px-4 text-center mb-10">
+    <section className="py-12 sm:py-20 bg-gray-950 relative overflow-hidden">
+      {/* Subtle blue glow blobs */}
+      <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/[0.06] blur-[120px] pointer-events-none" />
+      <div className="absolute -bottom-32 right-1/4 w-[400px] h-[400px] rounded-full bg-cyan-500/[0.05] blur-[100px] pointer-events-none" />
+      {/* Dot grid */}
+      <div className="absolute inset-0 opacity-[0.022] pointer-events-none"
+        style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,1) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+
+      <div className="relative z-10 mx-auto max-w-5xl px-4 text-center mb-10 sm:mb-14">
         <Reveal>
-          <p className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white leading-snug">
-            We&apos;ve worked with and are trusted by{" "}
-            <span className="text-blue-600 dark:text-blue-400">50,000+ Global</span>{" "}
-            <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-black tracking-wide uppercase">
-              Brands
-            </span>
+          <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-400 mb-4">
+            <span className="w-5 h-px bg-blue-400" />
+            Institutional Grade
+          </p>
+          <h2
+            className="font-black tracking-tight leading-[1.08] bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent"
+            style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}
+          >
+            Liquidity Providers
+          </h2>
+          <p className="mt-4 text-[15px] text-gray-400 max-w-xl mx-auto leading-relaxed">
+            KoveTrade connects to a deep pool of tier-1 banks and prime brokers,
+            keeping spreads ultra-tight around the clock.
           </p>
         </Reveal>
       </div>
 
-      <div className="space-y-4">
-        <BrandsRow brands={BRANDS_ROW_1} direction="left" />
-        <BrandsRow brands={BRANDS_ROW_2} direction="right" />
+      {/* Logo rows */}
+      <div
+        className="overflow-hidden"
+        style={{
+          maskImage: "linear-gradient(90deg, transparent 0%, white 12%, white 88%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(90deg, transparent 0%, white 12%, white 88%, transparent 100%)",
+        }}
+      >
+        <div className="overflow-hidden mb-1">
+          <div ref={row1Ref} className="flex">
+            {[...LP_ROW_1, ...LP_ROW_1].map((n, i) => <LpLogo key={`r1-${i}`} name={n} />)}
+          </div>
+        </div>
+        <div className="overflow-hidden mb-1">
+          <div ref={row2Ref} className="flex flex-row-reverse">
+            {[...LP_ROW_2, ...LP_ROW_2].map((n, i) => <LpLogo key={`r2-${i}`} name={n} />)}
+          </div>
+        </div>
+        <div className="overflow-hidden">
+          <div ref={row3Ref} className="flex">
+            {[...LP_ROW_3, ...LP_ROW_3].map((n, i) => <LpLogo key={`r3-${i}`} name={n} />)}
+          </div>
+        </div>
       </div>
+
+      {/* CTA */}
+      <Reveal className="relative z-10 mt-12 sm:mt-16 text-center px-4">
+        <h3
+          className="font-black text-white leading-tight mb-2"
+          style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.4rem)" }}
+        >
+          Instant account opening &amp; funding
+        </h3>
+        <p className="text-gray-400 text-base mb-8">Trade within minutes.</p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Link
+            href="/register"
+            className="rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-9 py-3.5 text-sm font-bold text-white hover:from-blue-500 hover:to-blue-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300"
+          >
+            Get Started
+          </Link>
+          <Link
+            href="/login"
+            className="rounded-full border border-white/20 px-9 py-3.5 text-sm font-bold text-white hover:bg-white/[0.07] hover:border-white/35 hover:-translate-y-0.5 transition-all duration-300"
+          >
+            Trade Now
+          </Link>
+        </div>
+      </Reveal>
     </section>
   );
 }
@@ -613,48 +669,46 @@ function TrustedBrandsSection() {
 
 const UNIQUE_PILLARS = [
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-      </svg>
-    ),
-    title: "We Believe You Deserve The Best",
-    body: "Utilize our Expert Advisors, platforms and round-the-clock Copy Trading. Experiment with our distinctive risk management tool or integrate the Trading Central automated analysis add-on.",
+    icon: <Eye className="w-6 h-6" />,
+    title: "Transparent Options Copying",
+    body: "See exactly what you're mirroring—ticker, strategy, side (call/put), strike, expiry, entry/exit premium, size, and timestamps—plus a clear history of each leader's performance and drawdowns.",
     accent: "from-blue-500 to-indigo-600",
     glow: "bg-blue-500/10",
   },
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
-      </svg>
-    ),
-    title: "We Believe in Endless Possibilities",
-    body: "Gain access to a diverse range of the world's most sought-after instruments, spanning from forex pairs to CFDs on stocks, indices, commodities, and cryptocurrencies — all conveniently at your fingertips.",
+    icon: <SlidersHorizontal className="w-6 h-6" />,
+    title: "Advanced Tools for Contracts",
+    body: "Dial in risk before you copy: per-trade caps, %-of-equity allocation, max contracts, slippage guard, chain filters, and auto-hedge toggles for volatile names.",
     accent: "from-violet-500 to-purple-600",
     glow: "bg-violet-500/10",
   },
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-      </svg>
-    ),
-    title: "Great Trading Conditions",
-    body: "From crafting top-tier educational materials to delivering daily market analysis updates and hosting live webinars, our commitment to your success matches your own level of dedication.",
+    icon: <Layers className="w-6 h-6" />,
+    title: "Innovative Execution for Multi-Legs",
+    body: "Copy complex structures as a unit: verticals, calendars, iron condors, butterflies. We sync legs, preserve ratios, and apply best-effort routing.",
     accent: "from-emerald-500 to-teal-600",
     glow: "bg-emerald-500/10",
   },
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
-      </svg>
-    ),
-    title: "Swift & Dependable Execution",
-    body: "Hedging is permitted without any constraints, alongside scalping. We ensure swift and dependable order execution, along with ultra-low spreads that keep you at the cutting edge.",
+    icon: <Headphones className="w-6 h-6" />,
+    title: "Trader-Centric Support",
+    body: "Human help when it matters—real people on chat, phone, and email for account linking, order settings, and contract-specific questions.",
     accent: "from-amber-500 to-orange-500",
     glow: "bg-amber-500/10",
+  },
+  {
+    icon: <BookOpen className="w-6 h-6" />,
+    title: "Learn While You Copy",
+    body: "Leaders attach notes, rationale, and risk context to each trade. Use strategy tags and post-trade debriefs to sharpen your own playbook.",
+    accent: "from-rose-500 to-pink-600",
+    glow: "bg-rose-500/10",
+  },
+  {
+    icon: <Sparkles className="w-6 h-6" />,
+    title: "Unique Options Features",
+    body: "AutoGuard™: optional auto-TP/SL by premium, % move, or delta. Smart protections built right into every trade you copy.",
+    accent: "from-cyan-500 to-blue-500",
+    glow: "bg-cyan-500/10",
   },
 ];
 
@@ -682,17 +736,17 @@ function UniqueSection() {
           >
             What makes{" "}
             <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              KoveTrade
+              US
             </span>{" "}
-            unique?
+            different?
           </h2>
           <p className="mt-4 text-[15px] text-gray-400 max-w-xl mx-auto leading-relaxed">
-            Built from the ground up to give every trader — beginner or pro — an unfair advantage.
+            The most advanced copy trading platform with enterprise-grade security and lightning-fast execution.
           </p>
         </Reveal>
 
         {/* 4 pillars grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {UNIQUE_PILLARS.map(({ icon, title, body, accent, glow }, i) => (
             <Reveal key={title} delay={0.1 * i}>
               <div className="group relative flex flex-col h-full rounded-3xl border border-white/[0.07] bg-white/[0.03] p-7 overflow-hidden transition-all duration-500 hover:border-white/[0.15] hover:bg-white/[0.06] hover:-translate-y-2 cursor-default">
@@ -817,9 +871,9 @@ function AboutSection() {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-24 items-center">
 
           {/* Left — stacked phone mockups */}
-          <Reveal dir="left">
+          {/* <Reveal dir="left">
             <PhoneMockups />
-          </Reveal>
+          </Reveal> */}
 
           {/* Right — copy */}
           <div>
@@ -948,112 +1002,72 @@ function PlatformSection() {
         {/* Two platform UI cards */}
         <div className="grid md:grid-cols-2 gap-6">
 
-          {/* Card 1 — chart */}
-          <Reveal dir="left">
-            <div className="relative rounded-3xl bg-[#111827] border border-white/[0.07] p-6 overflow-hidden h-full">
-              {/*
-                IMAGE PLACEHOLDER:
-                Dark trading platform chart card.
-                Candlestick chart for BTC/USD showing a December bull run.
-                Red & green candles, volume bars at bottom,
-                date labels: "Dec 1", "Dec 16", "Dec 30".
-                KoveTrade logo watermark bottom-right.
-                Background: #111827 with subtle blue radial glow top-left.
-              */}
-              <div className="absolute -top-8 -left-8 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+          
 
-              <p className="text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-5">Live Chart · BTC/USD</p>
-
-              {/* Simulated candlestick bars */}
-              <div className="flex items-end gap-[2px] h-48 bg-white/[0.03] rounded-2xl px-3 pb-3 pt-4 mb-3">
-                {PLATFORM_BARS.map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 rounded-sm transition-all"
-                    style={{
-                      height: `${h}%`,
-                      background: i % 2 === 0 ? "rgba(239,68,68,0.7)" : "rgba(16,185,129,0.7)",
-                    }}
-                  />
-                ))}
-              </div>
-
-              <div className="flex justify-between text-[10px] text-gray-600 px-1 mb-6">
-                <span>Dec 1</span><span>Dec 16</span><span>Dec 30</span>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-2xl font-black text-white">$43,182</p>
-                  <p className="text-xs text-emerald-400 font-semibold mt-0.5">+8.4% this month</p>
-                </div>
-                <div className="w-10 h-10 rounded-2xl bg-white/[0.06] flex items-center justify-center">
-                  <span className="text-white font-black text-sm">KT</span>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Card 2 — trade interface */}
-          <Reveal dir="right">
-            <div className="rounded-3xl bg-[#0f172a] border border-white/[0.07] p-6 h-full flex flex-col">
-              {/*
-                IMAGE PLACEHOLDER:
-                Dark KoveTrade trade interface card.
-                Header "Trade". Tabs: Buy (active/green), Sell, Convert.
-                Fields: Type → Crypto, Amount → 0.00 USD, Asset → BTC (with Bitcoin icon).
-                CTA: gradient blue "Buy Now →" button.
-                Background: #0f172a. Subtle purple glow top-right.
-              */}
-              <div className="flex items-center justify-between mb-6">
-                <p className="text-[11px] text-gray-500 font-bold uppercase tracking-widest">Trade</p>
-                <div className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Live
-                </div>
-              </div>
-
-              <div className="flex gap-2 mb-6">
-                {["Buy", "Sell", "Convert"].map((t, i) => (
-                  <button
-                    key={t}
-                    className={`flex-1 py-3 rounded-2xl text-[13px] font-bold transition-all ${
-                      i === 0
-                        ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
-                        : "bg-white/[0.04] text-gray-500 border border-white/[0.07] hover:bg-white/[0.07]"
-                    }`}
-                  >
-                    {t}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex-1 space-y-3 mb-6">
-                <div className="flex justify-between items-center bg-white/[0.04] border border-white/[0.07] rounded-2xl px-4 py-3.5">
-                  <span className="text-[12px] text-gray-500 font-medium">Type</span>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[13px] text-white font-semibold">Crypto</span>
-                    <svg className="w-3 h-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                    </svg>
+          {/* Platform feature text card */}
+          <Reveal className="md:col-span-2">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {[
+                {
+                  icon: <Zap className="w-5 h-5 text-white" />,
+                  accent: "from-blue-500 to-indigo-600",
+                  glow: "bg-blue-500/8 dark:bg-blue-500/10",
+                  border: "border-blue-100 dark:border-blue-500/20",
+                  title: "Instant Trade Mirroring",
+                  body: "Every move a top trader makes is copied to your account in real time — with zero delay and full transparency on every position.",
+                },
+                {
+                  icon: <Shield className="w-5 h-5 text-white" />,
+                  accent: "from-emerald-500 to-teal-600",
+                  glow: "bg-emerald-500/8 dark:bg-emerald-500/10",
+                  border: "border-emerald-100 dark:border-emerald-500/20",
+                  title: "AutoGuard™ Protection",
+                  body: "Set a maximum drawdown per trader and AutoGuard™ automatically closes all positions the moment your limit is hit — so you never lose more than you choose.",
+                },
+                {
+                  icon: <BarChart2 className="w-5 h-5 text-white" />,
+                  accent: "from-violet-500 to-purple-600",
+                  glow: "bg-violet-500/8 dark:bg-violet-500/10",
+                  border: "border-violet-100 dark:border-violet-500/20",
+                  title: "Live Portfolio Dashboard",
+                  body: "Track every copied trade, monitor real-time P&L across multiple strategies, and switch or stop copying any trader with a single tap.",
+                },
+                {
+                  icon: <Globe className="w-5 h-5 text-white" />,
+                  accent: "from-amber-500 to-orange-500",
+                  glow: "bg-amber-500/8 dark:bg-amber-500/10",
+                  border: "border-amber-100 dark:border-amber-500/20",
+                  title: "100+ Tradeable Assets",
+                  body: "Crypto, forex pairs, indices, commodities and equities — all available from one account with raw spreads from 0.0 pips.",
+                },
+                {
+                  icon: <Rocket className="w-5 h-5 text-white" />,
+                  accent: "from-rose-500 to-pink-600",
+                  glow: "bg-rose-500/8 dark:bg-rose-500/10",
+                  border: "border-rose-100 dark:border-rose-500/20",
+                  title: "Sub-25ms Execution",
+                  body: "Our engine is co-located in NY4 — the same data centre used by institutional desks. Every order executes in under 25 milliseconds, guaranteed.",
+                },
+                {
+                  icon: <Monitor className="w-5 h-5 text-white" />,
+                  accent: "from-cyan-500 to-blue-500",
+                  glow: "bg-cyan-500/8 dark:bg-cyan-500/10",
+                  border: "border-cyan-100 dark:border-cyan-500/20",
+                  title: "MT4 · MT5 · xStation",
+                  body: "Trade on the platform you already know. KoveTrade integrates with MetaTrader 4, MetaTrader 5, and xStation — all with full copy-trade support.",
+                },
+              ].map(({ icon, accent, glow, border, title, body }) => (
+                <div
+                  key={title}
+                  className={`group rounded-2xl border ${border} ${glow} p-6 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/30 transition-all duration-300`}
+                >
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${accent} flex items-center justify-center mb-4 shadow-md`}>
+                    {icon}
                   </div>
+                  <h3 className="text-[15px] font-bold text-gray-900 dark:text-white mb-2 leading-snug">{title}</h3>
+                  <p className="text-[13px] text-gray-500 dark:text-gray-400 leading-relaxed">{body}</p>
                 </div>
-                <div className="flex justify-between items-center bg-white/[0.04] border border-white/[0.07] rounded-2xl px-4 py-3.5">
-                  <span className="text-[12px] text-gray-500 font-medium">Amount</span>
-                  <span className="text-[13px] text-white font-semibold">0.00 USD</span>
-                </div>
-                <div className="flex justify-between items-center bg-white/[0.04] border border-white/[0.07] rounded-2xl px-4 py-3.5">
-                  <span className="text-[12px] text-gray-500 font-medium">Asset</span>
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center text-[9px] font-black text-white">₿</div>
-                    <span className="text-[13px] text-white font-semibold">Bitcoin</span>
-                  </div>
-                </div>
-              </div>
-
-              <button className="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold text-[14px] hover:from-blue-500 hover:to-blue-400 hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-300">
-                Buy Now →
-              </button>
+              ))}
             </div>
           </Reveal>
         </div>
@@ -1130,7 +1144,7 @@ function HowItWorksSection() {
               href="/register"
               className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-10 py-4 text-sm font-bold text-white hover:from-blue-500 hover:to-blue-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300"
             >
-              Get Started — It&apos;s Free
+              Get Started
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -1396,7 +1410,7 @@ const REVIEWS = [
     name: "Mark Villomas",
     handle: "@marktrades",
     stars: 5,
-    text: "I was skeptical at first, but after three months of copy trading with KoveTrade I've made more than my entire previous year of trading solo. The platform is transparent, fast, and the support team is genuinely helpful.",
+    text: "Following three months of engaging in copy trading with KoveTrade, my returns have surpassed my total earnings from the entirety of my previous year's independent trading activities. The platform demonstrates exceptional transparency and speed, and the support team consistently provides invaluable assistance.",
   },
   {
     avatar: "UW",
@@ -1545,7 +1559,7 @@ function CTASection() {
                 href="/register"
                 className="rounded-full bg-white px-10 py-4 text-sm font-bold text-blue-700 transition-all duration-300 hover:bg-blue-50 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/20 text-center"
               >
-                Start for Free
+                Get Started
               </Link>
               <Link
                 href="/login"

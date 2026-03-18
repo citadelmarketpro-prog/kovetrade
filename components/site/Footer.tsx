@@ -125,19 +125,7 @@ const Footer = () => {
               </p>
             </div>
 
-            {/* Social icons */}
-            <div className="flex items-center gap-2">
-              {socialLinks.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-gray-500 dark:text-gray-400 transition hover:border-blue-500/60 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10"
-                >
-                  {s.icon}
-                </a>
-              ))}
-            </div>
+           
 
             {/* Regulator badges */}
             <div>
