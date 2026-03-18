@@ -1,8 +1,1577 @@
-import { redirect } from "next/navigation";
+"use client";
 
+import React, { useRef, useEffect, useState } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useInView,
+} from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
+import Image from "next/image";
+import Navbar from "@/components/site/Navbar";
+import Footer from "@/components/site/Footer";
+
+// ─────────────────────────────────────────
+// DESIGN TOKENS
+// ─────────────────────────────────────────
+const E = [0.16, 1, 0.3, 1] as const; // ease‑out expo
+
+// ─────────────────────────────────────────
+// PRIMITIVES
+// ─────────────────────────────────────────
+
+function Reveal({
+  children,
+  delay = 0,
+  className = "",
+  dir = "up",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+  dir?: "up" | "left" | "right" | "none";
+}) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-6% 0px" });
+  const from = {
+    up:    { opacity: 0, y: 40, x: 0  },
+    left:  { opacity: 0, x: -52, y: 0 },
+    right: { opacity: 0, x: 52,  y: 0 },
+    none:  { opacity: 0, y: 0,   x: 0 },
+  }[dir];
+  return (
+    <motion.div
+      ref={ref}
+      initial={from}
+      animate={inView ? { opacity: 1, y: 0, x: 0 } : from}
+      transition={{ duration: 0.82, delay, ease: E }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function GsapNum({ to, suffix = "" }: { to: number; suffix?: string }) {
+  const [n, setN] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+  useEffect(() => {
+    if (!inView) return;
+    const obj = { v: 0 };
+    gsap.to(obj, {
+      v: to,
+      duration: 2.4,
+      ease: "power3.out",
+      onUpdate: () => setN(Math.round(obj.v)),
+    });
+  }, [inView, to]);
+  return (
+    <span ref={ref}>
+      {n.toLocaleString()}
+      {suffix}
+    </span>
+  );
+}
+
+/** SVG sparkline chart with animated draw-in */
+function Sparkline({
+  data,
+  positive = true,
+  w = 160,
+  h = 52,
+}: {
+  data: number[];
+  positive?: boolean;
+  w?: number;
+  h?: number;
+}) {
+  const color = positive ? "#10b981" : "#ef4444";
+  const min = Math.min(...data);
+  const max = Math.max(...data);
+  const rng = max - min || 1;
+  const pts = data.map((v, i) => [
+    (i / (data.length - 1)) * w,
+    h - ((v - min) / rng) * (h - 6) - 3,
+  ] as [number, number]);
+  const d = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+  const area = `${d} L${w},${h} L0,${h} Z`;
+  const uid = positive ? "sp" : "sn";
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="overflow-visible">
+      <defs>
+        <linearGradient id={uid} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity="0.22" />
+          <stop offset="100%" stopColor={color} stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={area} fill={`url(#${uid})`} />
+      <motion.path
+        d={d}
+        stroke={color}
+        strokeWidth="1.75"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 1.8, ease: "easeOut", delay: 0.4 }}
+      />
+    </svg>
+  );
+}
+
+// ─────────────────────────────────────────
+// PAGE
+// ─────────────────────────────────────────
 export default function Home() {
-  redirect("/login");
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+  }, []);
+
+  return (
+    <div className="overflow-x-hidden bg-white dark:bg-[#070809] text-gray-900 dark:text-white">
+      <Navbar />
+      <HeroSection />
+      <MarqueeTicker />
+      <StatsSection />
+      <TrustedBrandsSection />
+      <AboutSection />
+      <UniqueSection />
+      <PlatformSection />
+      <HowItWorksSection />
+      <TopTradersSection />
+      <FeaturesSection />
+      <TestimonialsSection />
+      <CTASection />
+      <Footer />
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// §1  HERO
+// ═══════════════════════════════════════════════════════════════
+
+/** The hero trading card — built entirely in JSX, no images */
+function HeroCard() {
+  const CHART = [42, 51, 46, 63, 57, 74, 69, 86, 80, 95, 90, 108, 100, 119, 112, 128];
+  const [copied, setCopied] = useState(false);
+
+  return (
+    <div className="relative select-none">
+      {/* ── Main card ── */}
+      <motion.div
+        className="relative w-[290px] md:w-[320px] lg:w-[340px] rounded-3xl bg-white dark:bg-zinc-900 border border-gray-100 dark:border-white/[0.07] shadow-[0_32px_72px_rgba(0,0,0,0.1)] dark:shadow-[0_32px_72px_rgba(0,0,0,0.7)] p-5 lg:p-6 overflow-hidden"
+        initial={{ opacity: 0, y: 48, scale: 0.94 }}
+        animate={{ opacity: 1, y: 0,  scale: 1     }}
+        transition={{ duration: 1.1, delay: 0.55, ease: E }}
+      >
+        {/* Faint gradient bg */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/60 to-transparent dark:from-blue-950/20 dark:to-transparent pointer-events-none" />
+
+        <div className="relative z-10">
+          {/* Trader header */}
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-sm font-black shadow-lg shadow-blue-500/30 shrink-0">
+                AT
+              </div>
+              <div>
+                <p className="text-sm font-bold text-gray-900 dark:text-white leading-none mb-1">Alex Thompson</p>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                  <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">Elite Trader · Verified</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              ))}
+            </div>
+          </div>
+
+          {/* Chart */}
+          <div className="mb-4 -mx-0.5">
+            <Sparkline data={CHART} positive w={300} h={62} />
+          </div>
+
+          {/* Stats grid */}
+          <div className="grid grid-cols-3 gap-2 mb-5">
+            {[
+              { v: "+127.4%", l: "12M Return",  c: "text-emerald-600 dark:text-emerald-400" },
+              { v: "Low 2/10", l: "Risk Score",  c: "text-blue-600 dark:text-blue-400"       },
+              { v: "4,291",    l: "Copiers",     c: "text-gray-900 dark:text-white"           },
+            ].map(({ v, l, c }) => (
+              <div key={l} className="rounded-xl bg-gray-50 dark:bg-zinc-800/70 px-2 py-2.5 text-center">
+                <p className={`text-[12px] font-black leading-none mb-1 ${c}`}>{v}</p>
+                <p className="text-[9px] text-gray-400 dark:text-gray-500 leading-none uppercase tracking-wide">{l}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Copy button */}
+          <motion.button
+            onClick={() => { setCopied(true); setTimeout(() => setCopied(false), 2500); }}
+            className={`w-full rounded-2xl py-3.5 text-sm font-bold text-white transition-all duration-300 ${
+              copied
+                ? "bg-emerald-500 shadow-lg shadow-emerald-500/30"
+                : "bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/30 hover:shadow-blue-500/40 hover:-translate-y-0.5"
+            }`}
+            whileTap={{ scale: 0.97 }}
+          >
+            {copied ? "✓  Copying Now" : "Copy This Trader"}
+          </motion.button>
+        </div>
+      </motion.div>
+
+      {/* ── Floating notification: profit ── */}
+      <motion.div
+        className="absolute -top-5 -right-3 rounded-2xl bg-emerald-500 px-4 py-2.5 shadow-xl shadow-emerald-500/30"
+        initial={{ opacity: 0, scale: 0.6, y: 12 }}
+        animate={{ opacity: 1, scale: 1,   y: 0  }}
+        transition={{ delay: 1.7, duration: 0.5, ease: E }}
+      >
+        <p className="text-white text-[12px] font-bold leading-none">+$1,247 profit</p>
+        <p className="text-emerald-200 text-[10px] mt-0.5">Last 30 days</p>
+      </motion.div>
+
+      {/* ── Floating BTC mini card ── */}
+      <motion.div
+        className="absolute -bottom-6 -left-6 rounded-2xl bg-white dark:bg-zinc-900 border border-gray-100 dark:border-white/[0.08] px-4 py-3 shadow-2xl shadow-black/10 dark:shadow-black/60"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1,  x: 0  }}
+        transition={{ delay: 2, duration: 0.6, ease: E }}
+      >
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-orange-100 dark:bg-orange-500/10 flex items-center justify-center text-base text-orange-600 dark:text-orange-400 font-bold shrink-0">
+            ₿
+          </div>
+          <div>
+            <p className="text-[10px] text-gray-400 mb-0.5">BTC/USD · Copied</p>
+            <p className="text-sm font-black text-gray-900 dark:text-white leading-none">$94,857</p>
+          </div>
+          <span className="ml-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">+2.4%</span>
+        </div>
+      </motion.div>
+
+      {/* ── Floating second trader card ── */}
+      <motion.div
+        className="absolute top-[45%] -right-16 hidden xl:flex items-center gap-3 rounded-2xl bg-white dark:bg-zinc-900 border border-gray-100 dark:border-white/[0.07] px-4 py-3 shadow-xl shadow-black/8 dark:shadow-black/50"
+        initial={{ opacity: 0, x: 24 }}
+        animate={{ opacity: 1,  x: 0  }}
+        transition={{ delay: 2.2, duration: 0.6, ease: E }}
+      >
+        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white text-xs font-black shrink-0">
+          SL
+        </div>
+        <div>
+          <p className="text-[11px] font-bold text-gray-900 dark:text-white leading-none mb-0.5">Sophie Laurent</p>
+          <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">+89.2% this year</p>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+function HeroSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const yCard = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+
+  return (
+    <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden">
+      {/* ── Light mode background ── */}
+      <div className="absolute inset-0 pointer-events-none dark:hidden">
+        <div
+          className="absolute -top-[10%] right-[0%] w-[700px] h-[700px] rounded-full opacity-[0.12]"
+          style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 62%)" }}
+        />
+        <div
+          className="absolute bottom-[0%] left-[5%] w-[500px] h-[500px] rounded-full opacity-[0.06]"
+          style={{ background: "radial-gradient(circle, #8b5cf6 0%, transparent 62%)" }}
+        />
+        {/* Fine dot grid */}
+        <div
+          className="absolute inset-0 opacity-[0.25]"
+          style={{
+            backgroundImage: "radial-gradient(circle, #cbd5e1 1px, transparent 1px)",
+            backgroundSize: "26px 26px",
+          }}
+        />
+      </div>
+
+      {/* ── Dark mode background ── */}
+      <div className="absolute inset-0 pointer-events-none hidden dark:block">
+        <div
+          className="aurora-a absolute -top-[25%] -left-[5%] w-[800px] h-[800px] rounded-full"
+          style={{ background: "radial-gradient(circle, #1d4ed8 0%, transparent 60%)" }}
+        />
+        <div
+          className="aurora-b absolute -bottom-[15%] right-[5%] w-[600px] h-[600px] rounded-full"
+          style={{ background: "radial-gradient(circle, #6d28d9 0%, transparent 60%)" }}
+        />
+        <div
+          className="aurora-c absolute top-[35%] right-[30%] w-[350px] h-[350px] rounded-full"
+          style={{ background: "radial-gradient(circle, #0891b2 0%, transparent 60%)" }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.028]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 pt-20 pb-16 sm:pt-28 sm:pb-20 lg:pt-36">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-14 lg:gap-20 items-center">
+
+          {/* ── LEFT: copy ── */}
+          <motion.div style={{ y: yText }}>
+            {/* Badge */}
+            <motion.div
+              className="inline-flex items-center gap-2.5 rounded-full border border-blue-200 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/[0.08] px-4 py-2 mb-8"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: E }}
+            >
+              <span className="relative flex w-2 h-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-50" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span className="text-[11px] font-semibold text-blue-700 dark:text-blue-300 tracking-wide">
+                Copy Trading Platform · Trusted by 50M+ Traders
+              </span>
+            </motion.div>
+
+            {/* Headline */}
+            <motion.h1
+              className="font-black leading-[1.06] tracking-tight mb-6 text-gray-900 dark:text-white"
+              style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)" }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.82, delay: 0.1, ease: E }}
+            >
+              Invest Like the{" "}
+              <span className="text-gradient-animate">World&apos;s Best</span>{" "}
+              Traders.
+            </motion.h1>
+
+            {/* Sub */}
+            <motion.p
+              className="text-base lg:text-lg text-gray-500 dark:text-gray-400 max-w-md leading-relaxed mb-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: E }}
+            >
+              Copy real trades automatically from top-performing investors.
+              Start in minutes — no experience required. Your portfolio grows
+              while they trade.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              className="flex flex-col sm:flex-row flex-wrap gap-3 mb-10 sm:mb-12"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.28, ease: E }}
+            >
+              <Link
+                href="/register"
+                className="group relative overflow-hidden rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/30 text-center"
+              >
+                <span className="relative z-10">Start for Free</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </Link>
+              <Link
+                href="/login"
+                className="inline-flex items-center justify-center gap-1.5 rounded-full border border-gray-200 dark:border-white/[0.1] bg-white dark:bg-white/[0.03] px-8 py-3.5 text-sm font-bold text-gray-700 dark:text-white transition-all duration-300 hover:border-blue-300 dark:hover:border-blue-500/40 hover:-translate-y-0.5"
+              >
+                Explore Traders
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </motion.div>
+
+            {/* Social proof strip */}
+            <motion.div
+              className="grid grid-cols-2 sm:flex sm:items-center sm:flex-wrap gap-y-4 gap-x-5"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.42 }}
+            >
+              {[
+                { v: "4.8★", l: "App Store Rating" },
+                { v: "50M+", l: "Active Users"     },
+                { v: "40+",  l: "Countries"         },
+                { v: "$2.4B", l: "Volume Copied"   },
+              ].map(({ v, l }, i) => (
+                <React.Fragment key={l}>
+                  <div>
+                    <p className="text-xl font-black text-gray-900 dark:text-white leading-none mb-0.5">{v}</p>
+                    <p className="text-[11px] text-gray-500 dark:text-gray-500">{l}</p>
+                  </div>
+                  {i < 3 && <div className="hidden sm:block w-px h-7 bg-gray-200 dark:bg-white/[0.08]" />}
+                </React.Fragment>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* ── RIGHT: trading card ── */}
+          <motion.div style={{ y: yCard }} className="relative hidden md:flex items-center justify-center py-8 lg:py-16">
+            <HeroCard />
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// §2  MARQUEE TICKER
+// ═══════════════════════════════════════════════════════════════
+const TICKS = [
+  { s: "BTC/USD",  p: "$94,857",   c: "+2.4%",  up: true  },
+  { s: "ETH/USD",  p: "$3,241",    c: "+1.8%",  up: true  },
+  { s: "AAPL",     p: "$213.49",   c: "+0.9%",  up: true  },
+  { s: "EUR/USD",  p: "1.1706",    c: "−0.12%", up: false },
+  { s: "TSLA",     p: "$412.23",   c: "+3.2%",  up: true  },
+  { s: "GOLD",     p: "$2,341",    c: "+0.6%",  up: true  },
+  { s: "NASDAQ",   p: "19,842",    c: "−0.3%",  up: false },
+  { s: "GBP/USD",  p: "1.2745",    c: "+0.08%", up: true  },
+  { s: "BNB",      p: "$632",      c: "+1.5%",  up: true  },
+  { s: "SPX500",   p: "5,441",     c: "+0.4%",  up: true  },
+];
+
+function MarqueeTicker() {
+  return (
+    <div className="relative overflow-hidden bg-gray-950 border-y border-gray-800 py-3.5">
+      <div className="absolute left-0 inset-y-0 w-16 bg-gradient-to-r from-gray-950 to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 inset-y-0 w-16 bg-gradient-to-l from-gray-950 to-transparent z-10 pointer-events-none" />
+      <div className="flex marquee-left">
+        {[...TICKS, ...TICKS].map(({ s, p, c, up }, i) => (
+          <div key={i} className="flex items-center gap-2.5 shrink-0 px-6">
+            <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${up ? "bg-emerald-500" : "bg-red-500"}`} />
+            <span className="text-[12px] font-semibold text-gray-400 tracking-wide">{s}</span>
+            <span className="text-[12px] font-black text-white">{p}</span>
+            <span className={`text-[11px] font-bold ${up ? "text-emerald-400" : "text-red-400"}`}>{c}</span>
+            <span className="w-px h-3.5 bg-gray-700 ml-3" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// §3  STATS
+// ═══════════════════════════════════════════════════════════════
+const STATS = [
+  { to: 50,   suf: "M+", label: "Active Traders",       sub: "and growing every day"            },
+  { to: 100,  suf: "+",  label: "Assets to Trade",      sub: "crypto, stocks, forex & more"     },
+  { to: 40,   suf: "+",  label: "Countries",             sub: "with full regulatory coverage"    },
+  { to: 2400, suf: "M+", label: "Volume Copied ($)",    sub: "in the last 12 months"             },
+];
+
+function StatsSection() {
+  return (
+    <section className="bg-gray-50 dark:bg-[#0a0b0d] border-y border-gray-100 dark:border-white/[0.04]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4">
+          {STATS.map(({ to, suf, label, sub }, i) => (
+            <Reveal key={label} delay={0.08 * i}>
+              <div className={`px-4 sm:px-6 py-10 lg:py-16 text-center
+                ${i % 2 === 0 ? "border-r border-gray-100 dark:border-white/[0.04]" : ""}
+                ${i === 1 ? "lg:border-r border-gray-100 dark:border-white/[0.04]" : ""}
+                ${i === 2 ? "lg:border-r border-gray-100 dark:border-white/[0.04]" : ""}
+                ${i >= 2 ? "border-t border-gray-100 dark:border-white/[0.04] lg:border-t-0" : ""}
+              `}>
+                <p
+                  className="font-black text-gray-900 dark:text-white leading-none tabular-nums mb-2"
+                  style={{ fontSize: "clamp(1.8rem, 4.5vw, 4rem)" }}
+                >
+                  <GsapNum to={to} suffix={suf} />
+                </p>
+                <p className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">{label}</p>
+                <p className="text-[12px] text-gray-400 dark:text-gray-600">{sub}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// §  TRUSTED BRANDS MARQUEE
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * ─── BRAND LOGOS ───────────────────────────────────────────────
+ * Set `logo` to an image path (e.g. "/images/brands/accenture.png")
+ * and the image will render instead of the text name.
+ * ───────────────────────────────────────────────────────────────
+ */
+const BRANDS_ROW_1: { name: string; logo: string | null }[] = [
+  { name: "Accenture",    logo: null },
+  { name: "Airtable",     logo: null },
+  { name: "Monday.com",   logo: null },
+  { name: "Databricks",   logo: null },
+  { name: "Amazon",       logo: null },
+  { name: "Barclays",     logo: null },
+  { name: "Spotify",      logo: null },
+  { name: "Salesforce",   logo: null },
+];
+
+const BRANDS_ROW_2: { name: string; logo: string | null }[] = [
+  { name: "Goldman Sachs",    logo: null },
+  { name: "JP Morgan",        logo: null },
+  { name: "Stripe",           logo: null },
+  { name: "Coinbase",         logo: null },
+  { name: "BlackRock",        logo: null },
+  { name: "Fidelity",         logo: null },
+  { name: "Interactive",      logo: null },
+  { name: "Vanguard",         logo: null },
+];
+
+function BrandPill({ name, logo }: { name: string; logo: string | null }) {
+  return (
+    <div className="flex items-center justify-center gap-2.5 shrink-0 px-6 py-3.5 rounded-full bg-gray-100 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] mx-2.5 select-none min-w-[140px]">
+      {logo ? (
+        <Image src={logo} alt={name} width={100} height={28} className="h-6 w-auto object-contain opacity-70 dark:opacity-60 grayscale" />
+      ) : (
+        <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400 whitespace-nowrap">{name}</span>
+      )}
+    </div>
+  );
 }
 
 
+function BrandsRow({ brands, direction }: { brands: typeof BRANDS_ROW_1; direction: "left" | "right" }) {
+  const [paused, setPaused] = useState(false);
+  const animClass = direction === "left" ? "marquee-left" : "marquee-right";
 
+  return (
+    <div
+      className="relative overflow-hidden py-2"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* Fade edges */}
+      <div className="absolute left-0 inset-y-0 w-20 bg-gradient-to-r from-white dark:from-[#0a0b0d] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 inset-y-0 w-20 bg-gradient-to-l from-white dark:from-[#0a0b0d] to-transparent z-10 pointer-events-none" />
+      <div
+        className={`flex ${animClass}`}
+        style={{ animationPlayState: paused ? "paused" : "running" }}
+      >
+        {/* Duplicate for seamless loop */}
+        {[...brands, ...brands, ...brands].map((b, i) => (
+          <BrandPill key={`${b.name}-${i}`} name={b.name} logo={b.logo} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TrustedBrandsSection() {
+  return (
+    <section className="py-16 sm:py-20 bg-white dark:bg-[#0a0b0d] border-y border-gray-100 dark:border-white/[0.04] overflow-hidden">
+      <div className="mx-auto max-w-3xl px-4 text-center mb-10">
+        <Reveal>
+          <p className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white leading-snug">
+            We&apos;ve worked with and are trusted by{" "}
+            <span className="text-blue-600 dark:text-blue-400">50,000+ Global</span>{" "}
+            <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-black tracking-wide uppercase">
+              Brands
+            </span>
+          </p>
+        </Reveal>
+      </div>
+
+      <div className="space-y-4">
+        <BrandsRow brands={BRANDS_ROW_1} direction="left" />
+        <BrandsRow brands={BRANDS_ROW_2} direction="right" />
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// §  WHAT MAKES US UNIQUE
+// ═══════════════════════════════════════════════════════════════
+
+const UNIQUE_PILLARS = [
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+      </svg>
+    ),
+    title: "We Believe You Deserve The Best",
+    body: "Utilize our Expert Advisors, platforms and round-the-clock Copy Trading. Experiment with our distinctive risk management tool or integrate the Trading Central automated analysis add-on.",
+    accent: "from-blue-500 to-indigo-600",
+    glow: "bg-blue-500/10",
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
+      </svg>
+    ),
+    title: "We Believe in Endless Possibilities",
+    body: "Gain access to a diverse range of the world's most sought-after instruments, spanning from forex pairs to CFDs on stocks, indices, commodities, and cryptocurrencies — all conveniently at your fingertips.",
+    accent: "from-violet-500 to-purple-600",
+    glow: "bg-violet-500/10",
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+      </svg>
+    ),
+    title: "Great Trading Conditions",
+    body: "From crafting top-tier educational materials to delivering daily market analysis updates and hosting live webinars, our commitment to your success matches your own level of dedication.",
+    accent: "from-emerald-500 to-teal-600",
+    glow: "bg-emerald-500/10",
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+      </svg>
+    ),
+    title: "Swift & Dependable Execution",
+    body: "Hedging is permitted without any constraints, alongside scalping. We ensure swift and dependable order execution, along with ultra-low spreads that keep you at the cutting edge.",
+    accent: "from-amber-500 to-orange-500",
+    glow: "bg-amber-500/10",
+  },
+];
+
+function UniqueSection() {
+  return (
+    <section className="py-16 sm:py-24 lg:py-32 bg-gray-950 overflow-hidden relative">
+      {/* Subtle background texture */}
+      <div
+        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,1) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+      {/* Glow blobs */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/[0.07] blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-600/[0.07] blur-[100px] pointer-events-none" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <Reveal className="text-center mb-14 lg:mb-20">
+          <h2
+            className="font-black tracking-tight text-white leading-[1.08]"
+            style={{ fontSize: "clamp(1.9rem, 4.5vw, 3.4rem)" }}
+          >
+            What makes{" "}
+            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              KoveTrade
+            </span>{" "}
+            unique?
+          </h2>
+          <p className="mt-4 text-[15px] text-gray-400 max-w-xl mx-auto leading-relaxed">
+            Built from the ground up to give every trader — beginner or pro — an unfair advantage.
+          </p>
+        </Reveal>
+
+        {/* 4 pillars grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+          {UNIQUE_PILLARS.map(({ icon, title, body, accent, glow }, i) => (
+            <Reveal key={title} delay={0.1 * i}>
+              <div className="group relative flex flex-col h-full rounded-3xl border border-white/[0.07] bg-white/[0.03] p-7 overflow-hidden transition-all duration-500 hover:border-white/[0.15] hover:bg-white/[0.06] hover:-translate-y-2 cursor-default">
+                {/* Hover gradient wash */}
+                <div className={`absolute inset-0 ${glow} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+
+                {/* Icon */}
+                <div className={`relative z-10 w-12 h-12 rounded-2xl bg-gradient-to-br ${accent} flex items-center justify-center text-white shadow-lg mb-6 shrink-0`}>
+                  {icon}
+                </div>
+
+                {/* Content */}
+                <div className="relative z-10">
+                  <h3 className="text-[15px] font-bold text-white leading-snug mb-3">{title}</h3>
+                  <p className="text-[13px] text-gray-400 leading-relaxed">{body}</p>
+                </div>
+
+                {/* Decorative number watermark */}
+                <span className="absolute bottom-4 right-5 text-[5rem] font-black leading-none text-white/[0.03] select-none pointer-events-none">
+                  {i + 1}
+                </span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// §4  HOW IT WORKS
+// ═══════════════════════════════════════════════════════════════
+const ACCOUNT_STEPS = [
+  {
+    n: 1,
+    title: "Register",
+    body: "Select your preferred account type and swiftly complete our secure registration form.",
+    video: "/videos/video-1.mp4",
+  },
+  {
+    n: 2,
+    title: "Verify Account",
+    body: "Utilize our digital onboarding system for swift and secure verification.",
+    video: "/videos/video-2.mp4",
+  },
+  {
+    n: 3,
+    title: "Fund Account",
+    body: "Deposit funds into your trading account through an extensive array of funding methods.",
+    video: "/videos/video-3.mp4",
+  },
+  {
+    n: 4,
+    title: "Copy Traders",
+    body: "Choose a plan, start copying top traders and mirror their moves while they trade.",
+    video: "/videos/video-4.mp4",
+  },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// §X  ABOUT
+// ═══════════════════════════════════════════════════════════════
+
+const ABOUT_PERKS = [
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    text: "Raw spreads from 0.0 pips",
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+      </svg>
+    ),
+    text: "Diverse and proprietary liquidity mix keeps spreads tight 24/5",
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
+    text: "Fastest trade execution speed under 25ms",
+  },
+];
+
+/** Phone mockups using the real trade-duplicate screenshot */
+function PhoneMockups() {
+  return (
+    <div className="relative flex items-center justify-center select-none">
+      {/* Glow blob behind the image */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10">
+        <div className="w-80 h-80 bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[100px]" />
+      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 32, scale: 0.97 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <Image
+          src="/images/trade-duplicate.png"
+          alt="KoveTrade platform — trading chart and Buy/Sell interface"
+          width={640}
+          height={720}
+          className="w-full max-w-sm lg:max-w-md object-contain drop-shadow-2xl"
+        />
+      </motion.div>
+    </div>
+  );
+}
+
+function AboutSection() {
+  return (
+    <section className="py-16 sm:py-24 lg:py-36 bg-white dark:bg-[#070809]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-24 items-center">
+
+          {/* Left — stacked phone mockups */}
+          <Reveal dir="left">
+            <PhoneMockups />
+          </Reveal>
+
+          {/* Right — copy */}
+          <div>
+            <Reveal>
+              <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-6">
+                <span className="w-5 h-px bg-blue-600 dark:bg-blue-400" />
+                About Us
+              </p>
+              <h2
+                className="font-black tracking-tight text-gray-900 dark:text-white leading-[1.08] mb-6"
+                style={{ fontSize: "clamp(2rem, 4.5vw, 3.6rem)" }}
+              >
+                Unleash Potentials.{" "}
+                <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
+                  Lock in profits.
+                </span>
+              </h2>
+              <p className="text-[15px] text-gray-500 dark:text-gray-400 leading-relaxed mb-10">
+                While conventional copy trading platforms remain static, the KoveTrade team pioneers
+                innovation. KoveTrade was crafted with you in mind — whether you&apos;re a trader seeking
+                to leverage technology or a broker striving to offer top-notch tools for traders at every stage.
+              </p>
+            </Reveal>
+
+            <div className="space-y-5 mb-10">
+              {ABOUT_PERKS.map(({ icon, text }, i) => (
+                <Reveal key={text} delay={0.08 * (i + 1)}>
+                  <div className="flex items-start gap-4 group">
+                    <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-blue-50 dark:bg-blue-500/10 border border-blue-100 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 dark:group-hover:bg-blue-500 dark:group-hover:border-blue-500 transition-all duration-300">
+                      {icon}
+                    </div>
+                    <p className="text-[15px] text-gray-600 dark:text-gray-300 leading-relaxed pt-2.5">{text}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal delay={0.35}>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2.5 rounded-full bg-gray-900 dark:bg-white px-8 py-3.5 text-sm font-bold text-white dark:text-gray-900 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/20 dark:hover:shadow-white/10"
+              >
+                About Us
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </Reveal>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// §X  PLATFORM
+// ═══════════════════════════════════════════════════════════════
+
+/** Circular rotating "MORE ABOUT" badge (inspired by image5) */
+function RotatingBadge() {
+  const text = "KOVETRADE · MORE ABOUT · KOVETRADE · MORE ABOUT · ";
+  return (
+    <div className="relative w-28 h-28 flex items-center justify-center group cursor-pointer shrink-0">
+      <svg
+        viewBox="0 0 120 120"
+        className="absolute inset-0 w-full h-full animate-[spin_14s_linear_infinite]"
+        aria-hidden="true"
+      >
+        <defs>
+          <path
+            id="rotCircle"
+            d="M 60,60 m -44,0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0"
+          />
+        </defs>
+        <text
+          className="fill-gray-900 dark:fill-white"
+          fontSize="9"
+          letterSpacing="2.4"
+          fontWeight="700"
+        >
+          <textPath href="#rotCircle">{text}</textPath>
+        </text>
+      </svg>
+      {/* Centre green arrow */}
+      <div className="relative z-10 w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30 group-hover:scale-110 group-hover:bg-emerald-400 transition-all duration-300">
+        <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+const PLATFORM_BARS = [55, 70, 50, 85, 60, 75, 45, 90, 65, 80, 55, 95, 70, 85, 60, 100, 75, 90, 65, 80, 95, 70, 85, 60, 75];
+
+function PlatformSection() {
+  return (
+    <section className="py-16 sm:py-24 lg:py-36 bg-gray-50 dark:bg-[#0a0b0d] overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        {/* Header row */}
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-12 lg:mb-16">
+          <Reveal>
+            <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-4">
+              <span className="w-5 h-px bg-blue-600 dark:bg-blue-400" />
+              Our Platform
+            </p>
+            <h2
+              className="font-black tracking-tight text-gray-900 dark:text-white leading-[1.08]"
+              style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
+            >
+              Trade smarter,
+              <br />
+              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                not harder.
+              </span>
+            </h2>
+          </Reveal>
+
+          <Reveal delay={0.15} className="hidden sm:block">
+            <RotatingBadge />
+          </Reveal>
+        </div>
+
+        {/* Two platform UI cards */}
+        <div className="grid md:grid-cols-2 gap-6">
+
+          {/* Card 1 — chart */}
+          <Reveal dir="left">
+            <div className="relative rounded-3xl bg-[#111827] border border-white/[0.07] p-6 overflow-hidden h-full">
+              {/*
+                IMAGE PLACEHOLDER:
+                Dark trading platform chart card.
+                Candlestick chart for BTC/USD showing a December bull run.
+                Red & green candles, volume bars at bottom,
+                date labels: "Dec 1", "Dec 16", "Dec 30".
+                KoveTrade logo watermark bottom-right.
+                Background: #111827 with subtle blue radial glow top-left.
+              */}
+              <div className="absolute -top-8 -left-8 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+
+              <p className="text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-5">Live Chart · BTC/USD</p>
+
+              {/* Simulated candlestick bars */}
+              <div className="flex items-end gap-[2px] h-48 bg-white/[0.03] rounded-2xl px-3 pb-3 pt-4 mb-3">
+                {PLATFORM_BARS.map((h, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 rounded-sm transition-all"
+                    style={{
+                      height: `${h}%`,
+                      background: i % 2 === 0 ? "rgba(239,68,68,0.7)" : "rgba(16,185,129,0.7)",
+                    }}
+                  />
+                ))}
+              </div>
+
+              <div className="flex justify-between text-[10px] text-gray-600 px-1 mb-6">
+                <span>Dec 1</span><span>Dec 16</span><span>Dec 30</span>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-2xl font-black text-white">$43,182</p>
+                  <p className="text-xs text-emerald-400 font-semibold mt-0.5">+8.4% this month</p>
+                </div>
+                <div className="w-10 h-10 rounded-2xl bg-white/[0.06] flex items-center justify-center">
+                  <span className="text-white font-black text-sm">KT</span>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Card 2 — trade interface */}
+          <Reveal dir="right">
+            <div className="rounded-3xl bg-[#0f172a] border border-white/[0.07] p-6 h-full flex flex-col">
+              {/*
+                IMAGE PLACEHOLDER:
+                Dark KoveTrade trade interface card.
+                Header "Trade". Tabs: Buy (active/green), Sell, Convert.
+                Fields: Type → Crypto, Amount → 0.00 USD, Asset → BTC (with Bitcoin icon).
+                CTA: gradient blue "Buy Now →" button.
+                Background: #0f172a. Subtle purple glow top-right.
+              */}
+              <div className="flex items-center justify-between mb-6">
+                <p className="text-[11px] text-gray-500 font-bold uppercase tracking-widest">Trade</p>
+                <div className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Live
+                </div>
+              </div>
+
+              <div className="flex gap-2 mb-6">
+                {["Buy", "Sell", "Convert"].map((t, i) => (
+                  <button
+                    key={t}
+                    className={`flex-1 py-3 rounded-2xl text-[13px] font-bold transition-all ${
+                      i === 0
+                        ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
+                        : "bg-white/[0.04] text-gray-500 border border-white/[0.07] hover:bg-white/[0.07]"
+                    }`}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex-1 space-y-3 mb-6">
+                <div className="flex justify-between items-center bg-white/[0.04] border border-white/[0.07] rounded-2xl px-4 py-3.5">
+                  <span className="text-[12px] text-gray-500 font-medium">Type</span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[13px] text-white font-semibold">Crypto</span>
+                    <svg className="w-3 h-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center bg-white/[0.04] border border-white/[0.07] rounded-2xl px-4 py-3.5">
+                  <span className="text-[12px] text-gray-500 font-medium">Amount</span>
+                  <span className="text-[13px] text-white font-semibold">0.00 USD</span>
+                </div>
+                <div className="flex justify-between items-center bg-white/[0.04] border border-white/[0.07] rounded-2xl px-4 py-3.5">
+                  <span className="text-[12px] text-gray-500 font-medium">Asset</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center text-[9px] font-black text-white">₿</div>
+                    <span className="text-[13px] text-white font-semibold">Bitcoin</span>
+                  </div>
+                </div>
+              </div>
+
+              <button className="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold text-[14px] hover:from-blue-500 hover:to-blue-400 hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-300">
+                Buy Now →
+              </button>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// §4  HOW IT WORKS
+// ═══════════════════════════════════════════════════════════════
+
+function HowItWorksSection() {
+  return (
+    <section className="py-16 sm:py-24 lg:py-36 bg-[#0d0e14]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
+        <Reveal className="text-center mb-12 lg:mb-20">
+          <h2
+            className="font-black tracking-tight text-white leading-[1.08]"
+            style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}
+          >
+            Open an account in{" "}
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              4 simple steps
+            </span>
+          </h2>
+          <p className="mt-4 text-[15px] text-gray-400 max-w-xl mx-auto leading-relaxed">
+            Get started in minutes. No prior trading experience needed.
+          </p>
+        </Reveal>
+
+        {/* 4 step cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
+          {ACCOUNT_STEPS.map(({ n, title, body, video }, i) => (
+            <Reveal key={n} delay={0.1 * i}>
+              <div className="group relative flex flex-col sm:flex-col rounded-3xl bg-white/[0.04] border border-white/[0.08] overflow-hidden h-full transition-all duration-500 hover:bg-gradient-to-b hover:from-blue-500/[0.08] hover:via-cyan-500/[0.04] hover:to-transparent hover:border-blue-500/30">
+
+                {/* Top content */}
+                <div className="p-6 flex-1">
+                  {/* Step number — big gradient */}
+                  <span
+                    className="block font-black leading-none mb-4 bg-gradient-to-br from-blue-400 via-cyan-400 to-blue-600 bg-clip-text text-transparent select-none"
+                    style={{ fontSize: "clamp(3.5rem, 6vw, 5rem)" }}
+                  >
+                    {n}
+                  </span>
+                  <h3 className="text-[17px] font-bold text-white mb-2.5 leading-snug">{title}</h3>
+                  <p className="text-[13px] text-gray-400 leading-relaxed">{body}</p>
+                </div>
+
+                {/* Video at bottom */}
+                <div className="relative w-full aspect-video sm:aspect-square overflow-hidden">
+                  <video
+                    src={video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover mix-blend-screen"
+                  />
+                </div>
+
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <Reveal delay={0.5}>
+          <div className="mt-14 text-center">
+            <Link
+              href="/register"
+              className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-10 py-4 text-sm font-bold text-white hover:from-blue-500 hover:to-blue-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300"
+            >
+              Get Started — It&apos;s Free
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+        </Reveal>
+
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// §5  TOP TRADERS
+// ═══════════════════════════════════════════════════════════════
+const TRADERS = [
+  {
+    initials: "AT",
+    grad: "from-blue-500 to-indigo-600",
+    glow: "shadow-blue-500/25",
+    name: "Alex Thompson",
+    tag: "Crypto Specialist",
+    ret: "+127.4%",
+    risk: "Low",
+    riskColor: "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10",
+    copiers: 4291,
+    chart: [42, 51, 46, 63, 57, 74, 69, 86, 80, 95, 90, 108, 100, 119, 112, 128],
+    pos: true,
+  },
+  {
+    initials: "SL",
+    grad: "from-rose-500 to-pink-600",
+    glow: "shadow-rose-500/25",
+    name: "Sophie Laurent",
+    tag: "Forex Expert",
+    ret: "+89.2%",
+    risk: "Medium",
+    riskColor: "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10",
+    copiers: 6847,
+    chart: [30, 38, 35, 45, 42, 53, 48, 60, 55, 68, 64, 78, 73, 84, 80, 89],
+    pos: true,
+  },
+  {
+    initials: "MR",
+    grad: "from-emerald-500 to-teal-600",
+    glow: "shadow-emerald-500/25",
+    name: "Marcus Rivera",
+    tag: "Multi-Asset Pro",
+    ret: "+214.7%",
+    risk: "High",
+    riskColor: "text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10",
+    copiers: 2156,
+    chart: [20, 36, 29, 58, 48, 80, 66, 97, 82, 120, 105, 144, 130, 168, 154, 215],
+    pos: true,
+  },
+];
+
+function TraderCard({ trader, delay }: { trader: (typeof TRADERS)[0]; delay: number }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Reveal delay={delay}>
+      <motion.div
+        className="rounded-3xl bg-white dark:bg-zinc-900/60 border border-gray-100 dark:border-white/[0.07] p-6 h-full transition-all duration-300 hover:shadow-2xl hover:shadow-black/8 dark:hover:shadow-black/50 hover:-translate-y-2 cursor-default"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-5">
+          <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${trader.grad} flex items-center justify-center text-white text-sm font-black shadow-xl ${trader.glow} shrink-0`}>
+            {trader.initials}
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="font-bold text-gray-900 dark:text-white text-sm leading-none mb-1.5">{trader.name}</p>
+            <p className="text-[11px] text-gray-500 dark:text-gray-500">{trader.tag}</p>
+          </div>
+          <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${trader.riskColor}`}>
+            {trader.risk}
+          </span>
+        </div>
+
+        {/* Chart */}
+        <div className="mb-5 -mx-1">
+          <Sparkline data={trader.chart} positive={trader.pos} w={280} h={56} />
+        </div>
+
+        {/* Stats row */}
+        <div className="flex items-center justify-between mb-5">
+          <div>
+            <p className="text-[11px] text-gray-400 dark:text-gray-600 mb-1">12M Return</p>
+            <p className="text-xl font-black text-emerald-600 dark:text-emerald-400">{trader.ret}</p>
+          </div>
+          <div className="text-right">
+            <p className="text-[11px] text-gray-400 dark:text-gray-600 mb-1">Copiers</p>
+            <p className="text-xl font-black text-gray-900 dark:text-white">{trader.copiers.toLocaleString()}</p>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <Link
+          href="/register"
+          className={`block w-full rounded-2xl py-3 text-sm font-bold text-center transition-all duration-300 ${
+            hovered
+              ? `bg-gradient-to-r ${trader.grad} text-white shadow-lg`
+              : "bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-300"
+          }`}
+        >
+          Copy Trader
+        </Link>
+      </motion.div>
+    </Reveal>
+  );
+}
+
+function TopTradersSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["-3%", "3%"]);
+
+  return (
+    <section ref={ref} className="py-16 sm:py-24 lg:py-36 bg-gray-50 dark:bg-[#0a0b0d] overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10 lg:mb-14 gap-6">
+          <Reveal>
+            <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-4">
+              <span className="w-5 h-px bg-blue-600 dark:bg-blue-400" />
+              Top Performers
+            </p>
+            <h2
+              className="font-black tracking-tight text-gray-900 dark:text-white leading-[1.08]"
+              style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)" }}
+            >
+              Browse the world&apos;s best traders.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <Link
+              href="/login"
+              className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 dark:text-blue-400 hover:gap-3 transition-all duration-200 shrink-0"
+            >
+              View all traders
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </Reveal>
+        </div>
+
+        <motion.div style={{ y }} className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 lg:gap-5">
+          {TRADERS.map((t, i) => (
+            <TraderCard key={t.name} trader={t} delay={0.1 * i} />
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// §6  FEATURES — BENTO GRID
+// ═══════════════════════════════════════════════════════════════
+const FEATURES = [
+  {
+    size: "lg:col-span-2 lg:row-span-1",
+    icon: "⚡",
+    tag: "Raw Spreads",
+    title: "Trade at 0.0 pips. Every time.",
+    body: "No markup, no requotes. Our raw spread pricing gives you direct market access with the tightest possible bid-ask spread — starting from absolute zero.",
+    accent: "bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/20",
+    border: "border-blue-100 dark:border-blue-900/40",
+    stat: "0.0 pips",
+    statLabel: "starting spread",
+  },
+  {
+    size: "lg:col-span-1 lg:row-span-1",
+    icon: "🌍",
+    tag: "Asset Classes",
+    title: "100+ assets across every market.",
+    body: "Crypto, equities, forex, commodities, indices. One account, every market.",
+    accent: "bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/20",
+    border: "border-violet-100 dark:border-violet-900/40",
+    stat: "100+",
+    statLabel: "instruments",
+  },
+  {
+    size: "lg:col-span-1 lg:row-span-1",
+    icon: "🛡️",
+    tag: "Risk Tools",
+    title: "Smart risk management built in.",
+    body: "Set stop-loss, take-profit, and copy limits per trader. AutoGuard closes positions automatically to protect your downside.",
+    accent: "bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/20",
+    border: "border-emerald-100 dark:border-emerald-900/40",
+    stat: "AutoGuard™",
+    statLabel: "proprietary tech",
+  },
+  {
+    size: "lg:col-span-2 lg:row-span-1",
+    icon: "🚀",
+    tag: "Execution",
+    title: "Under 25ms execution. No excuses.",
+    body: "Our matching engine sits in the New York Equinix NY4 data center — the same co-location used by institutional trading desks. Sub-25ms average execution, 99.9% uptime guarantee.",
+    accent: "bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20",
+    border: "border-amber-100 dark:border-amber-900/40",
+    stat: "<25ms",
+    statLabel: "avg. execution",
+  },
+];
+
+function FeaturesSection() {
+  return (
+    <section className="py-16 sm:py-24 lg:py-36 bg-white dark:bg-[#070809]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <Reveal className="text-center mb-10 lg:mb-16">
+          <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-4">
+            <span className="w-5 h-px bg-blue-600 dark:bg-blue-400" />
+            The Platform
+          </p>
+          <h2
+            className="font-black tracking-tight text-gray-900 dark:text-white leading-[1.08]"
+            style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)" }}
+          >
+            Built for traders who demand more.
+          </h2>
+        </Reveal>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-4">
+          {FEATURES.map(({ size, icon, tag, title, body, accent, border, stat, statLabel }, i) => (
+            <Reveal key={tag} delay={0.08 * i} className={size}>
+              <motion.div
+                className={`relative rounded-3xl border ${border} ${accent} p-6 sm:p-8 h-full min-h-[180px] overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/30`}
+                whileHover={{ scale: 1.01 }}
+                transition={{ duration: 0.25 }}
+              >
+                <div className="flex items-start justify-between mb-5">
+                  <div>
+                    <p className="text-[10px] font-bold tracking-[0.18em] uppercase text-blue-600 dark:text-blue-400 mb-2">{tag}</p>
+                    <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white leading-snug max-w-xs">{title}</h3>
+                  </div>
+                  <div className="text-3xl ml-4 shrink-0">{icon}</div>
+                </div>
+                <p className="text-[13px] text-gray-500 dark:text-gray-400 leading-relaxed mb-5 max-w-md">{body}</p>
+
+                {/* Stat callout */}
+                <div className="inline-flex items-baseline gap-1.5">
+                  <span className="text-2xl font-black text-gray-900 dark:text-white">{stat}</span>
+                  <span className="text-[11px] text-gray-400 dark:text-gray-600">{statLabel}</span>
+                </div>
+              </motion.div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// §7  TESTIMONIALS
+// ═══════════════════════════════════════════════════════════════
+const REVIEWS = [
+  {
+    avatar: "MV",
+    grad: "from-blue-500 to-indigo-600",
+    name: "Mark Villomas",
+    handle: "@marktrades",
+    stars: 5,
+    text: "I was skeptical at first, but after three months of copy trading with KoveTrade I've made more than my entire previous year of trading solo. The platform is transparent, fast, and the support team is genuinely helpful.",
+  },
+  {
+    avatar: "UW",
+    grad: "from-rose-500 to-pink-600",
+    name: "Ufqad Warraich",
+    handle: "@ufqad_w",
+    stars: 5,
+    text: "The risk management tools are what sold me. I can set a maximum drawdown per trader and the system handles everything automatically. I sleep better knowing AutoGuard is watching my portfolio.",
+  },
+  {
+    avatar: "ST",
+    grad: "from-emerald-500 to-teal-600",
+    name: "Sarah Thompson",
+    handle: "@sarahtrades",
+    stars: 5,
+    text: "Switching between traders is seamless. I've been running three different copy strategies simultaneously and the portfolio view makes it crystal clear how each one is performing. Couldn't be simpler.",
+  },
+];
+
+function TestimonialsSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["-2%", "2%"]);
+
+  return (
+    <section ref={ref} className="py-16 sm:py-24 lg:py-36 bg-gray-50 dark:bg-[#0a0b0d] overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 lg:mb-14 gap-6">
+          <Reveal>
+            <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-4">
+              <span className="w-5 h-px bg-blue-600 dark:bg-blue-400" />
+              Testimonials
+            </p>
+            <h2
+              className="font-black tracking-tight text-gray-900 dark:text-white leading-[1.08]"
+              style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)" }}
+            >
+              Loved by traders worldwide.
+            </h2>
+          </Reveal>
+          {/* Trust badges */}
+          <Reveal delay={0.1}>
+            <div className="flex items-center gap-3">
+              <div className="rounded-2xl border border-gray-200 dark:border-white/[0.07] bg-white dark:bg-zinc-900/60 px-5 py-3">
+                <p className="text-xs text-gray-500 mb-0.5">Trustpilot</p>
+                <div className="flex items-center gap-1.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <svg key={i} className="w-3.5 h-3.5 fill-emerald-500" viewBox="0 0 24 24">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                  <span className="text-sm font-bold text-gray-900 dark:text-white ml-1">4.8</span>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        <motion.div style={{ y }} className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 lg:gap-5">
+          {REVIEWS.map(({ avatar, grad, name, handle, stars, text }, i) => (
+            <Reveal key={name} delay={0.1 * i}>
+              <div className="relative rounded-3xl bg-white dark:bg-zinc-900/60 border border-gray-100 dark:border-white/[0.06] p-7 h-full flex flex-col hover:-translate-y-1 transition-all duration-300 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40">
+                {/* Large quote */}
+                <span className="absolute top-5 right-6 text-[5rem] font-black leading-none text-gray-900/[0.04] dark:text-white/[0.04] select-none">
+                  &ldquo;
+                </span>
+
+                {/* Stars */}
+                <div className="flex gap-0.5 mb-5">
+                  {Array.from({ length: stars }).map((_, j) => (
+                    <svg key={j} className="w-3.5 h-3.5 fill-amber-400" viewBox="0 0 24 24">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                </div>
+
+                <p className="text-[14px] text-gray-600 dark:text-gray-400 leading-relaxed flex-1 mb-7 relative z-10">
+                  &ldquo;{text}&rdquo;
+                </p>
+
+                <div className="flex items-center gap-3">
+                  <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${grad} flex items-center justify-center text-white text-xs font-black shrink-0`}>
+                    {avatar}
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-900 dark:text-white leading-none mb-0.5">{name}</p>
+                    <p className="text-[11px] text-gray-400 dark:text-gray-600">{handle}</p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// §8  CTA
+// ═══════════════════════════════════════════════════════════════
+function CTASection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end end"] });
+  const scale = useTransform(scrollYProgress, [0, 0.7], [0.9, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
+
+  return (
+    <section ref={ref} className="py-16 lg:py-24 bg-white dark:bg-[#070809] overflow-hidden">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          style={{ scale, opacity }}
+          className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 p-8 sm:p-12 lg:p-20 text-center shadow-2xl shadow-blue-900/30"
+        >
+          {/* Interior glow spots */}
+          <div className="absolute -top-[20%] -left-[10%] w-[500px] h-[500px] rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 65%)" }} />
+          <div className="absolute -bottom-[20%] -right-[10%] w-[400px] h-[400px] rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 65%)" }} />
+          {/* Fine dot grid overlay */}
+          <div className="absolute inset-0 pointer-events-none opacity-[0.08]"
+            style={{
+              backgroundImage: "radial-gradient(circle, rgba(255,255,255,1) 1px, transparent 1px)",
+              backgroundSize: "24px 24px",
+            }} />
+
+          <div className="relative z-10">
+            <p className="text-blue-200 text-[11px] font-bold tracking-[0.25em] uppercase mb-5">
+              Ready to get started?
+            </p>
+            <h2
+              className="font-black text-white leading-[1.06] tracking-tight mb-5"
+              style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
+            >
+              Copy the best traders.
+              <br />
+              Build your future.
+            </h2>
+            <p className="text-blue-200 text-base lg:text-lg max-w-lg mx-auto leading-relaxed mb-10">
+              Join 50 million traders and investors who chose KoveTrade. No
+              credit card required. Start copying in under 3 minutes.
+            </p>
+
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center mb-10">
+              <Link
+                href="/register"
+                className="rounded-full bg-white px-10 py-4 text-sm font-bold text-blue-700 transition-all duration-300 hover:bg-blue-50 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/20 text-center"
+              >
+                Start for Free
+              </Link>
+              <Link
+                href="/login"
+                className="rounded-full border border-white/25 bg-white/[0.08] px-10 py-4 text-sm font-bold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/[0.14] hover:border-white/40 hover:-translate-y-0.5 text-center"
+              >
+                Sign In
+              </Link>
+            </div>
+
+            {/* Trust line */}
+            <div className="flex items-center justify-center gap-x-4 gap-y-3 flex-wrap">
+              {["Regulated by CySEC", "FCA Authorised", "SEC Registered", "256-bit SSL"].map((t, i) => (
+                <React.Fragment key={t}>
+                  <span className="text-[11px] text-blue-300 font-medium flex items-center gap-1.5 whitespace-nowrap">
+                    <svg className="w-3 h-3 fill-blue-300 shrink-0" viewBox="0 0 24 24">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    {t}
+                  </span>
+                  {i < 3 && <span className="hidden sm:block w-px h-3 bg-blue-500/50" />}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
