@@ -209,14 +209,14 @@ export default function CookiesPolicy() {
       <Navbar />
 
       {/* ── Hero — dark, technical feel ── */}
-      <section className="relative overflow-hidden bg-[#0d0f16] pt-28 pb-24 sm:pt-36 sm:pb-32">
+      <section className="relative overflow-hidden bg-gray-100 dark:bg-[#0d0f16] pt-28 pb-24 sm:pt-36 sm:pb-32">
         {/* Grid overlay */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
           style={{ backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
         {/* Glow */}
-        <div className="aurora-a absolute -top-[20%] -left-[5%] w-[600px] h-[600px] rounded-full opacity-30"
+        <div className="aurora-a absolute -top-[20%] -left-[5%] w-[600px] h-[600px] rounded-full opacity-30 hidden dark:block"
           style={{ background: "radial-gradient(circle, #0d9488 0%, transparent 65%)" }} />
-        <div className="aurora-b absolute -bottom-[15%] right-[5%] w-[500px] h-[500px] rounded-full opacity-20"
+        <div className="aurora-b absolute -bottom-[15%] right-[5%] w-[500px] h-[500px] rounded-full opacity-20 hidden dark:block"
           style={{ background: "radial-gradient(circle, #2563eb 0%, transparent 65%)" }} />
 
         <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
@@ -229,11 +229,11 @@ export default function CookiesPolicy() {
                 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, ease: E }}
               >
                 <span className="text-base">🍪</span>
-                <span className="text-[11px] font-semibold text-teal-300 tracking-wide">Cookie Management · KoveTrade</span>
+                <span className="text-[11px] font-semibold text-teal-700 dark:text-teal-300 tracking-wide">Cookie Management · KoveTrade</span>
               </motion.div>
 
               <motion.h1
-                className="font-black tracking-tight leading-[1.04] mb-5 text-white"
+                className="font-black tracking-tight leading-[1.04] mb-5 text-gray-900 dark:text-white"
                 style={{ fontSize: "clamp(2.4rem, 5.5vw, 4.6rem)" }}
                 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.08, ease: E }}
               >
@@ -244,7 +244,7 @@ export default function CookiesPolicy() {
               </motion.h1>
 
               <motion.p
-                className="text-[15px] text-gray-400 leading-relaxed mb-8 max-w-md"
+                className="text-[15px] text-gray-600 dark:text-gray-400 leading-relaxed mb-8 max-w-md"
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.15, ease: E }}
               >
                 We use cookies to make KoveTrade work better for you. Here&apos;s a plain-English guide to
@@ -261,9 +261,9 @@ export default function CookiesPolicy() {
                   { label: "Cookie Types",   val: "3 Categories"  },
                   { label: "Opt-Out",        val: "Always Free"   },
                 ].map(({ label, val }) => (
-                  <div key={label} className="rounded-2xl border border-white/[0.09] bg-white/[0.04] px-4 py-2.5">
+                  <div key={label} className="rounded-2xl border border-gray-300 dark:border-white/[0.09] bg-gray-100 dark:bg-white/[0.04] px-4 py-2.5">
                     <p className="text-[10px] text-gray-600 font-medium">{label}</p>
-                    <p className="text-[13px] text-white font-bold">{val}</p>
+                    <p className="text-[13px] text-gray-900 dark:text-white font-bold">{val}</p>
                   </div>
                 ))}
               </motion.div>

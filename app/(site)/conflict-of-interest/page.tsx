@@ -172,14 +172,14 @@ export default function ConflictOfInterestPolicy() {
       <Navbar />
 
       {/* ── Hero — deep navy + gold ── */}
-      <section ref={heroRef} className="relative overflow-hidden bg-[#080c18] pt-28 pb-24 sm:pt-36 sm:pb-32">
+      <section ref={heroRef} className="relative overflow-hidden bg-gray-100 dark:bg-[#080c18] pt-28 pb-24 sm:pt-36 sm:pb-32">
         {/* Grid */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.035]"
           style={{ backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)", backgroundSize: "52px 52px" }} />
         {/* Glow */}
-        <div className="aurora-b absolute -top-[20%] right-[0%] w-[700px] h-[700px] rounded-full opacity-20"
+        <div className="aurora-b absolute -top-[20%] right-[0%] w-[700px] h-[700px] rounded-full opacity-20 hidden dark:block"
           style={{ background: "radial-gradient(circle, #f59e0b 0%, transparent 60%)" }} />
-        <div className="aurora-a absolute -bottom-[15%] left-[5%] w-[550px] h-[550px] rounded-full opacity-15"
+        <div className="aurora-a absolute -bottom-[15%] left-[5%] w-[550px] h-[550px] rounded-full opacity-15 hidden dark:block"
           style={{ background: "radial-gradient(circle, #6366f1 0%, transparent 60%)" }} />
 
         <motion.div style={{ y: heroY }} className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
@@ -194,11 +194,11 @@ export default function ConflictOfInterestPolicy() {
                 <svg className="w-3.5 h-3.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
                 </svg>
-                <span className="text-[11px] font-semibold text-amber-300 tracking-wide">Compliance Framework · KoveTrade</span>
+                <span className="text-[11px] font-semibold text-amber-700 dark:text-amber-300 tracking-wide">Compliance Framework · KoveTrade</span>
               </motion.div>
 
               <motion.h1
-                className="font-black tracking-tight leading-[1.04] mb-5 text-white"
+                className="font-black tracking-tight leading-[1.04] mb-5 text-gray-900 dark:text-white"
                 style={{ fontSize: "clamp(2.2rem, 5vw, 4.4rem)" }}
                 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.08, ease: E }}
               >
@@ -210,7 +210,7 @@ export default function ConflictOfInterestPolicy() {
               </motion.h1>
 
               <motion.p
-                className="text-[15px] text-gray-400 leading-relaxed mb-8 max-w-md"
+                className="text-[15px] text-gray-600 dark:text-gray-400 leading-relaxed mb-8 max-w-md"
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.15, ease: E }}
               >
                 We recognise that conflicts of interest may arise in the ordinary course of business.
@@ -224,9 +224,9 @@ export default function ConflictOfInterestPolicy() {
                   { label: "Sections",      val: "13 Clauses"    },
                   { label: "Regulators",    val: "5 Frameworks"  },
                 ].map(({ label, val }) => (
-                  <div key={label} className="rounded-2xl border border-white/[0.08] bg-white/[0.04] px-4 py-2.5">
+                  <div key={label} className="rounded-2xl border border-gray-300 dark:border-white/[0.08] bg-gray-100 dark:bg-white/[0.04] px-4 py-2.5">
                     <p className="text-[10px] text-gray-600 font-medium">{label}</p>
-                    <p className="text-[13px] text-white font-bold">{val}</p>
+                    <p className="text-[13px] text-gray-900 dark:text-white font-bold">{val}</p>
                   </div>
                 ))}
               </motion.div>

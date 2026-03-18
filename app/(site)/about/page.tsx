@@ -151,7 +151,7 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] mb-5 max-w-3xl">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] mb-5 max-w-3xl text-white">
               Democratizing
               <br />
               <span className="bg-gradient-to-r from-rose-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent">
@@ -163,7 +163,7 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.22}>
-            <p className="text-gray-600 dark:text-gray-400 text-xl leading-relaxed max-w-xl">
+            <p className="text-white/80 text-xl leading-relaxed max-w-xl">
               We believe every investor deserves access to professional-grade trading strategies
               — regardless of experience or background.
             </p>
@@ -174,7 +174,7 @@ export default function AboutPage() {
       {/* ── Stats strip ──────────────────────────────────────────── */}
       <section className="py-12 px-4 border-t border-gray-100 dark:border-white/5">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-x-0 md:divide-x divide-white/8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-x-0 md:divide-x divide-gray-200 dark:divide-white/8">
             <Stat value="150k+"  label="Global Traders"       delay={0.05} />
             <Stat value="4"      label="Regulated Entities"   delay={0.12} />
             <Stat value="$2.4B+" label="Volume Copied"        delay={0.19} />
@@ -229,7 +229,7 @@ export default function AboutPage() {
 
                 {/* Floating smaller image bottom-left */}
                 <motion.div
-                  className="absolute -bottom-8 -left-8 w-44 h-32 rounded-2xl overflow-hidden border-4 border-[#07070f] shadow-xl shadow-black/50"
+                  className="absolute -bottom-8 -left-8 w-44 h-32 rounded-2xl overflow-hidden border-4 border-white dark:border-[#07070f] shadow-xl shadow-black/50 hidden sm:block"
                   initial={{ opacity: 0, x: -20, y: 20 }}
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: true }}
@@ -245,7 +245,7 @@ export default function AboutPage() {
 
                 {/* Stat chip top-right */}
                 <motion.div
-                  className="absolute -top-5 -right-5 px-4 py-3 rounded-2xl border border-rose-500/30 bg-[#07070f]/95 backdrop-blur-sm"
+                  className="absolute -top-5 -right-5 px-4 py-3 rounded-2xl border border-rose-500/30 bg-[#07070f]/95 backdrop-blur-sm hidden sm:block"
                   initial={{ opacity: 0, scale: 0.7 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
@@ -483,8 +483,8 @@ export default function AboutPage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#07070f]/85 via-[#07070f]/70 to-[#07070f]/85" />
                 <div className="relative p-8 flex flex-col justify-end h-full">
                   <p className="text-xs text-rose-400 font-mono uppercase tracking-widest mb-2">Get in Touch</p>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">We'd love to hear from you.</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-5">
+                  <h3 className="text-2xl font-bold text-white mb-2">We'd love to hear from you.</h3>
+                  <p className="text-sm text-white/70 mb-5">
                     Have questions about KoveTrade? Reach out to our team — we are always happy to help.
                   </p>
                   <div className="flex flex-wrap gap-3">
