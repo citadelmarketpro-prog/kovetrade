@@ -1048,14 +1048,7 @@ function PlatformSection() {
                   title: "Sub-25ms Execution",
                   body: "Our engine is co-located in NY4 — the same data centre used by institutional desks. Every order executes in under 25 milliseconds, guaranteed.",
                 },
-                {
-                  icon: <Monitor className="w-5 h-5 text-white" />,
-                  accent: "from-cyan-500 to-blue-500",
-                  glow: "bg-cyan-500/8 dark:bg-cyan-500/10",
-                  border: "border-cyan-100 dark:border-cyan-500/20",
-                  title: "MT4 · MT5 · xStation",
-                  body: "Trade on the platform you already know. KoveTrade integrates with MetaTrader 4, MetaTrader 5, and xStation — all with full copy-trade support.",
-                },
+                
               ].map(({ icon, accent, glow, border, title, body }) => (
                 <div
                   key={title}
