@@ -349,7 +349,7 @@ export default function KYCVerificationPage() {
                   initial={false}
                   animate={{
                     scale: index === currentStage ? 1.1 : 1,
-                    backgroundColor: index <= currentStage ? "rgb(59, 130, 246)" : "rgb(209, 213, 219)",
+                    backgroundColor: index <= currentStage ? "rgb(94, 220, 31)" : "rgb(209, 213, 219)",
                   }}
                   transition={{ duration: 0.3 }}
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-lg ${
@@ -403,7 +403,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Title</label>
                     <select
                       {...register("title")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                     >
                       <option value="">Select Title</option>
                       <option value="mr">Mr.</option>
@@ -422,7 +422,7 @@ export default function KYCVerificationPage() {
                         type="text"
                         {...register("first_name")}
                         placeholder="John"
-                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                       />
                       {errors.first_name && <p className="text-red-500 text-sm mt-1">{errors.first_name.message}</p>}
                     </div>
@@ -432,7 +432,7 @@ export default function KYCVerificationPage() {
                         type="text"
                         {...register("last_name")}
                         placeholder="Doe"
-                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                       />
                       {errors.last_name && <p className="text-red-500 text-sm mt-1">{errors.last_name.message}</p>}
                     </div>
@@ -443,7 +443,7 @@ export default function KYCVerificationPage() {
                     <input
                       type="date"
                       {...register("dob")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                     />
                     {errors.dob && <p className="text-red-500 text-sm mt-1">{errors.dob.message}</p>}
                   </div>
@@ -457,7 +457,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Currency</label>
                     <select
                       {...register("currency")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                     >
                       <option value="">Select Currency</option>
                       <option value="USD">USD - US Dollar</option>
@@ -474,7 +474,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Status of Employment</label>
                     <select
                       {...register("status_of_employment")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                     >
                       <option value="">Select Employment Status</option>
                       <option value="employed">Employed</option>
@@ -490,7 +490,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Source of Income</label>
                     <select
                       {...register("source_of_income")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                     >
                       <option value="">Select Source of Income</option>
                       <option value="salary">Salary</option>
@@ -508,7 +508,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Industry</label>
                     <select
                       {...register("industry")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                     >
                       <option value="">Select Industry</option>
                       <option value="technology">Technology</option>
@@ -536,7 +536,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Annual Amount (USD)</label>
                     <select
                       {...register("annual_amount")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                     >
                       <option value="">Select Annual Income Range</option>
                       <option value="0-15k">Up to $15,000</option>
@@ -554,7 +554,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Estimated Net Worth (USD)</label>
                     <select
                       {...register("estimated_net_worth")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                     >
                       <option value="">Select Net Worth Range</option>
                       <option value="0-50k">Up to $50,000</option>
@@ -578,7 +578,7 @@ export default function KYCVerificationPage() {
                       type="text"
                       {...register("address")}
                       placeholder="123 Main Street"
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                     />
                     {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>}
                   </div>
@@ -590,7 +590,7 @@ export default function KYCVerificationPage() {
                         type="text"
                         {...register("city")}
                         placeholder="New York"
-                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                       />
                       {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>}
                     </div>
@@ -600,7 +600,7 @@ export default function KYCVerificationPage() {
                         type="text"
                         {...register("region")}
                         placeholder="NY"
-                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                       />
                       {errors.region && <p className="text-red-500 text-sm mt-1">{errors.region.message}</p>}
                     </div>
@@ -612,7 +612,7 @@ export default function KYCVerificationPage() {
                       type="text"
                       {...register("postal_code")}
                       placeholder="10001"
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                     />
                     {errors.postal_code && <p className="text-red-500 text-sm mt-1">{errors.postal_code.message}</p>}
                   </div>
@@ -623,7 +623,7 @@ export default function KYCVerificationPage() {
                       type="tel"
                       {...register("phone")}
                       placeholder={countryCallingCode ? `${countryCallingCode} 234 567 8900` : "+1 234 567 8900"}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                     />
                     {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
                     {countryCallingCode && <p className="text-xs text-gray-500 mt-1">Country code {countryCallingCode} detected</p>}
@@ -638,7 +638,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Identification Type</label>
                     <select
                       {...register("id_type")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1a0e] text-gray-900 dark:text-white border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f] dark:[color-scheme:dark]"
                     >
                       <option value="">Select ID Type</option>
                       <option value="passport">Passport</option>

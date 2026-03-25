@@ -64,7 +64,7 @@ export default function ForgotPasswordPage() {
   if (emailSent) {
     return (
       <PagePreloader>
-        <div className="min-h-screen flex items-center justify-center px-8">
+        <div className="min-h-screen flex items-center justify-center px-0 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -109,12 +109,12 @@ export default function ForgotPasswordPage() {
 
   return (
     <PagePreloader>
-      <div className="min-h-screen flex items-center justify-center px-8">
+      <div className="min-h-screen flex items-center justify-center px-0 sm:px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-md space-y-6 dark:bg-white/[0.025] dark:backdrop-blur-sm dark:border dark:border-[#5edc1f]/10 dark:rounded-3xl dark:p-8 dark:shadow-2xl dark:shadow-black/40"
+        className="w-full max-w-md space-y-6 p-8 rounded-3xl bg-white dark:bg-white/[0.025] backdrop-blur-sm border border-gray-100/80 dark:border-[#5edc1f]/10 shadow-sm dark:shadow-2xl dark:shadow-black/40"
       >
         {/* Logo */}
         <Link href="/" className="inline-flex items-baseline gap-0.5 justify-center mb-2">

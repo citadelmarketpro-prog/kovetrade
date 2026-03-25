@@ -105,12 +105,12 @@ export default function LoginPage() {
     <PagePreloader>
       <div className="min-h-screen flex flex-col lg:flex-row gap-10">
       {/* Left side: Login Form */}
-      <div className="flex-1 flex items-center justify-center px-8 py-6">
+      <div className="flex-1 flex items-center justify-center px-0 sm:px-8 py-4 sm:py-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full max-w-sm space-y-6 flex flex-col dark:bg-white/[0.025] dark:backdrop-blur-sm dark:border dark:border-[#5edc1f]/10 dark:rounded-3xl dark:p-8 dark:shadow-2xl dark:shadow-black/40"
+          className="w-full max-w-sm space-y-6 flex flex-col p-4 rounded-3xl bg-white dark:bg-white/[0.025] backdrop-blur-sm"
         >
           <Link href="/" className="inline-flex items-baseline gap-0.5 self-center mb-8">
             <span className="text-3xl font-black tracking-tight text-gray-900 dark:text-white">Kove</span>
