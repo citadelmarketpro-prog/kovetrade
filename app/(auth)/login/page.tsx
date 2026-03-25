@@ -60,13 +60,13 @@ export default function LoginPage() {
 
       if (!response.ok) {
         // Handle email verification required
-        if (result?.requires_verification) {
-          toast.info("Please verify your email first");
-          setTimeout(() => {
-            router.push(`/verify-email?email=${encodeURIComponent(data.email)}`);
-          }, 1000);
-          return;
-        }
+        // if (result?.requires_verification) {
+        //   toast.info("Login ");
+        //   setTimeout(() => {
+        //     router.push(`/verify-email?email=${encodeURIComponent(data.email)}`);
+        //   }, 1000);
+        //   return;
+        // }
         const backendError =
           result?.error || "Something went wrong. Please try again.";
         toast.error(backendError);
