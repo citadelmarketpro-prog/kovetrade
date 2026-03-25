@@ -281,7 +281,7 @@ const LiquidityProvidersSection = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
               href="/register"
-              className="px-8 py-3 bg-linear-to-r from-blue-500 to-blue-600 text-white rounded-full font-semibold hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-0.5 text-sm"
+              className="px-8 py-3 bg-linear-to-r from-[#5edc1f] to-green-700 text-white rounded-full font-semibold hover:shadow-xl hover:shadow-[#5edc1f]/25 transition-all duration-300 hover:-translate-y-0.5 text-sm"
             >
               Get Started
             </a>

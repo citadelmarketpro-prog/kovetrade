@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import Image from "next/image";
 
 const legalLinks = [
   { label: "Terms of Service",        href: "/terms" },
@@ -48,7 +47,7 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-white/90 dark:bg-[#0f1f3a]/90 backdrop-blur-xl shadow-lg shadow-black/[0.03] dark:shadow-black/20 border-b border-gray-200/60 dark:border-white/[0.06]"
+          ? "bg-white/90 dark:bg-[#070f08]/95 backdrop-blur-xl shadow-lg shadow-black/[0.03] dark:shadow-black/30 border-b border-gray-200/60 dark:border-[#5edc1f]/[0.08]"
           : "bg-transparent border-b border-transparent"
       }`}
     >
@@ -56,35 +55,23 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between lg:h-20">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-0 shrink-0">
-            <Image
-              src="/logo_dark.png"
-              className="block dark:hidden w-32 sm:w-40 lg:w-44"
-              alt="KoveTrade"
-              width={1000}
-              height={250}
-            />
-            <Image
-              src="/logo_light.png"
-              className="hidden dark:block w-32 sm:w-40 lg:w-44"
-              alt="KoveTrade"
-              width={1000}
-              height={250}
-            />
+          <Link href="/" className="inline-flex items-baseline gap-0.5 shrink-0">
+            <span className="text-2xl font-black tracking-tight text-gray-900 dark:text-white">Kove</span>
+            <span className="text-2xl font-black tracking-tight text-[#5edc1f]">Trade</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-8 lg:flex">
             <Link
               href="/"
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+              className="text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors hover:text-[#5edc1f] dark:hover:text-lime-400"
             >
               Home
             </Link>
 
             <Link
               href="/about"
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+              className="text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors hover:text-[#5edc1f] dark:hover:text-lime-400"
             >
               About
             </Link>
@@ -93,7 +80,7 @@ const Navbar = () => {
             <div className="relative" ref={legalRef}>
               <button
                 onClick={() => setLegalOpen((v) => !v)}
-                className="flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+                className="flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors hover:text-[#5edc1f] dark:hover:text-lime-400"
               >
                 Legal
                 <svg
@@ -109,17 +96,19 @@ const Navbar = () => {
 
               {/* Dropdown panel */}
               <div
-                className={`absolute top-full right-0 mt-2 w-56 rounded-2xl border border-gray-200 dark:border-white/[0.08] bg-white dark:bg-[#0f1f3a] shadow-xl shadow-black/10 dark:shadow-black/40 overflow-hidden transition-all duration-200 origin-top ${
+                className={`absolute top-full right-0 mt-2 w-56 rounded-2xl border border-gray-200 dark:border-[#5edc1f]/[0.12] bg-white dark:bg-[#070f08] shadow-xl shadow-black/10 dark:shadow-black/50 overflow-hidden transition-all duration-200 origin-top ${
                   legalOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-1 pointer-events-none"
                 }`}
               >
+                {/* Green top accent line */}
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-[#5edc1f]/50 to-transparent" />
                 <div className="py-1.5">
                   {legalLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
                       onClick={() => setLegalOpen(false)}
-                      className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-white/[0.06] hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="block px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 hover:bg-[#5edc1f]/8 hover:text-[#5edc1f] dark:hover:text-lime-400 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -133,13 +122,13 @@ const Navbar = () => {
           <div className="hidden items-center gap-3 lg:flex">
             <Link
               href="/login"
-              className="rounded-full border border-gray-300 dark:border-white/20 bg-transparent px-5 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 transition-all hover:border-blue-500 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400"
+              className="rounded-full border border-gray-300 dark:border-white/20 bg-transparent px-5 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 transition-all hover:border-[#5edc1f] hover:text-[#5edc1f] dark:hover:border-lime-400 dark:hover:text-lime-400"
             >
               Sign In
             </Link>
             <Link
               href="/register"
-              className="rounded-full bg-[var(--primary)] px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[var(--primary-hover)] hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5"
+              className="rounded-full bg-[var(--primary)] px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[var(--primary-hover)] hover:shadow-lg hover:shadow-[#5edc1f]/25 hover:-translate-y-0.5"
             >
               Get Started
             </Link>
@@ -147,7 +136,7 @@ const Navbar = () => {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="ml-1 flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 dark:border-white/15 text-gray-500 dark:text-gray-400 transition-all hover:border-blue-500/50 hover:text-blue-600"
+              className="ml-1 flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 dark:border-white/15 text-gray-500 dark:text-gray-400 transition-all hover:border-[#5edc1f]/50 hover:text-[#5edc1f] dark:hover:border-lime-400/50 dark:hover:text-lime-400"
               aria-label="Toggle theme"
             >
               {mounted && (
@@ -166,7 +155,7 @@ const Navbar = () => {
             </Link>
             <button
               onClick={toggleTheme}
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 dark:border-white/15 text-gray-500 dark:text-gray-400 shrink-0"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 dark:border-white/15 text-gray-500 dark:text-gray-400 shrink-0 hover:border-[#5edc1f]/50 hover:text-[#5edc1f] dark:hover:text-lime-400 transition-all"
               aria-label="Toggle theme"
             >
               {mounted && (
@@ -192,18 +181,18 @@ const Navbar = () => {
           mobileMenuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="bg-white/97 dark:bg-[#0f1f3a]/97 backdrop-blur-xl px-4 py-4 shadow-xl border-b border-gray-200/50 dark:border-white/[0.06]">
+        <div className="bg-white/97 dark:bg-[#070f08]/97 backdrop-blur-xl px-4 py-4 shadow-xl border-b border-gray-200/50 dark:border-[#5edc1f]/[0.08]">
           <div className="flex flex-col gap-0.5">
             <Link
               href="/"
-              className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors hover:bg-blue-50 dark:hover:bg-white/5"
+              className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors hover:bg-[#5edc1f]/8 hover:text-[#5edc1f] dark:hover:text-lime-400"
               onClick={() => setMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/about"
-              className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors hover:bg-blue-50 dark:hover:bg-white/5"
+              className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors hover:bg-[#5edc1f]/8 hover:text-[#5edc1f] dark:hover:text-lime-400"
               onClick={() => setMobileMenuOpen(false)}
             >
               About
@@ -212,7 +201,7 @@ const Navbar = () => {
             {/* Mobile Legal accordion */}
             <button
               onClick={() => setMobileLegalOpen((v) => !v)}
-              className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors hover:bg-blue-50 dark:hover:bg-white/5 w-full text-left"
+              className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors hover:bg-[#5edc1f]/8 hover:text-[#5edc1f] dark:hover:text-lime-400 w-full text-left"
             >
               <span>Legal</span>
               <svg
@@ -224,12 +213,12 @@ const Navbar = () => {
             </button>
 
             {mobileLegalOpen && (
-              <div className="ml-3 pl-3 border-l-2 border-gray-200 dark:border-white/10 flex flex-col gap-0.5 mb-1">
+              <div className="ml-3 pl-3 border-l-2 border-[#5edc1f]/20 flex flex-col gap-0.5 mb-1">
                 {legalLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="rounded-lg px-3 py-2 text-sm text-gray-600 dark:text-gray-400 transition-colors hover:bg-blue-50 dark:hover:bg-white/5 hover:text-blue-600 dark:hover:text-blue-400"
+                    className="rounded-lg px-3 py-2 text-sm text-gray-600 dark:text-gray-400 transition-colors hover:bg-[#5edc1f]/8 hover:text-[#5edc1f] dark:hover:text-lime-400"
                     onClick={() => { setMobileMenuOpen(false); setMobileLegalOpen(false); }}
                   >
                     {link.label}
@@ -241,7 +230,7 @@ const Navbar = () => {
             <div className="mt-2 border-t border-gray-200 dark:border-white/10 pt-3">
               <Link
                 href="/login"
-                className="block rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors hover:bg-blue-50 dark:hover:bg-white/5"
+                className="block rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors hover:bg-[#5edc1f]/8 hover:text-[#5edc1f] dark:hover:text-lime-400"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Sign In

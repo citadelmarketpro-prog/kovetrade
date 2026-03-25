@@ -54,7 +54,7 @@ function ConsentSeal() {
         {/* Outer ring */}
         <motion.circle
           cx="100" cy="100" r="85"
-          stroke="rgba(167,139,250,0.25)"
+          stroke="rgba(94,220,31,0.25)"
           strokeWidth="2"
           strokeDasharray="8 4"
           animate={{ rotate: 360 }}
@@ -62,16 +62,16 @@ function ConsentSeal() {
           style={{ transformOrigin: "100px 100px" }}
         />
         {/* Inner ring */}
-        <circle cx="100" cy="100" r="68" stroke="rgba(167,139,250,0.15)" strokeWidth="1.5" />
+        <circle cx="100" cy="100" r="68" stroke="rgba(94,220,31,0.15)" strokeWidth="1.5" />
 
         {/* Seal background glow */}
-        <circle cx="100" cy="100" r="60" fill="rgba(109,40,217,0.12)" />
+        <circle cx="100" cy="100" r="60" fill="rgba(22,101,52,0.12)" />
 
         {/* Checkmark shield */}
         <motion.path
           d="M100 42 L130 56 L130 90 Q130 118 100 132 Q70 118 70 90 L70 56 Z"
-          fill="rgba(109,40,217,0.2)"
-          stroke="rgba(167,139,250,0.5)"
+          fill="rgba(22,101,52,0.2)"
+          stroke="rgba(94,220,31,0.5)"
           strokeWidth="1.5"
           initial={{ opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -82,7 +82,7 @@ function ConsentSeal() {
         {/* Check mark */}
         <motion.path
           d="M85 88 L95 99 L116 76"
-          stroke="#a78bfa"
+          stroke="#5edc1f"
           strokeWidth="4"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -99,19 +99,19 @@ function ConsentSeal() {
         >
           <path
             d="M138 148 L152 134 L158 140 L144 154 Z"
-            fill="rgba(167,139,250,0.6)"
+            fill="rgba(94,220,31,0.6)"
           />
           <path
             d="M138 148 L134 158 L144 154 Z"
-            fill="rgba(167,139,250,0.4)"
+            fill="rgba(94,220,31,0.4)"
           />
-          <line x1="152" y1="134" x2="168" y2="118" stroke="rgba(167,139,250,0.5)" strokeWidth="3" strokeLinecap="round" />
+          <line x1="152" y1="134" x2="168" y2="118" stroke="rgba(94,220,31,0.5)" strokeWidth="3" strokeLinecap="round" />
         </motion.g>
 
         {/* Signature line */}
         <motion.path
           d="M52 162 Q70 155 85 162 Q100 170 115 160 Q130 150 148 162"
-          stroke="rgba(167,139,250,0.5)"
+          stroke="rgba(94,220,31,0.5)"
           strokeWidth="2"
           strokeLinecap="round"
           fill="none"
@@ -124,7 +124,7 @@ function ConsentSeal() {
         {[{ cx: 40, cy: 55 }, { cx: 160, cy: 55 }, { cx: 35, cy: 145 }, { cx: 165, cy: 145 }].map((p, i) => (
           <motion.circle
             key={i} cx={p.cx} cy={p.cy} r="3"
-            fill="#a78bfa"
+            fill="#5edc1f"
             animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8] }}
             transition={{ repeat: Infinity, duration: 2 + i * 0.4, delay: i * 0.3, ease: "easeInOut" }}
             style={{ transformOrigin: `${p.cx}px ${p.cy}px` }}
@@ -147,8 +147,8 @@ function ConsentCheck({ label, delay = 0 }: { label: string; delay?: number }) {
       animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -18 }}
       transition={{ duration: 0.5, delay, ease: E }}
     >
-      <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-violet-500/20 border border-violet-400/40 flex items-center justify-center">
-        <svg className="w-3 h-3 text-violet-400" fill="none" viewBox="0 0 12 12">
+      <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-[#5edc1f]/20 border border-[#5edc1f]/40 flex items-center justify-center">
+        <svg className="w-3 h-3 text-lime-400" fill="none" viewBox="0 0 12 12">
           <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </span>
@@ -175,14 +175,14 @@ function ConsentSection({
 
   const accentMap: Record<string, { badge: string; border: string; glow: string }> = {
     violet: {
-      badge: "bg-violet-500/20 text-violet-300 border border-violet-500/30",
-      border: "border-violet-500/20 hover:border-violet-500/40",
-      glow: "from-violet-500/5 to-transparent",
+      badge: "bg-[#5edc1f]/20 text-lime-300 border border-[#5edc1f]/30",
+      border: "border-[#5edc1f]/20 hover:border-[#5edc1f]/40",
+      glow: "from-[#5edc1f]/5 to-transparent",
     },
     purple: {
-      badge: "bg-purple-500/20 text-purple-300 border border-purple-500/30",
-      border: "border-purple-500/20 hover:border-purple-500/40",
-      glow: "from-purple-500/5 to-transparent",
+      badge: "bg-teal-500/20 text-teal-300 border border-teal-500/30",
+      border: "border-teal-500/20 hover:border-teal-500/40",
+      glow: "from-teal-500/5 to-transparent",
     },
     emerald: {
       badge: "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30",
@@ -190,14 +190,14 @@ function ConsentSection({
       glow: "from-emerald-500/5 to-transparent",
     },
     blue: {
-      badge: "bg-blue-500/20 text-blue-300 border border-blue-500/30",
-      border: "border-blue-500/20 hover:border-blue-500/40",
-      glow: "from-blue-500/5 to-transparent",
+      badge: "bg-[#5edc1f]/20 text-green-300 border border-[#5edc1f]/30",
+      border: "border-[#5edc1f]/20 hover:border-[#5edc1f]/40",
+      glow: "from-[#5edc1f]/5 to-transparent",
     },
     rose: {
-      badge: "bg-rose-500/20 text-rose-300 border border-rose-500/30",
+      badge: "bg-[#5edc1f]/20 text-lime-300 border border-[#5edc1f]/30",
       border: "border-rose-500/20 hover:border-rose-500/40",
-      glow: "from-rose-500/5 to-transparent",
+      glow: "from-[#5edc1f]/5 to-transparent",
     },
     amber: {
       badge: "bg-amber-500/20 text-amber-300 border border-amber-500/30",
@@ -210,14 +210,14 @@ function ConsentSection({
       glow: "from-teal-500/5 to-transparent",
     },
     cyan: {
-      badge: "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30",
-      border: "border-cyan-500/20 hover:border-cyan-500/40",
-      glow: "from-cyan-500/5 to-transparent",
+      badge: "bg-lime-400/20 text-lime-300 border border-lime-400/30",
+      border: "border-lime-400/20 hover:border-lime-400/40",
+      glow: "from-lime-400/5 to-transparent",
     },
     indigo: {
-      badge: "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30",
-      border: "border-indigo-500/20 hover:border-indigo-500/40",
-      glow: "from-indigo-500/5 to-transparent",
+      badge: "bg-[#5edc1f]/20 text-lime-300 border border-[#5edc1f]/30",
+      border: "border-[#5edc1f]/20 hover:border-[#5edc1f]/40",
+      glow: "from-[#5edc1f]/5 to-transparent",
     },
   };
 
@@ -303,7 +303,7 @@ const SECTION_ACCENTS = [
 export default function ConsentPage() {
   return (
     <div
-      className="min-h-screen bg-white dark:bg-[#08091a] text-gray-900 dark:text-white"
+      className="min-h-screen bg-white dark:bg-[#070f08] text-gray-900 dark:text-white"
     >
       {/* Aurora blobs */}
       <style>{`
@@ -316,9 +316,9 @@ export default function ConsentPage() {
       `}</style>
 
       <div className="fixed inset-0 overflow-hidden pointer-events-none hidden dark:block">
-        <div className="blob-a absolute top-[-10%] left-[-5%] w-[55vw] h-[55vw] rounded-full bg-violet-600/10 blur-[100px]" />
-        <div className="blob-b absolute bottom-[-10%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-purple-700/10 blur-[90px]" />
-        <div className="blob-c absolute top-[40%] left-[30%] w-[40vw] h-[40vw] rounded-full bg-indigo-600/8 blur-[110px]" />
+        <div className="blob-a absolute top-[-10%] left-[-5%] w-[55vw] h-[55vw] rounded-full bg-green-900/10 blur-[100px]" />
+        <div className="blob-b absolute bottom-[-10%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-green-900/10 blur-[90px]" />
+        <div className="blob-c absolute top-[40%] left-[30%] w-[40vw] h-[40vw] rounded-full bg-green-700/8 blur-[110px]" />
       </div>
 
       <Navbar />
@@ -330,16 +330,16 @@ export default function ConsentPage() {
             {/* Left */}
             <div>
               <Reveal delay={0.05}>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 mb-5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
-                  <span className="text-xs text-violet-300 font-medium">Legal Document</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#5edc1f]/30 bg-[#5edc1f]/10 mb-5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" />
+                  <span className="text-xs text-lime-300 font-medium">Legal Document</span>
                 </div>
               </Reveal>
 
               <Reveal delay={0.1}>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
                   Declaration{" "}
-                  <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-lime-400 via-[#5edc1f] to-emerald-400 bg-clip-text text-transparent">
                     of Consent
                   </span>
                 </h1>
@@ -355,11 +355,11 @@ export default function ConsentPage() {
               <Reveal delay={0.25}>
                 <div className="flex flex-wrap gap-3">
                   <div className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5">
-                    <span className="text-violet-400">📅</span>
+                    <span className="text-lime-400">📅</span>
                     <span className="text-sm text-gray-700 dark:text-gray-300">Last Updated: February 2026</span>
                   </div>
                   <div className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5">
-                    <span className="text-purple-400">📋</span>
+                    <span className="text-teal-400">📋</span>
                     <span className="text-sm text-gray-700 dark:text-gray-300">11 Consent Areas</span>
                   </div>
                 </div>
@@ -367,14 +367,14 @@ export default function ConsentPage() {
 
               {/* Consent status indicator */}
               <Reveal delay={0.32}>
-                <div className="mt-8 p-4 rounded-2xl border border-violet-500/20 bg-violet-500/5">
+                <div className="mt-8 p-4 rounded-2xl border border-[#5edc1f]/20 bg-[#5edc1f]/10">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-violet-400" fill="none" viewBox="0 0 16 16">
+                    <div className="w-8 h-8 rounded-full bg-[#5edc1f]/20 flex items-center justify-center">
+                      <svg className="w-4 h-4 text-lime-400" fill="none" viewBox="0 0 16 16">
                         <path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
-                    <span className="text-sm font-semibold text-violet-300">Consent Framework Active</span>
+                    <span className="text-sm font-semibold text-lime-300">Consent Framework Active</span>
                   </div>
                   <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                     By creating an account with KoveTrade, you acknowledge reading and agreeing to
@@ -387,12 +387,12 @@ export default function ConsentPage() {
             {/* Right — seal */}
             <div className="flex justify-center items-center">
               <div className="relative">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-600/15 to-purple-900/10 blur-2xl scale-110" />
-                <div className="relative rounded-3xl border border-violet-500/20 bg-gray-50 dark:bg-white/3 p-10">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#5edc1f]/15 to-green-900/10 blur-2xl scale-110" />
+                <div className="relative rounded-3xl border border-[#5edc1f]/20 bg-gray-50 dark:bg-white/3 p-10">
                   <ConsentSeal />
                   <div className="mt-4 text-center">
                     <p className="text-xs text-gray-500 uppercase tracking-widest">KoveTrade</p>
-                    <p className="text-sm font-semibold text-violet-300">Official Consent Declaration</p>
+                    <p className="text-sm font-semibold text-lime-300">Official Consent Declaration</p>
                   </div>
                 </div>
               </div>
@@ -402,14 +402,14 @@ export default function ConsentPage() {
       </section>
 
       {/* ── Sticky quick-nav ─────────────────────────────────────── */}
-      <div className="sticky top-0 z-40 border-b border-gray-200 dark:border-gray-100 dark:border-white/5 bg-white/95 dark:bg-[#08091a]/80 backdrop-blur-xl">
+      <div className="sticky top-0 z-40 border-b border-gray-200 dark:border-gray-100 dark:border-white/5 bg-white/95 dark:bg-[#070f08]/80 backdrop-blur-xl">
         <div className="max-w-6xl mx-auto px-4 py-3 overflow-x-auto">
           <div className="flex gap-2 min-w-max">
             {NAV_ITEMS.map((n) => (
               <a
                 key={n.id}
                 href={`#section-${n.id}`}
-                className="text-xs px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-violet-300 hover:border-violet-500/40 hover:bg-violet-500/10 transition-all whitespace-nowrap"
+                className="text-xs px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-lime-300 hover:border-[#5edc1f]/40 hover:bg-[#5edc1f]/10 transition-all whitespace-nowrap"
               >
                 §{n.id} {n.label}
               </a>
@@ -430,7 +430,7 @@ export default function ConsentPage() {
                 { icon: "↩️", label: "Withdraw Anytime", sub: "Subject to legal limits" },
               ].map((item, i) => (
                 <Reveal key={i} delay={i * 0.08}>
-                  <div className="flex flex-col items-center text-center p-4 rounded-2xl border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/3 hover:bg-violet-500/5 hover:border-violet-500/20 transition-all">
+                  <div className="flex flex-col items-center text-center p-4 rounded-2xl border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/3 hover:bg-[#5edc1f]/10 hover:border-[#5edc1f]/20 transition-all">
                     <span className="text-2xl mb-2">{item.icon}</span>
                     <p className="text-sm font-semibold text-gray-900 dark:text-white mb-0.5">{item.label}</p>
                     <p className="text-xs text-gray-500">{item.sub}</p>
@@ -477,7 +477,7 @@ export default function ConsentPage() {
                 <Link
                   key={i}
                   href={doc.href}
-                  className="text-xs px-3 py-2 rounded-xl border border-purple-500/20 bg-purple-500/5 text-purple-300 hover:border-purple-500/40 hover:bg-purple-500/10 transition-all text-center"
+                  className="text-xs px-3 py-2 rounded-xl border border-teal-500/20 bg-teal-500/5 text-teal-300 hover:border-teal-500/40 hover:bg-teal-500/10 transition-all text-center"
                 >
                   {doc.label} →
                 </Link>
@@ -521,7 +521,7 @@ export default function ConsentPage() {
                 <p className="text-xs text-gray-600 dark:text-gray-400">Non-essential marketing communications — unsubscribe at any time via email link or support request.</p>
               </div>
               <div className="p-4 rounded-xl border border-rose-500/20 bg-rose-500/5">
-                <p className="text-xs font-semibold text-rose-300 mb-1.5">⚠️ Cannot Opt Out</p>
+                <p className="text-xs font-semibold text-lime-300 mb-1.5">⚠️ Cannot Opt Out</p>
                 <p className="text-xs text-gray-600 dark:text-gray-400">Transactional and regulatory communications required while your account remains active.</p>
               </div>
             </div>
@@ -552,9 +552,9 @@ export default function ConsentPage() {
             </Body>
             <div className="space-y-2 mt-2">
               {[
-                { label: "Essential cookies", desc: "Required for platform operation", color: "text-cyan-400" },
-                { label: "Analytical cookies", desc: "Help us improve our services", color: "text-blue-400" },
-                { label: "Marketing cookies", desc: "Enable relevant content delivery", color: "text-purple-400" },
+                { label: "Essential cookies", desc: "Required for platform operation", color: "text-lime-300" },
+                { label: "Analytical cookies", desc: "Help us improve our services", color: "text-lime-400" },
+                { label: "Marketing cookies", desc: "Enable relevant content delivery", color: "text-teal-400" },
               ].map((c, i) => (
                 <div key={i} className="flex items-start gap-3 p-3 rounded-xl border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/3">
                   <span className={`text-xs font-bold mt-0.5 ${c.color}`}>🍪</span>
@@ -586,8 +586,8 @@ export default function ConsentPage() {
                 <ConsentCheck key={i} label={item} delay={i * 0.06} />
               ))}
             </div>
-            <div className="mt-3 p-3 rounded-xl border border-indigo-500/20 bg-indigo-500/5">
-              <p className="text-xs text-indigo-300">
+            <div className="mt-3 p-3 rounded-xl border border-[#5edc1f]/20 bg-[#5edc1f]/5">
+              <p className="text-xs text-lime-300">
                 You agree to provide all requested documentation promptly and accurately to support
                 the completion of required regulatory checks.
               </p>
@@ -610,7 +610,7 @@ export default function ConsentPage() {
               ].map((r, i) => (
                 <div key={i} className="p-3 rounded-xl border border-rose-500/15 bg-rose-500/5">
                   <p className="text-base mb-1">{r.icon}</p>
-                  <p className="text-xs font-semibold text-rose-300">{r.label}</p>
+                  <p className="text-xs font-semibold text-lime-300">{r.label}</p>
                   <p className="text-xs text-gray-500 mt-0.5">{r.desc}</p>
                 </div>
               ))}
@@ -653,8 +653,8 @@ export default function ConsentPage() {
           {/* §10 */}
           <ConsentSection num={10} title="Consent for Minors" accent={SECTION_ACCENTS[9]}>
             <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-violet-500/15 border border-violet-500/30 flex items-center justify-center">
-                <span className="text-2xl font-black text-violet-300">18+</span>
+              <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-[#5edc1f]/15 border border-[#5edc1f]/30 flex items-center justify-center">
+                <span className="text-2xl font-black text-lime-300">18+</span>
               </div>
               <div className="space-y-2">
                 <Body>
@@ -679,15 +679,15 @@ export default function ConsentPage() {
             </Body>
             <div className="mt-3 space-y-2">
               <div className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 text-purple-400 text-xs font-bold">1</span>
+                <span className="w-6 h-6 rounded-full bg-teal-500/20 flex items-center justify-center flex-shrink-0 text-teal-400 text-xs font-bold">1</span>
                 <p className="text-sm text-gray-600 dark:text-gray-400">We will notify you of material changes by posting the updated declaration on our website.</p>
               </div>
               <div className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 text-purple-400 text-xs font-bold">2</span>
+                <span className="w-6 h-6 rounded-full bg-teal-500/20 flex items-center justify-center flex-shrink-0 text-teal-400 text-xs font-bold">2</span>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Where appropriate, we will send you a direct notification of significant updates.</p>
               </div>
               <div className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 text-purple-400 text-xs font-bold">3</span>
+                <span className="w-6 h-6 rounded-full bg-teal-500/20 flex items-center justify-center flex-shrink-0 text-teal-400 text-xs font-bold">3</span>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Your continued use of our services after changes constitutes acceptance of the updated declaration.</p>
               </div>
             </div>
@@ -700,21 +700,21 @@ export default function ConsentPage() {
       <section className="py-16 px-4">
         <div className="max-w-3xl mx-auto">
           <Reveal>
-            <div className="relative rounded-3xl overflow-hidden border border-violet-500/20">
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-900/40 via-purple-900/30 to-indigo-900/40" />
-              <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-violet-500/10 blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-purple-500/10 blur-3xl" />
+            <div className="relative rounded-3xl overflow-hidden border border-[#5edc1f]/20">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-900/40 via-green-950/30 to-green-900/40" />
+              <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-[#5edc1f]/10 blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-teal-500/10 blur-3xl" />
 
               <div className="relative p-10 text-center">
-                <div className="w-14 h-14 rounded-2xl bg-violet-500/20 border border-violet-500/30 flex items-center justify-center mx-auto mb-5">
-                  <svg className="w-7 h-7 text-violet-400" fill="none" viewBox="0 0 24 24">
+                <div className="w-14 h-14 rounded-2xl bg-[#5edc1f]/20 border border-[#5edc1f]/30 flex items-center justify-center mx-auto mb-5">
+                  <svg className="w-7 h-7 text-lime-400" fill="none" viewBox="0 0 24 24">
                     <path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093M12 21h.01M12 3a9 9 0 110 18A9 9 0 0112 3z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
 
                 <h2 className="text-2xl md:text-3xl font-bold mb-3">
                   Have{" "}
-                  <span className="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#5edc1f] to-emerald-400 bg-clip-text text-transparent">
                     Questions?
                   </span>
                 </h2>
@@ -727,7 +727,7 @@ export default function ConsentPage() {
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <a
                     href="mailto:support@kovetrade.com"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 text-white font-semibold text-sm hover:from-violet-500 hover:to-purple-500 transition-all shadow-lg shadow-violet-900/30"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#4cc015] to-green-700 text-white font-semibold text-sm hover:from-[#5edc1f] hover:to-green-600 transition-all shadow-lg shadow-green-900/30"
                   >
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 16 16">
                       <path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4zm0 0l6 5 6-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

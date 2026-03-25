@@ -45,11 +45,11 @@ const SECTION_COLORS: Record<string, {
   tag: string; badge: string; bar: string; glow: string; icon: string;
 }> = {
   collect: {
-    tag:   "text-blue-600 dark:text-blue-400",
-    badge: "bg-blue-500/10 border-blue-500/20 text-blue-600 dark:text-blue-400",
-    bar:   "from-blue-500 to-cyan-500",
-    glow:  "bg-blue-500/[0.05]",
-    icon:  "bg-blue-500",
+    tag:   "text-[#4cc015] dark:text-lime-400",
+    badge: "bg-[#5edc1f]/10 border-[#5edc1f]/20 text-[#4cc015] dark:text-lime-400",
+    bar:   "from-[#5edc1f] to-lime-400",
+    glow:  "bg-[#5edc1f]/[0.05]",
+    icon:  "bg-[#5edc1f]",
   },
   security: {
     tag:   "text-emerald-600 dark:text-emerald-400",
@@ -59,16 +59,16 @@ const SECTION_COLORS: Record<string, {
     icon:  "bg-emerald-500",
   },
   affiliates: {
-    tag:   "text-violet-600 dark:text-violet-400",
-    badge: "bg-violet-500/10 border-violet-500/20 text-violet-600 dark:text-violet-400",
-    bar:   "from-violet-500 to-purple-500",
-    glow:  "bg-violet-500/[0.05]",
-    icon:  "bg-violet-500",
+    tag:   "text-[#4cc015] dark:text-lime-400",
+    badge: "bg-[#5edc1f]/10 border-[#5edc1f]/20 text-[#4cc015] dark:text-lime-400",
+    bar:   "from-[#5edc1f] to-green-700",
+    glow:  "bg-[#5edc1f]/[0.05]",
+    icon:  "bg-[#5edc1f]",
   },
   third: {
-    tag:   "text-rose-600 dark:text-rose-400",
-    badge: "bg-rose-500/10 border-rose-500/20 text-rose-600 dark:text-rose-400",
-    bar:   "from-rose-500 to-pink-500",
+    tag:   "text-rose-600 dark:text-lime-400",
+    badge: "bg-[#5edc1f]/10 border-rose-500/20 text-rose-600 dark:text-lime-400",
+    bar:   "from-[#5edc1f] to-green-700",
     glow:  "bg-rose-500/[0.05]",
     icon:  "bg-rose-500",
   },
@@ -80,11 +80,11 @@ const SECTION_COLORS: Record<string, {
     icon:  "bg-amber-500",
   },
   optout: {
-    tag:   "text-cyan-600 dark:text-cyan-400",
-    badge: "bg-cyan-500/10 border-cyan-500/20 text-cyan-600 dark:text-cyan-400",
-    bar:   "from-cyan-500 to-blue-500",
-    glow:  "bg-cyan-500/[0.05]",
-    icon:  "bg-cyan-500",
+    tag:   "text-[#4cc015] dark:text-lime-300",
+    badge: "bg-lime-400/10 border-lime-400/20 text-[#4cc015] dark:text-lime-300",
+    bar:   "from-lime-400 to-[#5edc1f]",
+    glow:  "bg-lime-400/[0.05]",
+    icon:  "bg-lime-400",
   },
 };
 
@@ -292,8 +292,8 @@ export default function PrivacyPolicy() {
         {/* BG — light */}
         <div className="absolute inset-0 dark:hidden pointer-events-none">
           <div className="absolute inset-0 opacity-[0.18]" style={{ backgroundImage: "radial-gradient(circle, #cbd5e1 1px, transparent 1px)", backgroundSize: "26px 26px" }} />
-          <div className="absolute -top-[5%] right-[15%] w-[600px] h-[600px] rounded-full opacity-[0.09]" style={{ background: "radial-gradient(circle, #6366f1 0%, transparent 65%)" }} />
-          <div className="absolute bottom-0 left-[10%] w-[400px] h-[400px] rounded-full opacity-[0.06]" style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 65%)" }} />
+          <div className="absolute -top-[5%] right-[15%] w-[600px] h-[600px] rounded-full opacity-[0.09]" style={{ background: "radial-gradient(circle, #2d6a0a 0%, transparent 65%)" }} />
+          <div className="absolute bottom-0 left-[10%] w-[400px] h-[400px] rounded-full opacity-[0.06]" style={{ background: "radial-gradient(circle, #5edc1f 0%, transparent 65%)" }} />
         </div>
         {/* BG — dark */}
         <div className="absolute inset-0 hidden dark:block pointer-events-none">
@@ -308,13 +308,13 @@ export default function PrivacyPolicy() {
             {/* Left */}
             <div>
               <motion.div
-                className="inline-flex items-center gap-2 rounded-full border border-violet-200 dark:border-violet-500/20 bg-violet-50 dark:bg-violet-500/[0.08] px-4 py-2 mb-7"
+                className="inline-flex items-center gap-2 rounded-full border border-green-200 dark:border-[#5edc1f]/20 bg-green-50 dark:bg-[#5edc1f]/[0.08] px-4 py-2 mb-7"
                 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, ease: E }}
               >
-                <svg className="w-3.5 h-3.5 text-violet-600 dark:text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="w-3.5 h-3.5 text-[#4cc015] dark:text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                 </svg>
-                <span className="text-[11px] font-semibold text-violet-700 dark:text-violet-300 tracking-wide">Data Protection · KoveTrade</span>
+                <span className="text-[11px] font-semibold text-[#4cc015] dark:text-lime-300 tracking-wide">Data Protection · KoveTrade</span>
               </motion.div>
 
               <motion.h1
@@ -323,7 +323,7 @@ export default function PrivacyPolicy() {
                 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.08, ease: E }}
               >
                 Your Privacy,{" "}
-                <span className="bg-gradient-to-r from-violet-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#4cc015] via-[#5edc1f] to-lime-400 bg-clip-text text-transparent">
                   Our Priority.
                 </span>
               </motion.h1>
@@ -357,9 +357,9 @@ export default function PrivacyPolicy() {
               initial={{ opacity: 0, x: 32 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, delay: 0.3, ease: E }}
             >
               {[
-                { icon: "🔒", stat: "256-bit",     label: "SSL Encryption",         c: "from-blue-500 to-cyan-500"    },
+                { icon: "🔒", stat: "256-bit",     label: "SSL Encryption",         c: "from-[#5edc1f] to-lime-400"    },
                 { icon: "🛡️", stat: "ISO 27001",   label: "Security Certified",     c: "from-emerald-500 to-teal-500" },
-                { icon: "🌍", stat: "GDPR",        label: "Compliant",              c: "from-violet-500 to-purple-500"},
+                { icon: "🌍", stat: "GDPR",        label: "Compliant",              c: "from-[#5edc1f] to-green-700"},
                 { icon: "⚡", stat: "<24h",        label: "Data Request Response",  c: "from-amber-500 to-orange-500" },
               ].map(({ icon, stat, label, c }, i) => (
                 <motion.div
@@ -387,12 +387,12 @@ export default function PrivacyPolicy() {
           <div className="flex items-center gap-2 py-3 overflow-x-auto no-scrollbar">
             <span className="text-[11px] text-gray-400 dark:text-gray-600 font-medium shrink-0 mr-1">Sections:</span>
             {[
-              { n: 1, label: "Data Collected",   col: "hover:text-blue-600 dark:hover:text-blue-400"    },
+              { n: 1, label: "Data Collected",   col: "hover:text-[#4cc015] dark:hover:text-lime-400"    },
               { n: 2, label: "Security",         col: "hover:text-emerald-600 dark:hover:text-emerald-400" },
-              { n: 3, label: "Affiliates",       col: "hover:text-violet-600 dark:hover:text-violet-400" },
-              { n: 4, label: "Third Parties",    col: "hover:text-rose-600 dark:hover:text-rose-400"    },
+              { n: 3, label: "Affiliates",       col: "hover:text-[#4cc015] dark:hover:text-lime-400" },
+              { n: 4, label: "Third Parties",    col: "hover:text-rose-600 dark:hover:text-lime-400"    },
               { n: 5, label: "Regulatory",       col: "hover:text-amber-600 dark:hover:text-amber-400"  },
-              { n: 6, label: "Your Rights",      col: "hover:text-cyan-600 dark:hover:text-cyan-400"    },
+              { n: 6, label: "Your Rights",      col: "hover:text-[#4cc015] dark:hover:text-lime-300"    },
             ].map(({ n, label, col }) => (
               <a
                 key={n}
@@ -426,9 +426,9 @@ export default function PrivacyPolicy() {
               disclose, and safeguard your information when you use our platform and services.
             </p>
             <div className="grid sm:grid-cols-3 gap-4">
-              <DataTypeCard label="Application Info"    fields={APP_INFO_FIELDS}  color="text-blue-600 dark:text-blue-400"    />
-              <DataTypeCard label="Transaction Info"    fields={TXN_FIELDS}       color="text-cyan-600 dark:text-cyan-400"    />
-              <DataTypeCard label="Verification (KYC)"  fields={VERIFY_FIELDS}    color="text-indigo-600 dark:text-indigo-400" />
+              <DataTypeCard label="Application Info"    fields={APP_INFO_FIELDS}  color="text-[#4cc015] dark:text-lime-400"    />
+              <DataTypeCard label="Transaction Info"    fields={TXN_FIELDS}       color="text-[#4cc015] dark:text-lime-300"    />
+              <DataTypeCard label="Verification (KYC)"  fields={VERIFY_FIELDS}    color="text-green-700 dark:text-lime-400" />
             </div>
           </PolicySection>
 
@@ -487,8 +487,8 @@ export default function PrivacyPolicy() {
                 { t: "Internal Analytics",           b: "Conducting research and analytics across our group" },
                 { t: "Risk Management",              b: "Managing risk holistically across our group of companies" },
               ].map(({ t, b }) => (
-                <div key={t} className="flex items-start gap-3 rounded-2xl border border-violet-100 dark:border-violet-500/[0.12] bg-violet-50 dark:bg-violet-500/[0.04] p-4">
-                  <span className="mt-0.5 w-5 h-5 rounded-full bg-violet-500 flex items-center justify-center shrink-0">
+                <div key={t} className="flex items-start gap-3 rounded-2xl border border-green-100 dark:border-[#5edc1f]/[0.12] bg-green-50 dark:bg-[#5edc1f]/[0.04] p-4">
+                  <span className="mt-0.5 w-5 h-5 rounded-full bg-[#5edc1f] flex items-center justify-center shrink-0">
                     <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                   </span>
                   <div>
@@ -517,8 +517,8 @@ export default function PrivacyPolicy() {
             </p>
             <div className="space-y-2.5">
               {THIRD_PARTY_TYPES.map(({ label, desc }, i) => (
-                <div key={label} className="flex items-center gap-4 rounded-2xl border border-rose-100 dark:border-rose-500/[0.12] bg-rose-50/50 dark:bg-rose-500/[0.03] px-5 py-4">
-                  <span className="w-7 h-7 rounded-full bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white text-[11px] font-black shrink-0">
+                <div key={label} className="flex items-center gap-4 rounded-2xl border border-green-100 dark:border-rose-500/[0.12] bg-rose-50/50 dark:bg-rose-500/[0.03] px-5 py-4">
+                  <span className="w-7 h-7 rounded-full bg-gradient-to-br from-[#5edc1f] to-green-700 flex items-center justify-center text-white text-[11px] font-black shrink-0">
                     {i + 1}
                   </span>
                   <div className="flex-1 min-w-0">
@@ -586,8 +586,8 @@ export default function PrivacyPolicy() {
             </p>
             <div className="grid sm:grid-cols-2 gap-3 mb-5">
               {OPT_OUT_RIGHTS.map((right, i) => (
-                <div key={i} className="flex items-start gap-3 rounded-2xl border border-cyan-100 dark:border-cyan-500/[0.15] bg-cyan-50 dark:bg-cyan-500/[0.04] p-4">
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white shrink-0 mt-0.5">
+                <div key={i} className="flex items-start gap-3 rounded-2xl border border-green-100 dark:border-lime-400/[0.15] bg-cyan-50 dark:bg-lime-400/[0.04] p-4">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-lime-400 to-[#5edc1f] flex items-center justify-center text-white shrink-0 mt-0.5">
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                   </div>
                   <p className="text-[13px] text-gray-600 dark:text-gray-400 leading-relaxed">{right}</p>
@@ -598,7 +598,7 @@ export default function PrivacyPolicy() {
               <span className="text-[13px] text-gray-500 dark:text-gray-500">To exercise any right:</span>
               <a
                 href="mailto:support@kovetrade.com"
-                className="inline-flex items-center gap-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 px-4 py-2 text-[12px] font-bold text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/20 transition-colors duration-200"
+                className="inline-flex items-center gap-1.5 rounded-full bg-lime-400/10 border border-lime-400/20 px-4 py-2 text-[12px] font-bold text-[#4cc015] dark:text-lime-300 hover:bg-lime-400/20 transition-colors duration-200"
               >
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
                 support@kovetrade.com
@@ -608,8 +608,8 @@ export default function PrivacyPolicy() {
 
           {/* ── Bottom CTA ── */}
           <Reveal delay={0.15}>
-            <div className="relative rounded-3xl overflow-hidden p-8 sm:p-10 text-center shadow-2xl shadow-violet-900/15"
-              style={{ background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2563eb 100%)" }}
+            <div className="relative rounded-3xl overflow-hidden p-8 sm:p-10 text-center shadow-2xl shadow-green-900/15"
+              style={{ background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #4cc015 100%)" }}
             >
               <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,1) 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
               <div className="absolute top-0 right-0 w-64 h-64 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 65%)" }} />
@@ -621,13 +621,13 @@ export default function PrivacyPolicy() {
                   </svg>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-white mb-3">Questions about your privacy?</h3>
-                <p className="text-violet-200 text-[14px] max-w-sm mx-auto leading-relaxed mb-8">
+                <p className="text-lime-200 text-[14px] max-w-sm mx-auto leading-relaxed mb-8">
                   Our data protection team takes your privacy seriously. We commit to responding to any inquiry within 24 hours.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <Link
                     href="mailto:privacy@kovetrade.com"
-                    className="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-violet-700 hover:bg-violet-50 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/20 transition-all duration-300"
+                    className="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-[#4cc015] hover:bg-green-50 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/20 transition-all duration-300"
                   >
                     Contact Privacy Team
                   </Link>

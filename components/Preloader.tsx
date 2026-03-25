@@ -1,44 +1,24 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-
 export default function Preloader() {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Avoid hydration mismatch by showing a neutral state until mounted
-  const logoSrc = mounted && resolvedTheme === "dark"
-    ? "/logo_light.png"
-    : "/logo_dark.png";
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-gradient-to-br dark:from-[#0a1628] dark:via-[#0d1b2a] dark:to-[#1b263b]">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-[#070f08]">
       {/* Logo */}
       <div className="mb-12">
-        <Image
-          src={logoSrc}
-    alt="KoveTrade"
-          width={300}
-          height={75}
-          className="w-64 h-auto"
-          priority
-        />
+        <span className="inline-flex items-baseline gap-0.5">
+          <span className="text-4xl font-black tracking-tight text-gray-900 dark:text-white">Kove</span>
+          <span className="text-4xl font-black tracking-tight text-[#5edc1f]">Trade</span>
+        </span>
       </div>
 
       {/* Circular Loading Spinner */}
-      <div className="relative w-16 h-16 mb-8">
-        <div className="absolute inset-0 rounded-full border-4 border-gray-200 dark:border-gray-700"></div>
-        <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-600 dark:border-t-blue-500 animate-spin"></div>
+      <div className="relative w-14 h-14 mb-8">
+        <div className="absolute inset-0 rounded-full border-4 border-gray-200 dark:border-gray-700/50"></div>
+        <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-[#5edc1f] animate-spin"></div>
       </div>
 
       {/* Loading Text */}
-      <p className="text-lg font-medium text-gray-600 dark:text-gray-300 animate-pulse">
+      <p className="text-sm font-medium text-gray-500 dark:text-gray-400 animate-pulse tracking-widest uppercase">
         Loading...
       </p>
     </div>

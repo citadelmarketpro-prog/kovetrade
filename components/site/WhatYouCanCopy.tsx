@@ -63,31 +63,31 @@ const CopyCard = ({ icon, title, description, accentColor }: CopyCardProps) => {
     switch (accentColor) {
       case "blue":
         return {
-          iconBg: "bg-blue-50 dark:bg-blue-500/10",
-          iconColor: "text-blue-600 dark:text-blue-400",
-          border: "group-hover:border-blue-500/30",
-          glow: "group-hover:shadow-blue-500/5",
+          iconBg: "bg-[#5edc1f]/8 dark:bg-[#5edc1f]/10",
+          iconColor: "text-[#5edc1f] dark:text-lime-400",
+          border: "group-hover:border-[#5edc1f]/30",
+          glow: "group-hover:shadow-[#5edc1f]/5",
         };
       case "cyan":
         return {
-          iconBg: "bg-cyan-50 dark:bg-cyan-500/10",
-          iconColor: "text-cyan-600 dark:text-cyan-400",
-          border: "group-hover:border-cyan-500/30",
-          glow: "group-hover:shadow-cyan-500/5",
+          iconBg: "bg-[#5edc1f]/8 dark:bg-[#5edc1f]/10",
+          iconColor: "text-[#5edc1f] dark:text-lime-400",
+          border: "group-hover:border-[#5edc1f]/30",
+          glow: "group-hover:shadow-[#5edc1f]/5",
         };
       case "indigo":
         return {
-          iconBg: "bg-indigo-50 dark:bg-indigo-500/10",
-          iconColor: "text-indigo-600 dark:text-indigo-400",
-          border: "group-hover:border-indigo-500/30",
-          glow: "group-hover:shadow-indigo-500/5",
+          iconBg: "bg-[#5edc1f]/8 dark:bg-[#5edc1f]/10",
+          iconColor: "text-[#5edc1f] dark:text-lime-400",
+          border: "group-hover:border-[#5edc1f]/30",
+          glow: "group-hover:shadow-[#5edc1f]/5",
         };
       default:
         return {
-          iconBg: "bg-blue-50 dark:bg-blue-500/10",
-          iconColor: "text-blue-600 dark:text-blue-400",
-          border: "group-hover:border-blue-500/30",
-          glow: "group-hover:shadow-blue-500/5",
+          iconBg: "bg-[#5edc1f]/8 dark:bg-[#5edc1f]/10",
+          iconColor: "text-[#5edc1f] dark:text-lime-400",
+          border: "group-hover:border-[#5edc1f]/30",
+          glow: "group-hover:shadow-[#5edc1f]/5",
         };
     }
   };

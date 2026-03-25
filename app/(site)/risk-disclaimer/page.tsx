@@ -269,13 +269,13 @@ export default function RiskDisclaimer() {
                 <div className="grid sm:grid-cols-2 gap-3">
                   {ENTITIES.map(({ region, entity, reg, license }) => (
                     <div key={region} className="flex items-start gap-3 rounded-2xl border border-gray-100 dark:border-white/[0.06] bg-gray-50 dark:bg-white/[0.02] p-4">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-[10px] font-black shrink-0 shadow-md">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#5edc1f] to-green-700 flex items-center justify-center text-white text-[10px] font-black shrink-0 shadow-md">
                         {reg}
                       </div>
                       <div>
                         <p className="text-[12px] font-bold text-gray-900 dark:text-white leading-none mb-1">{entity}</p>
                         <p className="text-[11px] text-gray-500 dark:text-gray-500 mb-0.5">{region}</p>
-                        <p className="text-[11px] text-blue-600 dark:text-blue-400 font-semibold">{license}</p>
+                        <p className="text-[11px] text-[#4cc015] dark:text-lime-400 font-semibold">{license}</p>
                       </div>
                     </div>
                   ))}
@@ -403,15 +403,15 @@ export default function RiskDisclaimer() {
 
           {/* §5 Important Notice */}
           <Reveal delay={0.11}>
-            <div id="rd5" className="scroll-mt-20 rounded-3xl border border-rose-100 dark:border-rose-500/[0.15] overflow-hidden bg-white dark:bg-[#0c0d0f]">
-              <div className="flex items-center gap-4 px-7 py-5 bg-rose-50/60 dark:bg-rose-500/[0.04] border-b border-rose-100 dark:border-rose-500/[0.12]">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white shadow-lg shrink-0">
+            <div id="rd5" className="scroll-mt-20 rounded-3xl border border-green-100 dark:border-rose-500/[0.15] overflow-hidden bg-white dark:bg-[#0c0d0f]">
+              <div className="flex items-center gap-4 px-7 py-5 bg-rose-50/60 dark:bg-rose-500/[0.04] border-b border-green-100 dark:border-rose-500/[0.12]">
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#5edc1f] to-green-700 flex items-center justify-center text-white shadow-lg shrink-0">
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-rose-600 dark:text-rose-400 mb-0.5">Section 5 · Mandatory Disclosure</p>
+                  <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-rose-600 dark:text-lime-400 mb-0.5">Section 5 · Mandatory Disclosure</p>
                   <h2 className="text-base sm:text-[17px] font-black text-gray-900 dark:text-white">Important Notice</h2>
                 </div>
               </div>

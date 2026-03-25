@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo, Suspense } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
+
 import { motion } from "framer-motion";
 import Select, {
   FormatOptionLabelMeta,
@@ -264,51 +264,31 @@ function RegisterPageContent() {
 
   return (
     <PagePreloader>
-      <div className="min-h-screen flex flex-col lg:flex-row gap-10 bg-white dark:bg-gradient-to-br dark:from-[#0a1628] dark:via-[#0d1b2a] dark:to-[#1b263b] text-black dark:text-white transition-colors duration-300">
+      <div className="min-h-screen flex flex-col lg:flex-row gap-10">
       {/* Left side: Register Form */}
       <div className="flex-1 flex items-center justify-center px-8 py-8 md:py-16 bg-white dark:bg-transparent">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full max-w-sm space-y-6 flex flex-col"
+          className="w-full max-w-sm space-y-6 flex flex-col dark:bg-white/[0.025] dark:backdrop-blur-sm dark:border dark:border-[#5edc1f]/10 dark:rounded-3xl dark:p-8 dark:shadow-2xl dark:shadow-black/40"
         >
           {/* Logo */}
-          <Link
-            href="/"
-            className="hidden dark:flex text-2xl md:text-4xl mb-10 font-extrabold self-center tracking-tight items-center gap-1 text-blue-600"
-          >
-            <Image
-              src={"/logo_light.png"}
-              className="hidden dark:block w-50"
-              alt=""
-              width={1000}
-              height={250}
-            />
-          </Link>
-          <Link
-            href="/"
-            className="flex dark:hidden text-2xl md:text-4xl mb-10 font-extrabold self-center tracking-tight items-center gap-1"
-          >
-            <Image
-              src={"/logo_dark.png"}
-              className="block dark:hidden w-50"
-              alt=""
-              width={1000}
-              height={250}
-            />
+          <Link href="/" className="inline-flex items-baseline gap-0.5 self-center mb-8">
+            <span className="text-3xl font-black tracking-tight text-gray-900 dark:text-white">Kove</span>
+            <span className="text-3xl font-black tracking-tight text-[#5edc1f]">Trade</span>
           </Link>
 
           {/* Theme toggle */}
           {mounted && (
             <button
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              className="p-2 ml-auto rounded-md border fixed top-5 right-1 border-gray-300 dark:border-gray-600/50 hover:bg-gray-100 dark:hover:bg-[#1e2d3d]/50 transition-all"
+              className="p-2 ml-auto rounded-md border fixed top-5 right-1 border-gray-300 dark:border-[#5edc1f]/15 hover:bg-gray-100 dark:hover:bg-[#0d1a0e]/50 transition-all"
             >
               {theme === "light" ? (
-                <Moon className="w-4 h-4 text-blue-500" />
+                <Moon className="w-4 h-4 text-[#5edc1f]" />
               ) : (
-                <Sun className="w-4 h-4 text-blue-400" />
+                <Sun className="w-4 h-4 text-lime-400" />
               )}
             </button>
           )}
@@ -318,17 +298,17 @@ function RegisterPageContent() {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg p-4"
+              className="bg-[#5edc1f]/10 dark:bg-[#5edc1f]/10 border border-[#5edc1f]/30 dark:border-[#5edc1f]/30 rounded-lg p-4"
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-100 dark:bg-blue-500/20 rounded-full">
-                  <Gift className="w-5 h-5 text-blue-600" />
+                <div className="p-2 bg-[#5edc1f]/15 dark:bg-[#5edc1f]/20 rounded-full">
+                  <Gift className="w-5 h-5 text-[#5edc1f]" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-blue-800 dark:text-blue-700">
+                  <p className="text-sm font-semibold text-[#4cc015] dark:text-[#5edc1f]">
                     🎉 Referred by {referrerName}!
                   </p>
-                  <p className="text-xs text-blue-700 dark:text-blue-600">
+                  <p className="text-xs text-[#5edc1f] dark:text-[#5edc1f]">
                     You&apos;ll get special bonuses when you join
                   </p>
                 </div>
@@ -356,7 +336,7 @@ function RegisterPageContent() {
               Already a member?{" "}
               <Link
                 href="/login"
-                className=" text-blue-500 underline"
+                className=" text-[#5edc1f] underline"
               >
                 Sign In here
               </Link>
@@ -372,10 +352,10 @@ function RegisterPageContent() {
                   id="firstName"
                   type="text"
                   {...register("firstName")}
-                  className={`peer w-full border rounded-md px-3 pt-5 pb-2 bg-white dark:bg-[#1e2d3d]/50 focus:outline-none transition-all ${
+                  className={`peer w-full border rounded-md px-3 pt-5 pb-2 bg-white dark:bg-white/[0.04] focus:outline-none transition-all ${
                     errors.firstName
                       ? "border-red-500"
-                      : "border-gray-300 dark:border-gray-600/50"
+                      : "border-gray-300 dark:border-[#5edc1f]/15"
                   }`}
                   placeholder=" "
                 />
@@ -401,10 +381,10 @@ function RegisterPageContent() {
                   id="lastName"
                   type="text"
                   {...register("lastName")}
-                  className={`peer w-full border rounded-md px-3 pt-5 pb-2 bg-white dark:bg-[#1e2d3d]/50 focus:outline-none transition-all ${
+                  className={`peer w-full border rounded-md px-3 pt-5 pb-2 bg-white dark:bg-white/[0.04] focus:outline-none transition-all ${
                     errors.lastName
                       ? "border-red-500"
-                      : "border-gray-300 dark:border-gray-600/50"
+                      : "border-gray-300 dark:border-[#5edc1f]/15"
                   }`}
                   placeholder=" "
                 />
@@ -432,10 +412,10 @@ function RegisterPageContent() {
                 id="email"
                 type="email"
                 {...register("email")}
-                className={`peer w-full border rounded-md px-3 pt-5 pb-2 bg-white dark:bg-[#1e2d3d]/50 focus:outline-none transition-all ${
+                className={`peer w-full border rounded-md px-3 pt-5 pb-2 bg-white dark:bg-white/[0.04] focus:outline-none transition-all ${
                   errors.email
                     ? "border-red-500"
-                    : "border-gray-300 dark:border-gray-600/50"
+                    : "border-gray-300 dark:border-[#5edc1f]/15"
                 }`}
                 placeholder=" "
               />
@@ -500,7 +480,7 @@ function RegisterPageContent() {
                             ...base,
                             zIndex: 50,
                             backgroundColor:
-                              theme === "dark" ? "#1e2d3d" : "#fff",
+                              theme === "dark" ? "#0d1a0e" : "#fff",
                             color: theme === "dark" ? "#fff" : "#000",
                           }),
                           option: (base, { isFocused, isSelected }) => ({
@@ -551,10 +531,10 @@ function RegisterPageContent() {
                 id="password"
                 type={showPassword ? "text" : "password"}
                 {...register("password")}
-                className={`peer w-full border rounded-md px-3 pt-5 pb-2 bg-white dark:bg-[#1e2d3d]/50 focus:outline-none transition-all ${
+                className={`peer w-full border rounded-md px-3 pt-5 pb-2 bg-white dark:bg-white/[0.04] focus:outline-none transition-all ${
                   errors.password
                     ? "border-red-500"
-                    : "border-gray-300 dark:border-gray-600/50"
+                    : "border-gray-300 dark:border-[#5edc1f]/15"
                 }`}
                 placeholder=" "
               />
@@ -628,7 +608,7 @@ function RegisterPageContent() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-700 hover:bg-blue-600 text-white py-6 rounded-md"
+              className="w-full bg-[#5edc1f] hover:bg-[#4cc015] text-gray-900 font-bold py-6 rounded-md"
             >
               {!loading ? (
                 <span>Create Account</span>
@@ -649,7 +629,7 @@ function RegisterPageContent() {
             {/* Google Button */}
             <button
               type="button"
-              className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 dark:border-gray-600/50 rounded-md bg-white dark:bg-[#1e2d3d]/50 hover:bg-gray-50 dark:hover:bg-[#1e2d3d]/80 transition-all"
+              className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 dark:border-[#5edc1f]/15 rounded-md bg-white dark:bg-white/[0.04] hover:bg-gray-50 dark:hover:bg-[#0d1a0e]/80 transition-all"
             >
               <svg width="20" height="20" viewBox="0 0 24 24">
                 <path
@@ -680,14 +660,14 @@ function RegisterPageContent() {
                 By signing up you agree to{" "}
                 <Link
                   href="/privacy-policy"
-                  className="text-blue-500 hover:underline"
+                  className="text-[#5edc1f] hover:underline"
                 >
                   Terms and Condition
                 </Link>{" "}
                 &{" "}
                 <Link
                   href="/privacy-policy"
-                  className="text-blue-500 hover:underline"
+                  className="text-[#5edc1f] hover:underline"
                 >
                   Privacy Policy
                 </Link>
@@ -710,7 +690,7 @@ function RegisterPageContent() {
       </div>
 
       {/* Right side visual */}
-      <div className="hidden flex-1 items-center justify-center bg-gradient-to-br from-[#1e3a5f] via-[#2a5298] to-[#1e3a5f] dark:from-[#0f1f3a] dark:via-[#1a3a5a] dark:to-[#0f1f3a] p-8 rounded-l-3xl">
+      <div className="hidden flex-1 items-center justify-center bg-gradient-to-br from-[#0f2d10] via-[#1a4d1b] to-[#0f2d10] dark:from-[#040d05] dark:via-[#0a1a0b] dark:to-[#040d05] p-8 rounded-l-3xl">
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}

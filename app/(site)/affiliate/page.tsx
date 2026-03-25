@@ -566,9 +566,9 @@ export default function AffiliatePage() {
 
           {/* Tracking */}
           <Reveal dir="left">
-            <div className="rounded-3xl border border-blue-500/15 bg-gray-50 dark:bg-white/[0.02] p-8 h-full">
+            <div className="rounded-3xl border border-[#5edc1f]/15 bg-gray-50 dark:bg-white/[0.02] p-8 h-full">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-2xl bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-xl">📡</div>
+                <div className="w-10 h-10 rounded-2xl bg-[#5edc1f]/15 border border-[#5edc1f]/25 flex items-center justify-center text-xl">📡</div>
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">Tracking & Analytics</h2>
               </div>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-5 leading-relaxed">

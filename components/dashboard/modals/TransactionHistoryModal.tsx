@@ -89,7 +89,7 @@ export default function TransactionHistoryModal({
                   onClick={() => setFilter(f)}
                   className={`px-4 py-2 rounded-lg text-xs font-semibold transition-colors ${
                     filter === f
-                      ? "bg-blue-500 text-white"
+                      ? "bg-[#5edc1f] text-white"
                       : "bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-white/10"
                   }`}
                 >
@@ -101,7 +101,7 @@ export default function TransactionHistoryModal({
             {/* Transactions List */}
             {loading ? (
               <div className="flex items-center justify-center py-12">
-                <Loader2 className="w-8 h-8 text-blue-400 animate-spin" />
+                <Loader2 className="w-8 h-8 text-lime-400 animate-spin" />
               </div>
             ) : transactions.length === 0 ? (
               <div className="text-center py-12">
@@ -113,7 +113,7 @@ export default function TransactionHistoryModal({
                 {transactions.map((tx) => (
                   <div
                     key={tx.id}
-                    className="bg-gray-50 dark:bg-[#1a2744]/80 border border-gray-200 dark:border-white/5 rounded-xl p-4"
+                    className="bg-gray-50 dark:bg-white/[0.04] border border-gray-200 dark:border-white/5 rounded-xl p-4"
                   >
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2.5">

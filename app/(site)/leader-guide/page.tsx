@@ -208,8 +208,8 @@ function MetricCard({
   const colors = {
     yellow:  { ring: "border-yellow-500/30",  bg: "bg-yellow-500/8",  glow: "bg-yellow-500/10",  text: "text-yellow-400"  },
     emerald: { ring: "border-emerald-500/30", bg: "bg-emerald-500/8", glow: "bg-emerald-500/10", text: "text-emerald-400" },
-    rose:    { ring: "border-rose-500/30",    bg: "bg-rose-500/8",    glow: "bg-rose-500/10",    text: "text-rose-400"    },
-    blue:    { ring: "border-blue-500/30",    bg: "bg-blue-500/8",    glow: "bg-blue-500/10",    text: "text-blue-400"    },
+    rose:    { ring: "border-[#5edc1f]/30",    bg: "bg-rose-500/8",    glow: "bg-[#5edc1f]/10",    text: "text-lime-400"    },
+    blue:    { ring: "border-[#5edc1f]/30",    bg: "bg-[#5edc1f]/8",    glow: "bg-[#5edc1f]/10",    text: "text-lime-400"    },
   };
   const c = colors[color];
   return (
@@ -308,7 +308,7 @@ export default function LeaderGuidePage() {
       {/* Aurora */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none hidden dark:block">
         <div className="lg-a absolute top-[-10%] left-[-4%] w-[55vw] h-[55vw] rounded-full bg-yellow-700/10 blur-[120px]" />
-        <div className="lg-b absolute bottom-[-10%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-indigo-800/10 blur-[110px]" />
+        <div className="lg-b absolute bottom-[-10%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-green-900/10 blur-[110px]" />
         <div className="lg-a absolute top-[40%] left-[28%] w-[38vw] h-[38vw] rounded-full bg-amber-800/6 blur-[130px]" style={{ animationDelay: "6s" }} />
       </div>
 
@@ -630,11 +630,11 @@ export default function LeaderGuidePage() {
                 ].map((ch, i) => {
                   const cols: Record<string, string> = {
                     yellow: "border-yellow-500/25 bg-yellow-500/8",
-                    blue: "border-blue-500/20 bg-blue-500/6",
+                    blue: "border-[#5edc1f]/20 bg-[#5edc1f]/6",
                     emerald: "border-emerald-500/20 bg-emerald-500/6",
                   };
                   const texts: Record<string, string> = {
-                    yellow: "text-yellow-400", blue: "text-blue-400", emerald: "text-emerald-400",
+                    yellow: "text-yellow-400", blue: "text-lime-400", emerald: "text-emerald-400",
                   };
                   return (
                     <Reveal key={i} delay={i * 0.1}>
@@ -689,7 +689,7 @@ export default function LeaderGuidePage() {
           <Reveal delay={0.1} dir="right">
             <div className="rounded-3xl border border-rose-500/20 bg-rose-500/5 p-8 h-full">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-2xl bg-rose-500/15 border border-rose-500/25 flex items-center justify-center text-xl">⚠️</div>
+                <div className="w-10 h-10 rounded-2xl bg-rose-500/15 border border-[#5edc1f]/25 flex items-center justify-center text-xl">⚠️</div>
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">Risk Management</h2>
               </div>
               <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-5">
@@ -705,7 +705,7 @@ export default function LeaderGuidePage() {
                   "Be mindful of correlated positions that increase overall portfolio risk",
                 ].map((r, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <span className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-rose-500/20 border border-rose-400/40 flex items-center justify-center text-rose-400 text-[10px] font-bold">
+                    <span className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-[#5edc1f]/20 border border-rose-400/40 flex items-center justify-center text-lime-400 text-[10px] font-bold">
                       !
                     </span>
                     <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{r}</p>
@@ -714,7 +714,7 @@ export default function LeaderGuidePage() {
               </div>
               <div className="mt-5 p-3 rounded-xl border border-rose-500/20 bg-rose-500/5 flex items-center gap-2">
                 <span className="text-sm">🛡️</span>
-                <p className="text-xs text-rose-300">
+                <p className="text-xs text-lime-300">
                   AutoGuard™ continuously monitors your risk profile and will notify you if thresholds are approached.
                 </p>
               </div>

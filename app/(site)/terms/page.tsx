@@ -37,7 +37,7 @@ function Reveal({
 // ─── Section number badge ─────────────────────────────────────────
 function SectionBadge({ n }: { n: number }) {
   return (
-    <span className="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-xs font-black shadow-lg shadow-blue-500/25 shrink-0 mt-0.5">
+    <span className="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-[#5edc1f] to-green-700 text-white text-xs font-black shadow-lg shadow-[#5edc1f]/25 shrink-0 mt-0.5">
       {n}
     </span>
   );
@@ -158,7 +158,7 @@ export default function TermsOfService() {
         <div className="absolute inset-0 dark:hidden pointer-events-none">
           <div
             className="absolute -top-[10%] left-[20%] w-[600px] h-[600px] rounded-full opacity-[0.1]"
-            style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 65%)" }}
+            style={{ background: "radial-gradient(circle, #5edc1f 0%, transparent 65%)" }}
           />
           <div
             className="absolute inset-0 opacity-[0.2]"
@@ -172,11 +172,11 @@ export default function TermsOfService() {
         <div className="absolute inset-0 hidden dark:block pointer-events-none">
           <div
             className="aurora-a absolute -top-[20%] left-[10%] w-[700px] h-[700px] rounded-full"
-            style={{ background: "radial-gradient(circle, #1d4ed8 0%, transparent 60%)" }}
+            style={{ background: "radial-gradient(circle, #2d6a0a 0%, transparent 60%)" }}
           />
           <div
             className="aurora-b absolute bottom-0 right-[5%] w-[400px] h-[400px] rounded-full"
-            style={{ background: "radial-gradient(circle, #6d28d9 0%, transparent 60%)" }}
+            style={{ background: "radial-gradient(circle, #166534 0%, transparent 60%)" }}
           />
           <div
             className="absolute inset-0 opacity-[0.025]"
@@ -193,12 +193,12 @@ export default function TermsOfService() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: E }}
-            className="inline-flex items-center gap-2.5 rounded-full border border-blue-200 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/[0.08] px-4 py-2 mb-8"
+            className="inline-flex items-center gap-2.5 rounded-full border border-green-200 dark:border-[#5edc1f]/20 bg-green-50 dark:bg-[#5edc1f]/[0.08] px-4 py-2 mb-8"
           >
-            <svg className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-3.5 h-3.5 text-[#4cc015] dark:text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
             </svg>
-            <span className="text-[11px] font-semibold text-blue-700 dark:text-blue-300 tracking-wide">
+            <span className="text-[11px] font-semibold text-green-700 dark:text-green-300 tracking-wide">
               Legal Agreement · KoveTrade
             </span>
           </motion.div>
@@ -249,9 +249,9 @@ export default function TermsOfService() {
               <a
                 key={n}
                 href={`#section-${n}`}
-                className="shrink-0 inline-flex items-center gap-1.5 rounded-full bg-gray-100 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.07] hover:border-blue-300 dark:hover:border-blue-500/40 hover:bg-blue-50 dark:hover:bg-blue-500/[0.08] px-3.5 py-1.5 text-[11px] font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-700 dark:hover:text-blue-300 transition-all duration-200"
+                className="shrink-0 inline-flex items-center gap-1.5 rounded-full bg-gray-100 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.07] hover:border-green-300 dark:hover:border-[#5edc1f]/40 hover:bg-green-50 dark:hover:bg-[#5edc1f]/[0.08] px-3.5 py-1.5 text-[11px] font-semibold text-gray-600 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-300 transition-all duration-200"
               >
-                <span className="text-blue-500 font-black">{n}.</span>
+                <span className="text-[#5edc1f] font-black">{n}.</span>
                 {title.split(" ").slice(0, 2).join(" ")}
               </a>
             ))}
@@ -277,7 +277,7 @@ export default function TermsOfService() {
                   className={`absolute left-0 inset-y-0 w-1 rounded-l-3xl ${
                     highlight
                       ? "bg-gradient-to-b from-amber-400 to-orange-500"
-                      : "bg-gradient-to-b from-blue-500 to-indigo-600"
+                      : "bg-gradient-to-b from-[#5edc1f] to-green-700"
                   }`}
                 />
 
@@ -303,7 +303,7 @@ export default function TermsOfService() {
                       <ul className="mt-4 space-y-2.5">
                         {list.map((item, i) => (
                           <li key={i} className="flex items-start gap-3">
-                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
+                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#5edc1f] shrink-0" />
                             <span className="text-[14px] text-gray-600 dark:text-gray-400 leading-relaxed">{item}</span>
                           </li>
                         ))}
@@ -329,16 +329,16 @@ export default function TermsOfService() {
 
           {/* ── Regulated entities ── */}
           <Reveal delay={0.1}>
-            <div className="rounded-3xl border border-blue-100 dark:border-blue-500/20 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/10 overflow-hidden">
+            <div className="rounded-3xl border border-green-100 dark:border-[#5edc1f]/20 bg-gradient-to-br from-green-50 to-lime-50 dark:from-green-950/20 dark:to-green-950/10 overflow-hidden">
               <div className="px-7 pt-8 pb-6">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-blue-500/25">
+                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#5edc1f] to-green-700 flex items-center justify-center text-white shrink-0 shadow-lg shadow-[#5edc1f]/25">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
                     </svg>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold tracking-[0.18em] uppercase text-blue-600 dark:text-blue-400 mb-0.5">Governing Law</p>
+                    <p className="text-[10px] font-bold tracking-[0.18em] uppercase text-[#4cc015] dark:text-lime-400 mb-0.5">Governing Law</p>
                     <h3 className="text-base font-black text-gray-900 dark:text-white">Regulated Entities Worldwide</h3>
                   </div>
                 </div>
@@ -347,15 +347,15 @@ export default function TermsOfService() {
                   {ENTITIES.map(({ region, entity, reg, license }) => (
                     <div
                       key={region}
-                      className="flex items-start gap-3 rounded-2xl bg-white dark:bg-white/[0.04] border border-blue-100 dark:border-white/[0.07] p-4"
+                      className="flex items-start gap-3 rounded-2xl bg-white dark:bg-white/[0.04] border border-green-100 dark:border-white/[0.07] p-4"
                     >
-                      <div className="w-8 h-8 rounded-xl bg-blue-100 dark:bg-blue-500/10 flex items-center justify-center shrink-0 mt-0.5">
-                        <span className="text-blue-600 dark:text-blue-400 text-[10px] font-black">{reg}</span>
+                      <div className="w-8 h-8 rounded-xl bg-green-100 dark:bg-[#5edc1f]/10 flex items-center justify-center shrink-0 mt-0.5">
+                        <span className="text-[#4cc015] dark:text-lime-400 text-[10px] font-black">{reg}</span>
                       </div>
                       <div>
                         <p className="text-[12px] font-bold text-gray-900 dark:text-white leading-none mb-1">{entity}</p>
                         <p className="text-[11px] text-gray-500 dark:text-gray-500 mb-0.5">{region}</p>
-                        <p className="text-[11px] text-blue-600 dark:text-blue-400 font-semibold">{license}</p>
+                        <p className="text-[11px] text-[#4cc015] dark:text-lime-400 font-semibold">{license}</p>
                       </div>
                     </div>
                   ))}
@@ -366,7 +366,7 @@ export default function TermsOfService() {
 
           {/* ── Questions / CTA ── */}
           <Reveal delay={0.12}>
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 p-8 sm:p-10 text-center shadow-2xl shadow-blue-900/20">
+            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#4cc015] via-green-700 to-green-800 p-8 sm:p-10 text-center shadow-2xl shadow-green-900/20">
               <div
                 className="absolute inset-0 opacity-[0.07] pointer-events-none"
                 style={{
@@ -384,13 +384,13 @@ export default function TermsOfService() {
                   </svg>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-white mb-3">Have questions?</h3>
-                <p className="text-blue-200 text-[14px] max-w-sm mx-auto leading-relaxed mb-8">
+                <p className="text-green-200 text-[14px] max-w-sm mx-auto leading-relaxed mb-8">
                   If you have any questions or concerns about these Terms of Service, our support team is here to help and will respond as soon as possible.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <Link
                     href="mailto:support@kovetrade.com"
-                    className="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-blue-700 hover:bg-blue-50 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/20 transition-all duration-300"
+                    className="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-green-700 hover:bg-green-50 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/20 transition-all duration-300"
                   >
                     Contact Support
                   </Link>

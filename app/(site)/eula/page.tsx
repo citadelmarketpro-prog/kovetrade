@@ -191,8 +191,8 @@ function Restriction({ text, delay = 0 }: { text: string; delay?: number }) {
       animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
       transition={{ duration: 0.5, delay, ease: E }}
     >
-      <span className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-rose-500/15 border border-rose-500/30 flex items-center justify-center">
-        <svg className="w-2.5 h-2.5 text-rose-400" fill="none" viewBox="0 0 10 10">
+      <span className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-rose-500/15 border border-[#5edc1f]/30 flex items-center justify-center">
+        <svg className="w-2.5 h-2.5 text-lime-400" fill="none" viewBox="0 0 10 10">
           <path d="M2 2l6 6M8 2L2 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
         </svg>
       </span>
@@ -206,13 +206,13 @@ const ACCENT_MAP: Record<string, { badge: string; border: string; top: string }>
   emerald: { badge: "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30", border: "border-emerald-500/15 hover:border-emerald-500/35", top: "from-emerald-500/20 to-transparent" },
   green:   { badge: "bg-green-500/15 text-green-300 border border-green-500/30",     border: "border-green-500/15 hover:border-green-500/35",   top: "from-green-500/20 to-transparent" },
   teal:    { badge: "bg-teal-500/15 text-teal-300 border border-teal-500/30",       border: "border-teal-500/15 hover:border-teal-500/35",     top: "from-teal-500/20 to-transparent" },
-  cyan:    { badge: "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30",       border: "border-cyan-500/15 hover:border-cyan-500/35",     top: "from-cyan-500/20 to-transparent" },
-  blue:    { badge: "bg-blue-500/15 text-blue-300 border border-blue-500/30",       border: "border-blue-500/15 hover:border-blue-500/35",     top: "from-blue-500/20 to-transparent" },
-  violet:  { badge: "bg-violet-500/15 text-violet-300 border border-violet-500/30", border: "border-violet-500/15 hover:border-violet-500/35", top: "from-violet-500/20 to-transparent" },
+  cyan:    { badge: "bg-lime-400/15 text-lime-300 border border-lime-400/30",       border: "border-lime-400/15 hover:border-lime-400/35",     top: "from-lime-400/20 to-transparent" },
+  blue:    { badge: "bg-[#5edc1f]/15 text-green-300 border border-[#5edc1f]/30",       border: "border-[#5edc1f]/15 hover:border-[#5edc1f]/35",     top: "from-[#5edc1f]/20 to-transparent" },
+  violet:  { badge: "bg-[#5edc1f]/15 text-lime-300 border border-[#5edc1f]/30", border: "border-[#5edc1f]/15 hover:border-[#5edc1f]/35", top: "from-[#5edc1f]/20 to-transparent" },
   amber:   { badge: "bg-amber-500/15 text-amber-300 border border-amber-500/30",   border: "border-amber-500/15 hover:border-amber-500/35",   top: "from-amber-500/20 to-transparent" },
-  rose:    { badge: "bg-rose-500/15 text-rose-300 border border-rose-500/30",       border: "border-rose-500/15 hover:border-rose-500/35",     top: "from-rose-500/20 to-transparent" },
+  rose:    { badge: "bg-rose-500/15 text-lime-300 border border-[#5edc1f]/30",       border: "border-[#5edc1f]/15 hover:border-[#5edc1f]/35",     top: "from-[#5edc1f]/20 to-transparent" },
   orange:  { badge: "bg-orange-500/15 text-orange-300 border border-orange-500/30", border: "border-orange-500/15 hover:border-orange-500/35", top: "from-orange-500/20 to-transparent" },
-  indigo:  { badge: "bg-indigo-500/15 text-indigo-300 border border-indigo-500/30", border: "border-indigo-500/15 hover:border-indigo-500/35", top: "from-indigo-500/20 to-transparent" },
+  indigo:  { badge: "bg-[#5edc1f]/15 text-lime-300 border border-[#5edc1f]/30", border: "border-[#5edc1f]/15 hover:border-[#5edc1f]/35", top: "from-[#5edc1f]/20 to-transparent" },
   slate:   { badge: "bg-slate-500/15 text-slate-300 border border-slate-500/30",   border: "border-slate-500/15 hover:border-slate-500/35",   top: "from-slate-500/20 to-transparent" },
 };
 
@@ -357,7 +357,7 @@ export default function EulaPage() {
               <Reveal delay={0.1}>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
                   End User{" "}
-                  <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-lime-300 bg-clip-text text-transparent">
                     License
                   </span>{" "}
                   Agreement
@@ -389,7 +389,7 @@ export default function EulaPage() {
               <Reveal delay={0.58}>
                 <div className="mt-6 p-4 rounded-2xl border border-rose-500/20 bg-rose-500/5">
                   <div className="flex items-start gap-3">
-                    <span className="text-rose-400 text-lg flex-shrink-0">⚠️</span>
+                    <span className="text-lime-400 text-lg flex-shrink-0">⚠️</span>
                     <p className="text-xs text-rose-200/80 leading-relaxed">
                       By downloading, installing, accessing, or using the Software, you agree to be
                       bound by the terms of this EULA. If you do not agree, you must not use the
@@ -493,8 +493,8 @@ export default function EulaPage() {
             </P>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-2">
               {[
-                { label: "Limited", icon: "🔒", color: "text-rose-400" },
-                { label: "Non-Exclusive", icon: "👥", color: "text-blue-400" },
+                { label: "Limited", icon: "🔒", color: "text-lime-400" },
+                { label: "Non-Exclusive", icon: "👥", color: "text-lime-400" },
                 { label: "Non-Transferable", icon: "🚫", color: "text-orange-400" },
                 { label: "Revocable", icon: "↩️", color: "text-amber-400" },
               ].map((l, i) => (
@@ -573,7 +573,7 @@ export default function EulaPage() {
                 <div key={i} className="flex items-start gap-3 p-3 rounded-xl border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/[0.02]">
                   <span className="text-xl flex-shrink-0">{u.icon}</span>
                   <div>
-                    <p className="text-xs font-semibold text-cyan-300">{u.label}</p>
+                    <p className="text-xs font-semibold text-lime-300">{u.label}</p>
                     <p className="text-xs text-gray-500 mt-0.5">{u.desc}</p>
                   </div>
                 </div>
@@ -601,9 +601,9 @@ export default function EulaPage() {
                 { label: "Log Files", icon: "📋" },
                 { label: "Diagnostics", icon: "🔍" },
               ].map((d, i) => (
-                <div key={i} className="flex items-center gap-2 p-2.5 rounded-xl border border-blue-500/15 bg-blue-500/5">
+                <div key={i} className="flex items-center gap-2 p-2.5 rounded-xl border border-[#5edc1f]/15 bg-[#5edc1f]/5">
                   <span className="text-base">{d.icon}</span>
-                  <p className="text-xs font-medium text-blue-300">{d.label}</p>
+                  <p className="text-xs font-medium text-green-300">{d.label}</p>
                 </div>
               ))}
             </div>
@@ -622,8 +622,8 @@ export default function EulaPage() {
               or services. Such third-party components are subject to their own license agreements
               and terms of use.
             </P>
-            <div className="mt-3 p-4 rounded-xl border border-violet-500/20 bg-violet-500/5">
-              <p className="text-xs font-semibold text-violet-300 mb-2">Important Disclaimer</p>
+            <div className="mt-3 p-4 rounded-xl border border-[#5edc1f]/20 bg-[#5edc1f]/10">
+              <p className="text-xs font-semibold text-lime-300 mb-2">Important Disclaimer</p>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                 KoveTrade does not assume any responsibility or liability for any third-party software
                 or services, and your use of such components is at your own risk. The inclusion of
@@ -687,7 +687,7 @@ export default function EulaPage() {
                 "Your violation of any applicable law or regulation",
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-indigo-500/20 border border-indigo-400/40 flex items-center justify-center text-xs font-bold text-indigo-400">
+                  <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-[#5edc1f]/20 border border-[#5edc1f]/40 flex items-center justify-center text-xs font-bold text-lime-400">
                     {i + 1}
                   </span>
                   <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{item}</p>
@@ -701,7 +701,7 @@ export default function EulaPage() {
           <Section num={11} title="Termination" accent={ACCENTS[10]}>
             <div className="grid sm:grid-cols-2 gap-4 mt-1">
               <div className="p-4 rounded-xl border border-rose-500/20 bg-rose-500/5">
-                <p className="text-xs font-semibold text-rose-300 mb-2">KoveTrade May Terminate</p>
+                <p className="text-xs font-semibold text-lime-300 mb-2">KoveTrade May Terminate</p>
                 <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                   At any time, with or without cause and with or without notice, if you violate this
                   EULA or applicable law.
@@ -783,8 +783,8 @@ export default function EulaPage() {
                   minimum extent necessary. Remaining provisions continue in full force.
                 </p>
               </div>
-              <div className="p-4 rounded-xl border border-cyan-500/20 bg-cyan-500/5">
-                <p className="text-xs font-semibold text-cyan-300 mb-2">📄 Entire Agreement</p>
+              <div className="p-4 rounded-xl border border-lime-400/20 bg-lime-400/5">
+                <p className="text-xs font-semibold text-lime-300 mb-2">📄 Entire Agreement</p>
                 <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                   This EULA constitutes the entire agreement between you and KoveTrade regarding
                   the Software, superseding all prior communications and agreements.
@@ -805,7 +805,7 @@ export default function EulaPage() {
         <div className="max-w-3xl mx-auto">
           <Reveal>
             <div className="relative rounded-3xl overflow-hidden border border-emerald-500/20">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/60 via-teal-950/40 to-cyan-950/40" />
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/60 via-teal-950/40 to-green-950/40" />
               <div className="absolute top-0 right-0 w-60 h-60 rounded-full bg-emerald-500/10 blur-3xl" />
               <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-teal-500/10 blur-3xl" />
 

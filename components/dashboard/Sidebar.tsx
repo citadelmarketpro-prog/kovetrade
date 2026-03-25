@@ -21,7 +21,6 @@ import {
   ArrowUpFromLine,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const overviewSection = [
   { name: "Dashboard", href: "/portfolio", icon: Home },
@@ -84,7 +83,7 @@ function SidebarGrid({
               transition-all duration-200 border
               ${
                 isActive
-                  ? "bg-blue-500/10 border-blue-500/30 text-blue-600 dark:text-blue-400"
+                  ? "bg-[#5edc1f]/10 border-[#5edc1f]/30 text-[#5edc1f] dark:text-lime-400"
                   : "bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100 hover:border-gray-300 dark:bg-white/5 dark:border-white/10 dark:text-gray-300 dark:hover:bg-white/10 dark:hover:border-white/20"
               }
             `}
@@ -122,26 +121,14 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         animate={{ x: 0 }}
         exit={{ x: -320 }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="fixed inset-y-0 left-0 w-72 bg-white dark:bg-gradient-to-b dark:from-[#1e3a5f] dark:to-[#0f1f3a] z-50 shadow-2xl overflow-y-auto"
+        className="fixed inset-y-0 left-0 w-72 bg-white dark:bg-[#070f08] dark:border-r dark:border-[#5edc1f]/8 z-50 shadow-2xl overflow-y-auto"
       >
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-5 border-b border-gray-200 dark:border-white/10">
-            <Link href="/portfolio" className="flex items-center gap-0">
-              <Image
-                src={"/logo_dark.png"}
-                className="block dark:hidden w-40"
-                alt=""
-                width={1000}
-                height={250}
-              />
-              <Image
-                src={"/logo_light.png"}
-                className="hidden dark:block w-40"
-                alt=""
-                width={1000}
-                height={250}
-              />
+            <Link href="/portfolio" className="inline-flex items-baseline gap-0.5">
+              <span className="text-xl font-black tracking-tight text-gray-900 dark:text-white">Kove</span>
+              <span className="text-xl font-black tracking-tight text-[#5edc1f]">Trade</span>
             </Link>
 
             <button

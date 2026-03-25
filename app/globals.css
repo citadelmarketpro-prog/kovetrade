@@ -4,38 +4,38 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* 
-  BLUE THEME - EXACT Sidebar Colors
-  Using from-[#1e3a5f] to-[#0f1f3a] gradient
+/*
+  GREEN THEME - EXACT Sidebar Colors
+  Using from-[#1a3a0f] to-[#0a1f05] gradient
 */
 
 :root {
   /* Light mode colors */
-  --background-rgb: 240, 244, 248;
+  --background-rgb: 240, 244, 240;
   --foreground-muted: #6b7280;
 
-  /* Brand colors - PURE BLUE THEME */
-  --primary: #3b82f6;
-  --primary-hover: #2563eb;
-  --primary-dark: #1e3a8a;
-  --secondary: #1e3a8a;
-  --secondary-hover: #1e40af;
+  /* Brand colors - PURE GREEN THEME */
+  --primary: #5edc1f;
+  --primary-hover: #4cc015;
+  --primary-dark: #2d6a0a;
+  --secondary: #2d6a0a;
+  --secondary-hover: #336b0c;
 
   /* Surface colors */
   --surface: #ffffff;
   --surface-elevated: #ffffff;
   --border: #e5e7eb;
 
-  /* Dot pattern - BLUE */
-  --dot-color: rgba(59, 130, 246, 0.25);
+  /* Dot pattern - GREEN */
+  --dot-color: rgba(94, 220, 31, 0.25);
 
-  /* Accent - BLUE */
-  --accent: #3b82f6;
-  --accent-hover: #2563eb;
+  /* Accent - GREEN */
+  --accent: #5edc1f;
+  --accent-hover: #4cc015;
 
-  /* Stats - BLUE */
-  --stats-text: #1e3a8a;
-  
+  /* Stats - GREEN */
+  --stats-text: #2d6a0a;
+
   /* shadcn/ui variables */
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -69,33 +69,33 @@
 
 .dark {
   /* Dark mode colors - EXACT SIDEBAR GRADIENT */
-  --background: #1e3a5f;
-  --background-rgb: 30, 58, 95;
+  --background: #1a3a0f;
+  --background-rgb: 26, 58, 15;
   --foreground: #ffffff;
   --foreground-muted: #9ca3af;
 
-  /* Brand colors - PURE BLUE for dark */
-  --primary: #3b82f6;
-  --primary-hover: #60a5fa;
-  --primary-dark: #1e3a8a;
-  --secondary: #1e3a8a;
-  --secondary-hover: #1e40af;
+  /* Brand colors - PURE GREEN for dark */
+  --primary: #5edc1f;
+  --primary-hover: #7ee83f;
+  --primary-dark: #2d6a0a;
+  --secondary: #2d6a0a;
+  --secondary-hover: #336b0c;
 
   /* Surface colors - EXACT sidebar colors */
-  --surface: #1e3a5f;
-  --surface-elevated: #2a4a7a;
+  --surface: #1a3a0f;
+  --surface-elevated: #2a4a1a;
   --border: rgba(255, 255, 255, 0.1);
 
-  /* Dot pattern - BLUE */
-  --dot-color: rgba(96, 165, 250, 0.15);
+  /* Dot pattern - GREEN */
+  --dot-color: rgba(94, 220, 31, 0.15);
 
-  /* Accent - BLUE */
-  --accent: #3b82f6;
-  --accent-hover: #60a5fa;
+  /* Accent - GREEN */
+  --accent: #5edc1f;
+  --accent-hover: #7ee83f;
 
-  /* Stats - BLUE */
-  --stats-text: #60a5fa;
-  
+  /* Stats - GREEN */
+  --stats-text: #7ee83f;
+
   /* shadcn/ui dark mode variables */
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -176,7 +176,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #e0f2fe 0%, #f0f4f8 50%, #dbeafe 100%);
+  background: linear-gradient(135deg, #e8fcd4 0%, #f0f4f0 50%, #d9fbbf 100%);
   background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
@@ -184,8 +184,8 @@ body {
 }
 
 .dark body {
-  /* EXACT SIDEBAR GRADIENT: from-[#1e3a5f] to-[#0f1f3a] */
-  background: linear-gradient(180deg, #1e3a5f 0%, #0f1f3a 100%);
+  /* EXACT SIDEBAR GRADIENT: from-[#1a3a0f] to-[#0a1f05] */
+  background: linear-gradient(180deg, #1a3a0f 0%, #0a1f05 100%);
   background-attachment: fixed;
 }
 
@@ -228,11 +228,11 @@ body {
 }
 
 .dark .integration-badge {
-  background: rgba(30, 58, 95, 0.8);
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: rgba(26, 58, 15, 0.8);
+  border: 1px solid rgba(94, 220, 31, 0.2);
 }
 
-/* Buttons - ALL BLUE */
+/* Buttons - ALL GREEN */
 .btn-primary {
   background-color: var(--primary);
   color: #ffffff;
@@ -258,7 +258,7 @@ body {
 
 .dark .btn-secondary {
   background-color: var(--secondary);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  border: 1px solid rgba(94, 220, 31, 0.3);
 }
 
 .dark .btn-secondary:hover {
@@ -302,7 +302,7 @@ body {
 }
 
 .dark .theme-toggle {
-  border-color: rgba(59, 130, 246, 0.3);
+  border-color: rgba(94, 220, 31, 0.3);
 }
 
 /* Network nodes */
@@ -320,7 +320,7 @@ body {
 
 .dark .network-node {
   background: var(--surface-elevated);
-  border-color: rgba(59, 130, 246, 0.3);
+  border-color: rgba(94, 220, 31, 0.3);
 }
 
 /* Stats */
@@ -331,7 +331,7 @@ body {
 }
 
 .dark .stat-divider {
-  background: rgba(59, 130, 246, 0.2);
+  background: rgba(94, 220, 31, 0.2);
 }
 
 .stats-card {
@@ -342,16 +342,16 @@ body {
 
 .stats-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+  box-shadow: 0 10px 30px rgba(94, 220, 31, 0.15);
 }
 
 .dark .stats-card {
   background: var(--surface-elevated);
-  border-color: rgba(59, 130, 246, 0.2);
+  border-color: rgba(94, 220, 31, 0.2);
 }
 
 .dark .stats-card:hover {
-  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 10px 30px rgba(94, 220, 31, 0.25);
 }
 
 /* How it works cards */
@@ -364,40 +364,40 @@ body {
 .step-card:hover {
   transform: translateY(-4px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 10px 30px rgba(94, 220, 31, 0.2);
 }
 
 .dark .step-card {
   background: var(--surface-elevated);
-  border-color: rgba(59, 130, 246, 0.2);
+  border-color: rgba(94, 220, 31, 0.2);
 }
 
 .dark .step-card:hover {
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 10px 30px rgba(94, 220, 31, 0.3);
 }
 
-/* Chat widget - BLUE */
+/* Chat widget - GREEN */
 .chat-widget {
   background: var(--primary);
   color: white;
   border-radius: 50px;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 4px 20px rgba(94, 220, 31, 0.4);
   transition: all 0.3s ease;
 }
 
 .chat-widget:hover {
   background: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 6px 25px rgba(94, 220, 31, 0.5);
 }
 
 .dark .chat-widget {
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 4px 20px rgba(94, 220, 31, 0.5);
 }
 
 .dark .chat-widget:hover {
-  box-shadow: 0 6px 25px rgba(59, 130, 246, 0.6);
+  box-shadow: 0 6px 25px rgba(94, 220, 31, 0.6);
 }
 
 /* ── Landing page animations ── */
@@ -407,7 +407,7 @@ body {
   100% { background-position: 0%   50%; }
 }
 .text-gradient-animate {
-  background: linear-gradient(90deg, #3b82f6, #22d3ee, #818cf8, #3b82f6);
+  background: linear-gradient(90deg, #5edc1f, #86efac, #a3e635, #5edc1f);
   background-size: 300% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -415,7 +415,7 @@ body {
   animation: gradientFlow 5s ease infinite;
 }
 .text-gradient-static {
-  background: linear-gradient(135deg, #3b82f6 0%, #22d3ee 100%);
+  background: linear-gradient(135deg, #5edc1f 0%, #86efac 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -475,8 +475,8 @@ body {
 
 /* Glow pulse on cards */
 @keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 0 0   rgba(59,130,246,0); }
-  50%       { box-shadow: 0 0 40px 4px rgba(59,130,246,0.18); }
+  0%, 100% { box-shadow: 0 0 0 0   rgba(94,220,31,0); }
+  50%       { box-shadow: 0 0 40px 4px rgba(94,220,31,0.18); }
 }
 .glow-card:hover { animation: glowPulse 2s ease-in-out infinite; }
 
@@ -488,7 +488,7 @@ body {
 .hr-glow {
   border: none;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(94,220,31,0.4), transparent);
 }
 
 /* Utilities */

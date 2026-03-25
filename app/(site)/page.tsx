@@ -138,7 +138,6 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <MarqueeTicker />
-      <StatsSection />
       <AboutSection />
       <UniqueSection />
       <PlatformSection />
@@ -159,60 +158,92 @@ export default function Home() {
 
 /** The hero trading card — built entirely in JSX, no images */
 function HeroCard() {
-  const CHART = [42, 51, 46, 63, 57, 74, 69, 86, 80, 95, 90, 108, 100, 119, 112, 128];
   const [copied, setCopied] = useState(false);
+
+  const RECENT_TRADES = [
+    { symbol: "NVDA", side: "BUY",  gain: "+4.7%", time: "2m ago" },
+    { symbol: "AAPL", side: "BUY",  gain: "+1.2%", time: "18m ago" },
+    { symbol: "TSLA", side: "SELL", gain: "+3.1%", time: "1h ago" },
+  ];
 
   return (
     <div className="relative select-none">
       {/* ── Main card ── */}
       <motion.div
-        className="relative w-[290px] md:w-[320px] lg:w-[340px] rounded-3xl bg-white dark:bg-zinc-900 border border-gray-100 dark:border-white/[0.07] shadow-[0_32px_72px_rgba(0,0,0,0.1)] dark:shadow-[0_32px_72px_rgba(0,0,0,0.7)] p-5 lg:p-6 overflow-hidden"
+        className="relative w-[290px] md:w-[320px] lg:w-[340px] rounded-3xl bg-white dark:bg-zinc-900 border border-gray-100 dark:border-white/[0.07] shadow-[0_32px_72px_rgba(0,0,0,0.1)] dark:shadow-[0_32px_72px_rgba(0,0,0,0.7)] overflow-hidden"
         initial={{ opacity: 0, y: 48, scale: 0.94 }}
         animate={{ opacity: 1, y: 0,  scale: 1     }}
         transition={{ duration: 1.1, delay: 0.55, ease: E }}
       >
-        {/* Faint gradient bg */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/60 to-transparent dark:from-blue-950/20 dark:to-transparent pointer-events-none" />
+        {/* ── Premium header band ── */}
+        <div className="relative px-5 pt-5 pb-4 bg-gradient-to-br from-[#1a4d1b] via-[#0f3010] to-[#071a08]">
+          {/* Subtle grid on header */}
+          <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "linear-gradient(rgba(94,220,31,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(94,220,31,.5) 1px,transparent 1px)", backgroundSize: "20px 20px" }} />
+          {/* Glow blob */}
+          <div className="absolute -top-6 -right-6 w-28 h-28 rounded-full bg-[#5edc1f]/20 blur-2xl pointer-events-none" />
 
-        <div className="relative z-10">
-          {/* Trader header */}
-          <div className="flex items-center justify-between mb-5">
+          <div className="relative flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-sm font-black shadow-lg shadow-blue-500/30 shrink-0">
-                AT
+              {/* Avatar with live pulse ring */}
+              <div className="relative shrink-0">
+                <div className="w-11 h-11 rounded-2xl overflow-hidden ring-2 ring-[#5edc1f]/50">
+                  <Image src="https://i.pravatar.cc/150?img=11" alt="Alex Thompson" width={44} height={44} className="w-full h-full object-cover" />
+                </div>
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#0f3010]" />
               </div>
               <div>
-                <p className="text-sm font-bold text-gray-900 dark:text-white leading-none mb-1">Alex Thompson</p>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
-                  <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">Elite Trader · Verified</p>
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <p className="text-sm font-bold text-white leading-none">Alex Thompson</p>
+                  {/* Verified checkmark */}
+                  <svg className="w-3.5 h-3.5 text-[#5edc1f] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                 </div>
+                <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#5edc1f] bg-[#5edc1f]/15 border border-[#5edc1f]/25 rounded-full px-2 py-0.5">
+                  <span className="w-1 h-1 rounded-full bg-[#5edc1f] animate-pulse" />
+                  Elite Trader
+                </span>
               </div>
             </div>
-            <div className="flex gap-0.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-              ))}
+            {/* 12M return hero number */}
+            <div className="text-right">
+              <p className="text-[22px] font-black text-[#5edc1f] leading-none">+127.4%</p>
+              <p className="text-[9px] text-white/50 uppercase tracking-widest mt-0.5">12M Return</p>
             </div>
           </div>
 
-          {/* Chart */}
-          <div className="mb-4 -mx-0.5">
-            <Sparkline data={CHART} positive w={300} h={62} />
+          {/* Two key metrics */}
+          <div className="relative mt-4 grid grid-cols-2 gap-2">
+            <div className="rounded-xl bg-white/[0.07] border border-white/[0.08] px-3 py-2">
+              <p className="text-[10px] text-white/50 uppercase tracking-wide mb-0.5">Copiers</p>
+              <p className="text-sm font-black text-white">4,291</p>
+            </div>
+            <div className="rounded-xl bg-white/[0.07] border border-white/[0.08] px-3 py-2">
+              <p className="text-[10px] text-white/50 uppercase tracking-wide mb-0.5">Risk Score</p>
+              <p className="text-sm font-black text-[#5edc1f]">Low 2/10</p>
+            </div>
           </div>
+        </div>
 
-          {/* Stats grid */}
-          <div className="grid grid-cols-3 gap-2 mb-5">
-            {[
-              { v: "+127.4%", l: "12M Return",  c: "text-emerald-600 dark:text-emerald-400" },
-              { v: "Low 2/10", l: "Risk Score",  c: "text-blue-600 dark:text-blue-400"       },
-              { v: "4,291",    l: "Copiers",     c: "text-gray-900 dark:text-white"           },
-            ].map(({ v, l, c }) => (
-              <div key={l} className="rounded-xl bg-gray-50 dark:bg-zinc-800/70 px-2 py-2.5 text-center">
-                <p className={`text-[12px] font-black leading-none mb-1 ${c}`}>{v}</p>
-                <p className="text-[9px] text-gray-400 dark:text-gray-500 leading-none uppercase tracking-wide">{l}</p>
+        {/* ── Live trade feed ── */}
+        <div className="px-5 py-4">
+          <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            Recent Trades
+          </p>
+          <div className="space-y-2">
+            {RECENT_TRADES.map(({ symbol, side, gain, time }) => (
+              <div key={symbol + time} className="flex items-center justify-between rounded-xl bg-gray-50 dark:bg-zinc-800/60 border border-gray-100/80 dark:border-white/[0.05] px-3 py-2">
+                <div className="flex items-center gap-2.5">
+                  <span className={`text-[9px] font-black px-1.5 py-0.5 rounded-md ${side === "BUY" ? "bg-emerald-100 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400" : "bg-red-100 dark:bg-red-500/15 text-red-600 dark:text-red-400"}`}>
+                    {side}
+                  </span>
+                  <span className="text-xs font-bold text-gray-900 dark:text-white">{symbol}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-black text-emerald-600 dark:text-emerald-400">{gain}</span>
+                  <span className="text-[10px] text-gray-400 dark:text-gray-600">{time}</span>
+                </div>
               </div>
             ))}
           </div>
@@ -220,10 +251,10 @@ function HeroCard() {
           {/* Copy button */}
           <motion.button
             onClick={() => { setCopied(true); setTimeout(() => setCopied(false), 2500); }}
-            className={`w-full rounded-2xl py-3.5 text-sm font-bold text-white transition-all duration-300 ${
+            className={`mt-4 w-full rounded-2xl py-3.5 text-sm font-bold transition-all duration-300 ${
               copied
-                ? "bg-emerald-500 shadow-lg shadow-emerald-500/30"
-                : "bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/30 hover:shadow-blue-500/40 hover:-translate-y-0.5"
+                ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/30"
+                : "bg-[#5edc1f] hover:bg-[#4cc015] text-gray-900 shadow-lg shadow-[#5edc1f]/30 hover:shadow-[#4cc015]/40 hover:-translate-y-0.5"
             }`}
             whileTap={{ scale: 0.97 }}
           >
@@ -243,7 +274,7 @@ function HeroCard() {
         <p className="text-emerald-200 text-[10px] mt-0.5">Last 30 days</p>
       </motion.div>
 
-      {/* ── Floating BTC mini card ── */}
+      {/* ── Floating NVDA mini card ── */}
       <motion.div
         className="absolute -bottom-6 -left-6 rounded-2xl bg-white dark:bg-zinc-900 border border-gray-100 dark:border-white/[0.08] px-4 py-3 shadow-2xl shadow-black/10 dark:shadow-black/60"
         initial={{ opacity: 0, x: -20 }}
@@ -251,14 +282,14 @@ function HeroCard() {
         transition={{ delay: 2, duration: 0.6, ease: E }}
       >
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-orange-100 dark:bg-orange-500/10 flex items-center justify-center text-base text-orange-600 dark:text-orange-400 font-bold shrink-0">
-            ₿
+          <div className="w-8 h-8 rounded-xl bg-[#5edc1f]/10 dark:bg-[#5edc1f]/15 flex items-center justify-center shrink-0">
+            <span className="text-[10px] font-black text-[#5edc1f]">NVDA</span>
           </div>
           <div>
-            <p className="text-[10px] text-gray-400 mb-0.5">BTC/USD · Copied</p>
-            <p className="text-sm font-black text-gray-900 dark:text-white leading-none">$94,857</p>
+            <p className="text-[10px] text-gray-400 mb-0.5">NVDA · Copied</p>
+            <p className="text-sm font-black text-gray-900 dark:text-white leading-none">$875.40</p>
           </div>
-          <span className="ml-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">+2.4%</span>
+          <span className="ml-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">+4.7%</span>
         </div>
       </motion.div>
 
@@ -269,7 +300,7 @@ function HeroCard() {
         animate={{ opacity: 1,  x: 0  }}
         transition={{ delay: 2.2, duration: 0.6, ease: E }}
       >
-        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white text-xs font-black shrink-0">
+        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#5edc1f] to-green-700 flex items-center justify-center text-white text-xs font-black shrink-0">
           SL
         </div>
         <div>
@@ -284,27 +315,25 @@ function HeroCard() {
 function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const yCard = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden">
       {/* ── Light mode background ── */}
       <div className="absolute inset-0 pointer-events-none dark:hidden">
         <div
-          className="absolute -top-[10%] right-[0%] w-[700px] h-[700px] rounded-full opacity-[0.12]"
-          style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 62%)" }}
+          className="absolute -top-[10%] left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full opacity-[0.10]"
+          style={{ background: "radial-gradient(circle, #5edc1f 0%, transparent 62%)" }}
         />
         <div
-          className="absolute bottom-[0%] left-[5%] w-[500px] h-[500px] rounded-full opacity-[0.06]"
-          style={{ background: "radial-gradient(circle, #8b5cf6 0%, transparent 62%)" }}
+          className="absolute bottom-[0%] left-[5%] w-[500px] h-[500px] rounded-full opacity-[0.05]"
+          style={{ background: "radial-gradient(circle, #4cc015 0%, transparent 62%)" }}
         />
-        {/* Fine dot grid */}
         <div
-          className="absolute inset-0 opacity-[0.25]"
+          className="absolute inset-0 opacity-[0.22]"
           style={{
             backgroundImage: "radial-gradient(circle, #cbd5e1 1px, transparent 1px)",
-            backgroundSize: "26px 26px",
+            backgroundSize: "28px 28px",
           }}
         />
       </div>
@@ -313,18 +342,18 @@ function HeroSection() {
       <div className="absolute inset-0 pointer-events-none hidden dark:block">
         <div
           className="aurora-a absolute -top-[25%] -left-[5%] w-[800px] h-[800px] rounded-full"
-          style={{ background: "radial-gradient(circle, #1d4ed8 0%, transparent 60%)" }}
+          style={{ background: "radial-gradient(circle, #2d6a0a 0%, transparent 60%)" }}
         />
         <div
           className="aurora-b absolute -bottom-[15%] right-[5%] w-[600px] h-[600px] rounded-full"
-          style={{ background: "radial-gradient(circle, #6d28d9 0%, transparent 60%)" }}
+          style={{ background: "radial-gradient(circle, #166534 0%, transparent 60%)" }}
         />
         <div
-          className="aurora-c absolute top-[35%] right-[30%] w-[350px] h-[350px] rounded-full"
-          style={{ background: "radial-gradient(circle, #0891b2 0%, transparent 60%)" }}
+          className="aurora-c absolute top-[35%] left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full"
+          style={{ background: "radial-gradient(circle, #14532d 0%, transparent 60%)" }}
         />
         <div
-          className="absolute inset-0 opacity-[0.028]"
+          className="absolute inset-0 opacity-[0.025]"
           style={{
             backgroundImage:
               "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
@@ -333,106 +362,100 @@ function HeroSection() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 pt-20 pb-16 sm:pt-28 sm:pb-20 lg:pt-36">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-14 lg:gap-20 items-center">
+      <div className="relative z-10 mx-auto max-w-5xl w-full px-4 sm:px-6 lg:px-8 pt-28 pb-20 sm:pt-36 sm:pb-24 lg:pt-44 lg:pb-28">
+        <motion.div style={{ y: yText }} className="flex flex-col items-center text-center">
 
-          {/* ── LEFT: copy ── */}
-          <motion.div style={{ y: yText }}>
-            {/* Badge */}
-            <motion.div
-              className="inline-flex items-center gap-2.5 rounded-full border border-blue-200 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/[0.08] px-4 py-2 mb-8"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: E }}
-            >
-              <span className="relative flex w-2 h-2 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-50" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span className="text-[11px] font-semibold text-blue-700 dark:text-blue-300 tracking-wide">
-                Copy Trading Platform · Trusted by 50M+ Traders
-              </span>
-            </motion.div>
-
-            {/* Headline */}
-            <motion.h1
-              className="font-black leading-[1.06] tracking-tight mb-6 text-gray-900 dark:text-white"
-              style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)" }}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.82, delay: 0.1, ease: E }}
-            >
-              Invest Like the{" "}
-              <span className="text-gradient-animate">World&apos;s Best</span>{" "}
-              Traders.
-            </motion.h1>
-
-            {/* Sub */}
-            <motion.p
-              className="text-base lg:text-lg text-gray-500 dark:text-gray-400 max-w-md leading-relaxed mb-10"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: E }}
-            >
-              Copy real trades automatically from top-performing investors.
-              Start in minutes — no experience required. Your portfolio grows
-              while they trade.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div
-              className="flex flex-col sm:flex-row flex-wrap gap-3 mb-10 sm:mb-12"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.28, ease: E }}
-            >
-              <Link
-                href="/register"
-                className="group relative overflow-hidden rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/30 text-center"
-              >
-                <span className="relative z-10">Get Started</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </Link>
-              <Link
-                href="/login"
-                className="inline-flex items-center justify-center gap-1.5 rounded-full border border-gray-200 dark:border-white/[0.1] bg-white dark:bg-white/[0.03] px-8 py-3.5 text-sm font-bold text-gray-700 dark:text-white transition-all duration-300 hover:border-blue-300 dark:hover:border-blue-500/40 hover:-translate-y-0.5"
-              >
-                Explore Traders
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </motion.div>
-
-            {/* Social proof strip */}
-            <motion.div
-              className="grid grid-cols-2 sm:flex sm:items-center sm:flex-wrap gap-y-4 gap-x-5"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.42 }}
-            >
-              {[
-                { v: "4.8★", l: "App Store Rating" },
-                { v: "50M+", l: "Active Users"     },
-                { v: "40+",  l: "Countries"         },
-                { v: "$2.4B", l: "Volume Copied"   },
-              ].map(({ v, l }, i) => (
-                <React.Fragment key={l}>
-                  <div>
-                    <p className="text-xl font-black text-gray-900 dark:text-white leading-none mb-0.5">{v}</p>
-                    <p className="text-[11px] text-gray-500 dark:text-gray-500">{l}</p>
-                  </div>
-                  {i < 3 && <div className="hidden sm:block w-px h-7 bg-gray-200 dark:bg-white/[0.08]" />}
-                </React.Fragment>
-              ))}
-            </motion.div>
+          {/* Badge */}
+          <motion.div
+            className="inline-flex items-center gap-2 rounded-full border border-green-200 dark:border-[#5edc1f]/20 bg-green-50 dark:bg-[#5edc1f]/[0.08] px-3 sm:px-4 py-2 mb-8 whitespace-nowrap max-w-full overflow-hidden"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: E }}
+          >
+            <span className="relative flex w-2 h-2 shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-50" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            <span className="text-[10px] sm:text-[11px] font-semibold text-green-700 dark:text-green-300 tracking-wide whitespace-nowrap">
+              Copy Trading Platform · Trusted by 50M+ Traders
+            </span>
           </motion.div>
 
-          {/* ── RIGHT: trading card ── */}
-          <motion.div style={{ y: yCard }} className="relative hidden md:flex items-center justify-center py-8 lg:py-16">
-            <HeroCard />
+          {/* Headline */}
+          <motion.h1
+            className="font-black leading-[1.06] tracking-tight mb-6 text-gray-900 dark:text-white"
+            style={{ fontSize: "clamp(2.8rem, 6.5vw, 5.2rem)" }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.82, delay: 0.1, ease: E }}
+          >
+            Invest Like the{" "}
+            <span className="text-gradient-animate">World&apos;s Best</span>
+            <br className="hidden sm:block" />
+            {" "}Traders.
+          </motion.h1>
+
+          {/* Sub */}
+          <motion.p
+            className="text-base sm:text-lg lg:text-xl text-gray-500 dark:text-gray-400 max-w-2xl leading-relaxed mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: E }}
+          >
+            Copy real trades automatically from top-performing investors.
+            Start in minutes — no experience required. Your portfolio grows
+            while they trade.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-14 sm:mb-16"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.28, ease: E }}
+          >
+            <Link
+              href="/register"
+              className="group relative overflow-hidden rounded-full bg-[#4cc015] px-10 py-4 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#4cc015]/35 min-w-[180px] text-center"
+            >
+              <span className="relative z-10">Get Started Free</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-green-700 to-[#5edc1f] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </Link>
+            <Link
+              href="/login"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-200 dark:border-white/[0.1] bg-white dark:bg-white/[0.03] px-10 py-4 text-sm font-bold text-gray-700 dark:text-white transition-all duration-300 hover:border-green-300 dark:hover:border-[#5edc1f]/40 hover:-translate-y-0.5 min-w-[180px]"
+            >
+              Explore Traders
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </motion.div>
-        </div>
+
+          {/* Social proof strip */}
+          <motion.div
+            className="flex flex-wrap items-center justify-center gap-y-5 gap-x-8 sm:gap-x-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.42 }}
+          >
+            {[
+              { v: "4.8★", l: "App Store Rating" },
+              { v: "50M+", l: "Active Users"      },
+              { v: "40+",  l: "Countries"          },
+              { v: "$2.4B", l: "Volume Copied"    },
+            ].map(({ v, l }, i) => (
+              <React.Fragment key={l}>
+                <div className="text-center">
+                  <p className="text-2xl font-black text-gray-900 dark:text-white leading-none mb-1">{v}</p>
+                  <p className="text-[11px] text-gray-500 dark:text-gray-500 uppercase tracking-wide">{l}</p>
+                </div>
+                {i < 3 && <div className="hidden sm:block w-px h-8 bg-gray-200 dark:bg-white/[0.08]" />}
+              </React.Fragment>
+            ))}
+          </motion.div>
+
+        </motion.div>
       </div>
     </section>
   );
@@ -442,16 +465,21 @@ function HeroSection() {
 // §2  MARQUEE TICKER
 // ═══════════════════════════════════════════════════════════════
 const TICKS = [
-  { s: "BTC/USD",  p: "$94,857",   c: "+2.4%",  up: true  },
-  { s: "ETH/USD",  p: "$3,241",    c: "+1.8%",  up: true  },
-  { s: "AAPL",     p: "$213.49",   c: "+0.9%",  up: true  },
-  { s: "EUR/USD",  p: "1.1706",    c: "−0.12%", up: false },
-  { s: "TSLA",     p: "$412.23",   c: "+3.2%",  up: true  },
-  { s: "GOLD",     p: "$2,341",    c: "+0.6%",  up: true  },
-  { s: "NASDAQ",   p: "19,842",    c: "−0.3%",  up: false },
-  { s: "GBP/USD",  p: "1.2745",    c: "+0.08%", up: true  },
-  { s: "BNB",      p: "$632",      c: "+1.5%",  up: true  },
-  { s: "SPX500",   p: "5,441",     c: "+0.4%",  up: true  },
+  { s: "AAPL",  p: "$213.49",  c: "+0.9%",  up: true  },
+  { s: "TSLA",  p: "$412.23",  c: "+3.2%",  up: true  },
+  { s: "MSFT",  p: "$421.80",  c: "+1.1%",  up: true  },
+  { s: "NVDA",  p: "$875.40",  c: "+4.7%",  up: true  },
+  { s: "AMZN",  p: "$185.62",  c: "+1.4%",  up: true  },
+  { s: "GOOGL", p: "$174.30",  c: "−0.3%",  up: false },
+  { s: "META",  p: "$517.91",  c: "+2.1%",  up: true  },
+  { s: "NFLX",  p: "$648.20",  c: "+0.8%",  up: true  },
+  { s: "AMD",   p: "$162.45",  c: "−0.7%",  up: false },
+  { s: "V",     p: "$276.88",  c: "+0.5%",  up: true  },
+  { s: "JPM",   p: "$198.34",  c: "+0.3%",  up: true  },
+  { s: "WMT",   p: "$68.15",   c: "+0.4%",  up: true  },
+  { s: "DIS",   p: "$111.72",  c: "−0.6%",  up: false },
+  { s: "UBER",  p: "$74.30",   c: "+1.9%",  up: true  },
+  { s: "SPOT",  p: "$312.50",  c: "+2.5%",  up: true  },
 ];
 
 function MarqueeTicker() {
@@ -474,45 +502,6 @@ function MarqueeTicker() {
   );
 }
 
-// ═══════════════════════════════════════════════════════════════
-// §3  STATS
-// ═══════════════════════════════════════════════════════════════
-const STATS = [
-  { to: 50,   suf: "M+", label: "Active Traders",       sub: "and growing every day"            },
-  { to: 100,  suf: "+",  label: "Assets to Trade",      sub: "crypto, stocks, forex & more"     },
-  { to: 40,   suf: "+",  label: "Countries",             sub: "with full regulatory coverage"    },
-  { to: 2400, suf: "M+", label: "Volume Copied ($)",    sub: "in the last 12 months"             },
-];
-
-function StatsSection() {
-  return (
-    <section className="bg-gray-50 dark:bg-[#0a0b0d] border-y border-gray-100 dark:border-white/[0.04]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4">
-          {STATS.map(({ to, suf, label, sub }, i) => (
-            <Reveal key={label} delay={0.08 * i}>
-              <div className={`px-4 sm:px-6 py-10 lg:py-16 text-center
-                ${i % 2 === 0 ? "border-r border-gray-100 dark:border-white/[0.04]" : ""}
-                ${i === 1 ? "lg:border-r border-gray-100 dark:border-white/[0.04]" : ""}
-                ${i === 2 ? "lg:border-r border-gray-100 dark:border-white/[0.04]" : ""}
-                ${i >= 2 ? "border-t border-gray-100 dark:border-white/[0.04] lg:border-t-0" : ""}
-              `}>
-                <p
-                  className="font-black text-gray-900 dark:text-white leading-none tabular-nums mb-2"
-                  style={{ fontSize: "clamp(1.8rem, 4.5vw, 4rem)" }}
-                >
-                  <GsapNum to={to} suffix={suf} />
-                </p>
-                <p className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">{label}</p>
-                <p className="text-[12px] text-gray-400 dark:text-gray-600">{sub}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ═══════════════════════════════════════════════════════════════
 // §  LIQUIDITY PROVIDERS
@@ -585,20 +574,20 @@ function TrustedBrandsSection() {
   return (
     <section className="py-12 sm:py-20 bg-gray-950 relative overflow-hidden">
       {/* Subtle blue glow blobs */}
-      <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/[0.06] blur-[120px] pointer-events-none" />
-      <div className="absolute -bottom-32 right-1/4 w-[400px] h-[400px] rounded-full bg-cyan-500/[0.05] blur-[100px] pointer-events-none" />
+      <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] rounded-full bg-[#4cc015]/[0.06] blur-[120px] pointer-events-none" />
+      <div className="absolute -bottom-32 right-1/4 w-[400px] h-[400px] rounded-full bg-lime-400/[0.05] blur-[100px] pointer-events-none" />
       {/* Dot grid */}
       <div className="absolute inset-0 opacity-[0.022] pointer-events-none"
         style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,1) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
 
       <div className="relative z-10 mx-auto max-w-5xl px-4 text-center mb-10 sm:mb-14">
         <Reveal>
-          <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-400 mb-4">
-            <span className="w-5 h-px bg-blue-400" />
+          <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-lime-400 mb-4">
+            <span className="w-5 h-px bg-lime-400" />
             Institutional Grade
           </p>
           <h2
-            className="font-black tracking-tight leading-[1.08] bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent"
+            className="font-black tracking-tight leading-[1.08] bg-gradient-to-r from-lime-400 via-lime-300 to-[#5edc1f] bg-clip-text text-transparent"
             style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}
           >
             Liquidity Providers
@@ -647,7 +636,7 @@ function TrustedBrandsSection() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             href="/register"
-            className="rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-9 py-3.5 text-sm font-bold text-white hover:from-blue-500 hover:to-blue-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300"
+            className="rounded-full bg-gradient-to-r from-[#4cc015] to-[#5edc1f] px-9 py-3.5 text-sm font-bold text-white hover:from-[#5edc1f] hover:to-lime-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#5edc1f]/30 transition-all duration-300"
           >
             Get Started
           </Link>
@@ -672,15 +661,15 @@ const UNIQUE_PILLARS = [
     icon: <Eye className="w-6 h-6" />,
     title: "Transparent Options Copying",
     body: "See exactly what you're mirroring—ticker, strategy, side (call/put), strike, expiry, entry/exit premium, size, and timestamps—plus a clear history of each leader's performance and drawdowns.",
-    accent: "from-blue-500 to-indigo-600",
-    glow: "bg-blue-500/10",
+    accent: "from-[#5edc1f] to-green-700",
+    glow: "bg-[#5edc1f]/10",
   },
   {
     icon: <SlidersHorizontal className="w-6 h-6" />,
     title: "Advanced Tools for Contracts",
     body: "Dial in risk before you copy: per-trade caps, %-of-equity allocation, max contracts, slippage guard, chain filters, and auto-hedge toggles for volatile names.",
-    accent: "from-violet-500 to-purple-600",
-    glow: "bg-violet-500/10",
+    accent: "from-[#5edc1f] to-green-700",
+    glow: "bg-[#5edc1f]/10",
   },
   {
     icon: <Layers className="w-6 h-6" />,
@@ -700,15 +689,15 @@ const UNIQUE_PILLARS = [
     icon: <BookOpen className="w-6 h-6" />,
     title: "Learn While You Copy",
     body: "Leaders attach notes, rationale, and risk context to each trade. Use strategy tags and post-trade debriefs to sharpen your own playbook.",
-    accent: "from-rose-500 to-pink-600",
-    glow: "bg-rose-500/10",
+    accent: "from-[#5edc1f] to-green-700",
+    glow: "bg-[#5edc1f]/10",
   },
   {
     icon: <Sparkles className="w-6 h-6" />,
     title: "Unique Options Features",
     body: "AutoGuard™: optional auto-TP/SL by premium, % move, or delta. Smart protections built right into every trade you copy.",
-    accent: "from-cyan-500 to-blue-500",
-    glow: "bg-cyan-500/10",
+    accent: "from-lime-400 to-[#5edc1f]",
+    glow: "bg-lime-400/10",
   },
 ];
 
@@ -724,8 +713,8 @@ function UniqueSection() {
         }}
       />
       {/* Glow blobs */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/[0.07] blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-600/[0.07] blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-[#4cc015]/[0.07] blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-green-900/[0.07] blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
@@ -735,7 +724,7 @@ function UniqueSection() {
             style={{ fontSize: "clamp(1.9rem, 4.5vw, 3.4rem)" }}
           >
             What makes{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-lime-400 via-lime-300 to-[#5edc1f] bg-clip-text text-transparent">
               US
             </span>{" "}
             different?
@@ -844,7 +833,7 @@ function PhoneMockups() {
     <div className="relative flex items-center justify-center select-none">
       {/* Glow blob behind the image */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10">
-        <div className="w-80 h-80 bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[100px]" />
+        <div className="w-80 h-80 bg-[#5edc1f]/10 dark:bg-[#5edc1f]/20 rounded-full blur-[100px]" />
       </div>
       <motion.div
         initial={{ opacity: 0, y: 32, scale: 0.97 }}
@@ -878,8 +867,8 @@ function AboutSection() {
           {/* Right — copy */}
           <div>
             <Reveal>
-              <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-6">
-                <span className="w-5 h-px bg-blue-600 dark:bg-blue-400" />
+              <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-[#4cc015] dark:text-lime-400 mb-6">
+                <span className="w-5 h-px bg-[#4cc015] dark:bg-lime-400" />
                 About Us
               </p>
               <h2
@@ -887,7 +876,7 @@ function AboutSection() {
                 style={{ fontSize: "clamp(2rem, 4.5vw, 3.6rem)" }}
               >
                 Unleash Potentials.{" "}
-                <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#4cc015] via-[#5edc1f] to-lime-400 bg-clip-text text-transparent">
                   Lock in profits.
                 </span>
               </h2>
@@ -902,7 +891,7 @@ function AboutSection() {
               {ABOUT_PERKS.map(({ icon, text }, i) => (
                 <Reveal key={text} delay={0.08 * (i + 1)}>
                   <div className="flex items-start gap-4 group">
-                    <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-blue-50 dark:bg-blue-500/10 border border-blue-100 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 dark:group-hover:bg-blue-500 dark:group-hover:border-blue-500 transition-all duration-300">
+                    <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-green-50 dark:bg-[#5edc1f]/10 border border-green-100 dark:border-[#5edc1f]/20 flex items-center justify-center text-[#4cc015] dark:text-lime-400 group-hover:bg-[#4cc015] group-hover:text-white group-hover:border-[#4cc015] dark:group-hover:bg-[#5edc1f] dark:group-hover:border-[#5edc1f] transition-all duration-300">
                       {icon}
                     </div>
                     <p className="text-[15px] text-gray-600 dark:text-gray-300 leading-relaxed pt-2.5">{text}</p>
@@ -978,17 +967,17 @@ function PlatformSection() {
         {/* Header row */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-12 lg:mb-16">
           <Reveal>
-            <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-4">
-              <span className="w-5 h-px bg-blue-600 dark:bg-blue-400" />
+            <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-[#4cc015] dark:text-lime-400 mb-4">
+              <span className="w-5 h-px bg-[#4cc015] dark:bg-lime-400" />
               Our Platform
             </p>
             <h2
-              className="font-black tracking-tight text-gray-900 dark:text-white leading-[1.08]"
+              className="font-black  tracking-tight text-gray-900 dark:text-white leading-[1.08]"
               style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
             >
               Trade smarter,
               <br />
-              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#4cc015] to-lime-400 bg-clip-text text-transparent">
                 not harder.
               </span>
             </h2>
@@ -1010,9 +999,9 @@ function PlatformSection() {
               {[
                 {
                   icon: <Zap className="w-5 h-5 text-white" />,
-                  accent: "from-blue-500 to-indigo-600",
-                  glow: "bg-blue-500/8 dark:bg-blue-500/10",
-                  border: "border-blue-100 dark:border-blue-500/20",
+                  accent: "from-[#5edc1f] to-green-700",
+                  glow: "bg-[#5edc1f]/8 dark:bg-[#5edc1f]/10",
+                  border: "border-green-100 dark:border-[#5edc1f]/20",
                   title: "Instant Trade Mirroring",
                   body: "Every move a top trader makes is copied to your account in real time — with zero delay and full transparency on every position.",
                 },
@@ -1026,9 +1015,9 @@ function PlatformSection() {
                 },
                 {
                   icon: <BarChart2 className="w-5 h-5 text-white" />,
-                  accent: "from-violet-500 to-purple-600",
-                  glow: "bg-violet-500/8 dark:bg-violet-500/10",
-                  border: "border-violet-100 dark:border-violet-500/20",
+                  accent: "from-[#5edc1f] to-green-700",
+                  glow: "bg-[#5edc1f]/10 dark:bg-[#5edc1f]/10",
+                  border: "border-green-100 dark:border-[#5edc1f]/20",
                   title: "Live Portfolio Dashboard",
                   body: "Track every copied trade, monitor real-time P&L across multiple strategies, and switch or stop copying any trader with a single tap.",
                 },
@@ -1042,9 +1031,9 @@ function PlatformSection() {
                 },
                 {
                   icon: <Rocket className="w-5 h-5 text-white" />,
-                  accent: "from-rose-500 to-pink-600",
-                  glow: "bg-rose-500/8 dark:bg-rose-500/10",
-                  border: "border-rose-100 dark:border-rose-500/20",
+                  accent: "from-[#5edc1f] to-green-700",
+                  glow: "bg-rose-500/8 dark:bg-[#5edc1f]/10",
+                  border: "border-green-100 dark:border-rose-500/20",
                   title: "Sub-25ms Execution",
                   body: "Our engine is co-located in NY4 — the same data centre used by institutional desks. Every order executes in under 25 milliseconds, guaranteed.",
                 },
@@ -1085,7 +1074,7 @@ function HowItWorksSection() {
             style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}
           >
             Open an account in{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-lime-400 to-lime-300 bg-clip-text text-transparent">
               4 simple steps
             </span>
           </h2>
@@ -1098,13 +1087,13 @@ function HowItWorksSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
           {ACCOUNT_STEPS.map(({ n, title, body, video }, i) => (
             <Reveal key={n} delay={0.1 * i}>
-              <div className="group relative flex flex-col sm:flex-col rounded-3xl bg-white/[0.04] border border-white/[0.08] overflow-hidden h-full transition-all duration-500 hover:bg-gradient-to-b hover:from-blue-500/[0.08] hover:via-cyan-500/[0.04] hover:to-transparent hover:border-blue-500/30">
+              <div className="group relative flex flex-col sm:flex-col rounded-3xl bg-white/[0.04] border border-white/[0.08] overflow-hidden h-full transition-all duration-500 hover:bg-gradient-to-b hover:from-[#5edc1f]/[0.08] hover:via-lime-400/[0.04] hover:to-transparent hover:border-[#5edc1f]/30">
 
                 {/* Top content */}
                 <div className="p-6 flex-1">
                   {/* Step number — big gradient */}
                   <span
-                    className="block font-black leading-none mb-4 bg-gradient-to-br from-blue-400 via-cyan-400 to-blue-600 bg-clip-text text-transparent select-none"
+                    className="block font-black leading-none mb-4 bg-gradient-to-br from-lime-400 via-lime-300 to-[#4cc015] bg-clip-text text-transparent select-none"
                     style={{ fontSize: "clamp(3.5rem, 6vw, 5rem)" }}
                   >
                     {n}
@@ -1114,14 +1103,14 @@ function HowItWorksSection() {
                 </div>
 
                 {/* Video at bottom */}
-                <div className="relative w-full aspect-video sm:aspect-square overflow-hidden">
+                <div className="relative w-full h-36 sm:h-40 lg:h-36 overflow-hidden shrink-0 flex items-center justify-center">
                   <video
                     src={video}
                     autoPlay
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover mix-blend-screen"
+                    className="w-full h-full object-contain mix-blend-screen"
                   />
                 </div>
 
@@ -1135,7 +1124,7 @@ function HowItWorksSection() {
           <div className="mt-14 text-center">
             <Link
               href="/register"
-              className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-10 py-4 text-sm font-bold text-white hover:from-blue-500 hover:to-blue-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300"
+              className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#4cc015] to-[#5edc1f] px-10 py-4 text-sm font-bold text-white hover:from-[#5edc1f] hover:to-lime-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#5edc1f]/30 transition-all duration-300"
             >
               Get Started
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -1155,43 +1144,43 @@ function HowItWorksSection() {
 // ═══════════════════════════════════════════════════════════════
 const TRADERS = [
   {
-    initials: "AT",
-    grad: "from-blue-500 to-indigo-600",
-    glow: "shadow-blue-500/25",
+    img: "https://i.pravatar.cc/150?img=11",
+    grad: "from-[#5edc1f] to-green-700",
+    glow: "shadow-[#5edc1f]/25",
     name: "Alex Thompson",
-    tag: "Crypto Specialist",
+    tag: "Expert",
     ret: "+127.4%",
+    profit1m: "+14.2%",
+    total: "$4.8M",
     risk: "Low",
     riskColor: "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10",
     copiers: 4291,
-    chart: [42, 51, 46, 63, 57, 74, 69, 86, 80, 95, 90, 108, 100, 119, 112, 128],
-    pos: true,
   },
   {
-    initials: "SL",
-    grad: "from-rose-500 to-pink-600",
-    glow: "shadow-rose-500/25",
+    img: "https://i.pravatar.cc/150?img=49",
+    grad: "from-[#5edc1f] to-green-700",
+    glow: "shadow-[#5edc1f]/25",
     name: "Sophie Laurent",
-    tag: "Forex Expert",
+    tag: "Expert",
     ret: "+89.2%",
+    profit1m: "+8.6%",
+    total: "$2.1M",
     risk: "Medium",
     riskColor: "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10",
     copiers: 6847,
-    chart: [30, 38, 35, 45, 42, 53, 48, 60, 55, 68, 64, 78, 73, 84, 80, 89],
-    pos: true,
   },
   {
-    initials: "MR",
+    img: "https://i.pravatar.cc/150?img=15",
     grad: "from-emerald-500 to-teal-600",
     glow: "shadow-emerald-500/25",
     name: "Marcus Rivera",
-    tag: "Multi-Asset Pro",
+    tag: "Expert",
     ret: "+214.7%",
+    profit1m: "+22.1%",
+    total: "$9.3M",
     risk: "High",
     riskColor: "text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10",
     copiers: 2156,
-    chart: [20, 36, 29, 58, 48, 80, 66, 97, 82, 120, 105, 144, 130, 168, 154, 215],
-    pos: true,
   },
 ];
 
@@ -1206,32 +1195,35 @@ function TraderCard({ trader, delay }: { trader: (typeof TRADERS)[0]; delay: num
       >
         {/* Header */}
         <div className="flex items-center gap-3 mb-5">
-          <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${trader.grad} flex items-center justify-center text-white text-sm font-black shadow-xl ${trader.glow} shrink-0`}>
-            {trader.initials}
+          <div className="w-12 h-12 rounded-2xl overflow-hidden shrink-0 ring-2 ring-[#5edc1f]/30">
+            <Image src={trader.img} alt={trader.name} width={48} height={48} className="w-full h-full object-cover" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-bold text-gray-900 dark:text-white text-sm leading-none mb-1.5">{trader.name}</p>
-            <p className="text-[11px] text-gray-500 dark:text-gray-500">{trader.tag}</p>
+            <p className="font-bold text-gray-900 dark:text-white text-sm leading-none mb-1">{trader.name}</p>
+            <p className="text-[11px] text-[#5edc1f] dark:text-lime-400 font-semibold">{trader.tag}</p>
           </div>
-          <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${trader.riskColor}`}>
+          {/* <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${trader.riskColor}`}>
             {trader.risk}
-          </span>
+          </span> */}
         </div>
 
-        {/* Chart */}
-        <div className="mb-5 -mx-1">
-          <Sparkline data={trader.chart} positive={trader.pos} w={280} h={56} />
-        </div>
-
-        {/* Stats row */}
-        <div className="flex items-center justify-between mb-5">
-          <div>
-            <p className="text-[11px] text-gray-400 dark:text-gray-600 mb-1">12M Return</p>
-            <p className="text-xl font-black text-emerald-600 dark:text-emerald-400">{trader.ret}</p>
+        {/* 4-stat grid */}
+        <div className="grid grid-cols-2 gap-3 mb-5">
+          <div className="rounded-xl bg-gray-50 dark:bg-white/[0.04] border border-gray-100 dark:border-white/[0.06] px-3 py-2.5">
+            <p className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1">Copiers</p>
+            <p className="text-base font-black text-gray-900 dark:text-white">{trader.copiers.toLocaleString()}</p>
           </div>
-          <div className="text-right">
-            <p className="text-[11px] text-gray-400 dark:text-gray-600 mb-1">Copiers</p>
-            <p className="text-xl font-black text-gray-900 dark:text-white">{trader.copiers.toLocaleString()}</p>
+          <div className="rounded-xl bg-gray-50 dark:bg-white/[0.04] border border-gray-100 dark:border-white/[0.06] px-3 py-2.5">
+            <p className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1">Profit (1M)</p>
+            <p className="text-base font-black text-emerald-600 dark:text-emerald-400">{trader.profit1m}</p>
+          </div>
+          <div className="rounded-xl bg-gray-50 dark:bg-white/[0.04] border border-gray-100 dark:border-white/[0.06] px-3 py-2.5">
+            <p className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1">Total</p>
+            <p className="text-base font-black text-gray-900 dark:text-white">{trader.total}</p>
+          </div>
+          <div className="rounded-xl bg-gray-50 dark:bg-white/[0.04] border border-gray-100 dark:border-white/[0.06] px-3 py-2.5">
+            <p className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1">12M Return</p>
+            <p className="text-base font-black text-emerald-600 dark:text-emerald-400">{trader.ret}</p>
           </div>
         </div>
 
@@ -1261,8 +1253,8 @@ function TopTradersSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10 lg:mb-14 gap-6">
           <Reveal>
-            <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-4">
-              <span className="w-5 h-px bg-blue-600 dark:bg-blue-400" />
+            <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-[#4cc015] dark:text-lime-400 mb-4">
+              <span className="w-5 h-px bg-[#4cc015] dark:bg-lime-400" />
               Top Performers
             </p>
             <h2
@@ -1275,7 +1267,7 @@ function TopTradersSection() {
           <Reveal delay={0.1}>
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 dark:text-blue-400 hover:gap-3 transition-all duration-200 shrink-0"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#4cc015] dark:text-lime-400 hover:gap-3 transition-all duration-200 shrink-0"
             >
               View all traders
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -1305,8 +1297,8 @@ const FEATURES = [
     tag: "Raw Spreads",
     title: "Trade at 0.0 pips. Every time.",
     body: "No markup, no requotes. Our raw spread pricing gives you direct market access with the tightest possible bid-ask spread — starting from absolute zero.",
-    accent: "bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/20",
-    border: "border-blue-100 dark:border-blue-900/40",
+    accent: "bg-gradient-to-br from-green-50 to-lime-50 dark:from-green-950/30 dark:to-green-950/20",
+    border: "border-green-100 dark:border-green-900/40",
     stat: "0.0 pips",
     statLabel: "starting spread",
   },
@@ -1316,8 +1308,8 @@ const FEATURES = [
     tag: "Asset Classes",
     title: "100+ assets across every market.",
     body: "Crypto, equities, forex, commodities, indices. One account, every market.",
-    accent: "bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/20",
-    border: "border-violet-100 dark:border-violet-900/40",
+    accent: "bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/20",
+    border: "border-green-100 dark:border-green-900/40",
     stat: "100+",
     statLabel: "instruments",
   },
@@ -1350,8 +1342,8 @@ function FeaturesSection() {
     <section className="py-16 sm:py-24 lg:py-36 bg-white dark:bg-[#070809]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center mb-10 lg:mb-16">
-          <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-4">
-            <span className="w-5 h-px bg-blue-600 dark:bg-blue-400" />
+          <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-[#4cc015] dark:text-lime-400 mb-4">
+            <span className="w-5 h-px bg-[#4cc015] dark:bg-lime-400" />
             The Platform
           </p>
           <h2
@@ -1372,7 +1364,7 @@ function FeaturesSection() {
               >
                 <div className="flex items-start justify-between mb-5">
                   <div>
-                    <p className="text-[10px] font-bold tracking-[0.18em] uppercase text-blue-600 dark:text-blue-400 mb-2">{tag}</p>
+                    <p className="text-[10px] font-bold tracking-[0.18em] uppercase text-[#4cc015] dark:text-lime-400 mb-2">{tag}</p>
                     <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white leading-snug max-w-xs">{title}</h3>
                   </div>
                   <div className="text-3xl ml-4 shrink-0">{icon}</div>
@@ -1398,24 +1390,21 @@ function FeaturesSection() {
 // ═══════════════════════════════════════════════════════════════
 const REVIEWS = [
   {
-    avatar: "MV",
-    grad: "from-blue-500 to-indigo-600",
+    img: "https://i.pravatar.cc/150?img=3",
     name: "Mark Villomas",
     handle: "@marktrades",
     stars: 5,
     text: "Following three months of engaging in copy trading with KoveTrade, my returns have surpassed my total earnings from the entirety of my previous year's independent trading activities. The platform demonstrates exceptional transparency and speed, and the support team consistently provides invaluable assistance.",
   },
   {
-    avatar: "UW",
-    grad: "from-rose-500 to-pink-600",
+    img: "https://i.pravatar.cc/150?img=8",
     name: "Ufqad Warraich",
     handle: "@ufqad_w",
     stars: 5,
     text: "The risk management tools are what sold me. I can set a maximum drawdown per trader and the system handles everything automatically. I sleep better knowing AutoGuard is watching my portfolio.",
   },
   {
-    avatar: "ST",
-    grad: "from-emerald-500 to-teal-600",
+    img: "https://i.pravatar.cc/150?img=47",
     name: "Sarah Thompson",
     handle: "@sarahtrades",
     stars: 5,
@@ -1433,8 +1422,8 @@ function TestimonialsSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 lg:mb-14 gap-6">
           <Reveal>
-            <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-4">
-              <span className="w-5 h-px bg-blue-600 dark:bg-blue-400" />
+            <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-[#4cc015] dark:text-lime-400 mb-4">
+              <span className="w-5 h-px bg-[#4cc015] dark:bg-lime-400" />
               Testimonials
             </p>
             <h2
@@ -1463,7 +1452,7 @@ function TestimonialsSection() {
         </div>
 
         <motion.div style={{ y }} className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 lg:gap-5">
-          {REVIEWS.map(({ avatar, grad, name, handle, stars, text }, i) => (
+          {REVIEWS.map(({ img, name, handle, stars, text }, i) => (
             <Reveal key={name} delay={0.1 * i}>
               <div className="relative rounded-3xl bg-white dark:bg-zinc-900/60 border border-gray-100 dark:border-white/[0.06] p-7 h-full flex flex-col hover:-translate-y-1 transition-all duration-300 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40">
                 {/* Large quote */}
@@ -1485,8 +1474,8 @@ function TestimonialsSection() {
                 </p>
 
                 <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${grad} flex items-center justify-center text-white text-xs font-black shrink-0`}>
-                    {avatar}
+                  <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 ring-2 ring-[#5edc1f]/25">
+                    <Image src={img} alt={name} width={40} height={40} className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <p className="text-sm font-bold text-gray-900 dark:text-white leading-none mb-0.5">{name}</p>
@@ -1516,7 +1505,7 @@ function CTASection() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <motion.div
           style={{ scale, opacity }}
-          className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 p-8 sm:p-12 lg:p-20 text-center shadow-2xl shadow-blue-900/30"
+          className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-[#4cc015] via-green-700 to-green-800 p-8 sm:p-12 lg:p-20 text-center shadow-2xl shadow-green-900/30"
         >
           {/* Interior glow spots */}
           <div className="absolute -top-[20%] -left-[10%] w-[500px] h-[500px] rounded-full pointer-events-none"
@@ -1531,7 +1520,7 @@ function CTASection() {
             }} />
 
           <div className="relative z-10">
-            <p className="text-blue-200 text-[11px] font-bold tracking-[0.25em] uppercase mb-5">
+            <p className="text-green-200 text-[11px] font-bold tracking-[0.25em] uppercase mb-5">
               Ready to get started?
             </p>
             <h2
@@ -1542,7 +1531,7 @@ function CTASection() {
               <br />
               Build your future.
             </h2>
-            <p className="text-blue-200 text-base lg:text-lg max-w-lg mx-auto leading-relaxed mb-10">
+            <p className="text-green-200 text-base lg:text-lg max-w-lg mx-auto leading-relaxed mb-10">
               Join 50 million traders and investors who chose KoveTrade. No
               credit card required. Start copying in under 3 minutes.
             </p>
@@ -1550,7 +1539,7 @@ function CTASection() {
             <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center mb-10">
               <Link
                 href="/register"
-                className="rounded-full bg-white px-10 py-4 text-sm font-bold text-blue-700 transition-all duration-300 hover:bg-blue-50 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/20 text-center"
+                className="rounded-full bg-white px-10 py-4 text-sm font-bold text-green-700 transition-all duration-300 hover:bg-green-50 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/20 text-center"
               >
                 Get Started
               </Link>
@@ -1566,13 +1555,13 @@ function CTASection() {
             <div className="flex items-center justify-center gap-x-4 gap-y-3 flex-wrap">
               {["Regulated by CySEC", "FCA Authorised", "SEC Registered", "256-bit SSL"].map((t, i) => (
                 <React.Fragment key={t}>
-                  <span className="text-[11px] text-blue-300 font-medium flex items-center gap-1.5 whitespace-nowrap">
-                    <svg className="w-3 h-3 fill-blue-300 shrink-0" viewBox="0 0 24 24">
+                  <span className="text-[11px] text-green-300 font-medium flex items-center gap-1.5 whitespace-nowrap">
+                    <svg className="w-3 h-3 fill-green-300 shrink-0" viewBox="0 0 24 24">
                       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                     </svg>
                     {t}
                   </span>
-                  {i < 3 && <span className="hidden sm:block w-px h-3 bg-blue-500/50" />}
+                  {i < 3 && <span className="hidden sm:block w-px h-3 bg-[#5edc1f]/50" />}
                 </React.Fragment>
               ))}
             </div>

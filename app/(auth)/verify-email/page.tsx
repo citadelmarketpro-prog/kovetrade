@@ -9,7 +9,6 @@ import { apiFetch } from "@/lib/api";
 import { toast } from "sonner";
 import { PulseLoader } from "react-spinners";
 import Link from "next/link";
-import Image from "next/image";
 import PagePreloader from "@/components/PagePreloader";
 
 function VerifyEmailContent() {
@@ -94,33 +93,21 @@ function VerifyEmailContent() {
 
   return (
     <PagePreloader>
-      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gradient-to-br dark:from-[#0a1628] dark:via-[#0d1b2a] dark:to-[#1b263b] px-8">
+      <div className="min-h-screen flex items-center justify-center px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-md space-y-6 text-center"
+        className="w-full max-w-md space-y-6 text-center dark:bg-white/[0.025] dark:backdrop-blur-sm dark:border dark:border-[#5edc1f]/10 dark:rounded-3xl dark:p-8 dark:shadow-2xl dark:shadow-black/40"
       >
         {/* Logo */}
-        <Link href="/" className="inline-block mb-4">
-          <Image
-            src="/logo_dark.png"
-            className="hidden dark:block w-50 mx-auto"
-            alt="Logo"
-            width={1000}
-            height={250}
-          />
-          <Image
-            src="/logo_light.png"
-            className="block dark:hidden w-50 mx-auto"
-            alt="Logo"
-            width={1000}
-            height={250}
-          />
+        <Link href="/" className="inline-flex items-baseline gap-0.5 justify-center mb-4">
+          <span className="text-3xl font-black tracking-tight text-gray-900 dark:text-white">Kove</span>
+          <span className="text-3xl font-black tracking-tight text-[#5edc1f]">Trade</span>
         </Link>
 
-        <div className="w-20 h-20 bg-blue-100 dark:bg-blue-500/20 rounded-full flex items-center justify-center mx-auto">
-          <Mail className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+        <div className="w-20 h-20 bg-[#5edc1f]/15 dark:bg-[#5edc1f]/20 rounded-full flex items-center justify-center mx-auto">
+          <Mail className="w-10 h-10 text-[#5edc1f] dark:text-lime-400" />
         </div>
 
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -144,7 +131,7 @@ function VerifyEmailContent() {
               value={digit}
               onChange={(e) => handleChange(index, e.target.value)}
               onKeyDown={(e) => handleKeyDown(index, e)}
-              className="w-14 h-14 text-center text-2xl font-bold border-2 rounded-lg bg-white dark:bg-[#1e2d3d]/50 border-gray-300 dark:border-gray-600/50 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 transition-all"
+              className="w-14 h-14 text-center text-2xl font-bold border-2 rounded-lg bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 text-gray-900 dark:text-white focus:outline-none focus:border-[#5edc1f] focus:ring-2 focus:ring-[#5edc1f]/30 transition-all"
             />
           ))}
         </div>
@@ -152,7 +139,7 @@ function VerifyEmailContent() {
         <Button
           onClick={handleVerify}
           disabled={loading}
-          className="w-full py-6 bg-blue-700 hover:bg-blue-600 text-white rounded-md"
+          className="w-full py-6 bg-[#5edc1f] hover:bg-[#4cc015] text-gray-900 font-bold rounded-md"
         >
           {!loading ? (
             <span>Verify Email</span>
@@ -166,7 +153,7 @@ function VerifyEmailContent() {
           <button
             onClick={handleResend}
             disabled={resending}
-            className="text-blue-500 hover:underline disabled:opacity-50"
+            className="text-[#5edc1f] hover:underline disabled:opacity-50"
           >
             {resending ? "Sending..." : "Resend code"}
           </button>
@@ -174,7 +161,7 @@ function VerifyEmailContent() {
 
         <Link
           href="/login"
-          className="inline-flex items-center text-sm text-blue-500 hover:underline"
+          className="inline-flex items-center text-sm text-[#5edc1f] hover:underline"
         >
           <ArrowLeft className="w-4 h-4 mr-1" />
           Back to Login
@@ -190,7 +177,7 @@ export default function VerifyEmailPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center">
-          <PulseLoader color="#3b82f6" size={15} />
+          <PulseLoader color="#5edc1f" size={15} />
         </div>
       }
     >

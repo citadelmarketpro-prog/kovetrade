@@ -61,7 +61,7 @@ function BrokerNetwork() {
       <svg viewBox="0 0 260 260" className="w-64 h-64 md:w-80 md:h-80" fill="none">
         {/* Outer ring */}
         <motion.circle cx="130" cy="130" r="118"
-          stroke="rgba(59,130,246,0.12)" strokeWidth="1" strokeDasharray="5 8"
+          stroke="rgba(94, 220, 31,0.12)" strokeWidth="1" strokeDasharray="5 8"
           animate={{ rotate: 360 }}
           transition={{ repeat: Infinity, duration: 38, ease: "linear" }}
           style={{ transformOrigin: "130px 130px" }}
@@ -71,7 +71,7 @@ function BrokerNetwork() {
         {traders.map((t, i) => (
           <motion.line key={i}
             x1="130" y1="130" x2={t.cx} y2={t.cy}
-            stroke="rgba(59,130,246,0.2)" strokeWidth="1.5" strokeDasharray="4 3"
+            stroke="rgba(94, 220, 31,0.2)" strokeWidth="1.5" strokeDasharray="4 3"
             initial={{ opacity: 0, pathLength: 0 }}
             animate={inView ? { opacity: 1, pathLength: 1 } : { opacity: 0 }}
             transition={{ delay: 0.8 + i * 0.08, duration: 0.5 }}
@@ -81,7 +81,7 @@ function BrokerNetwork() {
         {/* Data flow dots */}
         {traders.slice(0, 5).map((t, i) => (
           <motion.circle key={`flow-${i}`} r="4"
-            fill="rgba(59,130,246,0.85)"
+            fill="rgba(94, 220, 31,0.85)"
             animate={{
               cx: [130, t.cx, 130],
               cy: [130, t.cy, 130],
@@ -103,23 +103,23 @@ function BrokerNetwork() {
             style={{ transformOrigin: `${t.cx}px ${t.cy}px` }}
           >
             <circle cx={t.cx} cy={t.cy} r="14"
-              fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.35)" strokeWidth="1.5"
+              fill="rgba(94, 220, 31,0.08)" stroke="rgba(94, 220, 31,0.35)" strokeWidth="1.5"
             />
-            <circle cx={t.cx} cy={t.cy} r="6" fill="rgba(59,130,246,0.5)" />
+            <circle cx={t.cx} cy={t.cy} r="6" fill="rgba(94, 220, 31,0.5)" />
           </motion.g>
         ))}
 
         {/* Hub — broker */}
-        <circle cx="130" cy="130" r="38" fill="rgba(4,6,18,0.9)" stroke="rgba(59,130,246,0.5)" strokeWidth="2" />
+        <circle cx="130" cy="130" r="38" fill="rgba(4,6,18,0.9)" stroke="rgba(94, 220, 31,0.5)" strokeWidth="2" />
         <motion.circle cx="130" cy="130" r="44"
-          stroke="rgba(59,130,246,0.15)" strokeWidth="1.5"
+          stroke="rgba(94, 220, 31,0.15)" strokeWidth="1.5"
           animate={{ r: [38, 52, 38], opacity: [0.4, 0, 0.4] }}
           transition={{ repeat: Infinity, duration: 2.8, ease: "easeInOut" }}
         />
 
         {/* Hub icon — building */}
-        <text x="130" y="126" fill="rgba(59,130,246,0.9)" fontSize="18" textAnchor="middle">🏦</text>
-        <text x="130" y="143" fill="rgba(59,130,246,0.7)" fontSize="7.5" fontWeight="700" textAnchor="middle" fontFamily="monospace">BROKER</text>
+        <text x="130" y="126" fill="rgba(94, 220, 31,0.9)" fontSize="18" textAnchor="middle">🏦</text>
+        <text x="130" y="143" fill="rgba(94, 220, 31,0.7)" fontSize="7.5" fontWeight="700" textAnchor="middle" fontFamily="monospace">BROKER</text>
 
         {/* KoveTrade badge top */}
         <motion.g
@@ -127,9 +127,9 @@ function BrokerNetwork() {
           transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
         >
           <rect x="87" y="30" width="86" height="20" rx="10"
-            fill="rgba(4,6,18,0.95)" stroke="rgba(59,130,246,0.5)" strokeWidth="1.5"
+            fill="rgba(4,6,18,0.95)" stroke="rgba(94, 220, 31,0.5)" strokeWidth="1.5"
           />
-          <text x="130" y="44" fill="rgba(59,130,246,0.9)" fontSize="8" fontWeight="700" textAnchor="middle" fontFamily="monospace">KOVETRADE B2B</text>
+          <text x="130" y="44" fill="rgba(94, 220, 31,0.9)" fontSize="8" fontWeight="700" textAnchor="middle" fontFamily="monospace">KOVETRADE B2B</text>
         </motion.g>
 
         {/* Stats floating */}
@@ -145,10 +145,10 @@ function BrokerNetwork() {
             style={{ transformOrigin: `${s.x}px ${s.y}px` }}
           >
             <rect x={s.x - 28} y={s.y - 14} width="56" height="26" rx="8"
-              fill="rgba(4,6,18,0.9)" stroke="rgba(59,130,246,0.35)" strokeWidth="1"
+              fill="rgba(4,6,18,0.9)" stroke="rgba(94, 220, 31,0.35)" strokeWidth="1"
             />
-            <text x={s.x} y={s.y - 2} fill="rgba(59,130,246,0.9)" fontSize="8" fontWeight="800" textAnchor="middle" fontFamily="monospace">{s.v}</text>
-            <text x={s.x} y={s.y + 8} fill="rgba(59,130,246,0.5)" fontSize="5.5" textAnchor="middle" fontFamily="sans-serif">{s.l}</text>
+            <text x={s.x} y={s.y - 2} fill="rgba(94, 220, 31,0.9)" fontSize="8" fontWeight="800" textAnchor="middle" fontFamily="monospace">{s.v}</text>
+            <text x={s.x} y={s.y + 8} fill="rgba(94, 220, 31,0.5)" fontSize="5.5" textAnchor="middle" fontFamily="sans-serif">{s.l}</text>
           </motion.g>
         ))}
       </svg>
@@ -162,8 +162,8 @@ function StatBadge({ value, label, sub, delay = 0 }: {
 }) {
   return (
     <Reveal delay={delay}>
-      <div className="text-center p-5 rounded-2xl border border-blue-500/15 bg-blue-500/5 hover:border-blue-500/30 hover:bg-blue-500/10 transition-all">
-        <p className="text-4xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">{value}</p>
+      <div className="text-center p-5 rounded-2xl border border-[#5edc1f]/15 bg-[#5edc1f]/5 hover:border-[#5edc1f]/30 hover:bg-[#5edc1f]/10 transition-all">
+        <p className="text-4xl font-black bg-gradient-to-r from-lime-400 to-lime-300 bg-clip-text text-transparent">{value}</p>
         <p className="text-sm font-semibold text-gray-900 dark:text-white mt-1">{label}</p>
         <p className="text-xs text-gray-500 mt-0.5">{sub}</p>
       </div>
@@ -181,7 +181,7 @@ function TimelineStep({ num, title, timing, body, icon, delay = 0, last = false 
     <div ref={ref} className="flex gap-5">
       <div className="flex flex-col items-center flex-shrink-0">
         <motion.div
-          className="w-12 h-12 rounded-2xl border-2 border-blue-500/40 bg-blue-500/10 flex items-center justify-center text-xl"
+          className="w-12 h-12 rounded-2xl border-2 border-[#5edc1f]/40 bg-[#5edc1f]/10 flex items-center justify-center text-xl"
           initial={{ opacity: 0, scale: 0.6 }}
           animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.6 }}
           transition={{ duration: 0.5, delay, ease: E }}
@@ -190,7 +190,7 @@ function TimelineStep({ num, title, timing, body, icon, delay = 0, last = false 
         </motion.div>
         {!last && (
           <motion.div
-            className="w-0.5 flex-1 mt-2 rounded-full bg-gradient-to-b from-blue-500/40 to-transparent min-h-[40px]"
+            className="w-0.5 flex-1 mt-2 rounded-full bg-gradient-to-b from-[#5edc1f]/40 to-transparent min-h-[40px]"
             initial={{ scaleY: 0, transformOrigin: "top" }}
             animate={inView ? { scaleY: 1 } : { scaleY: 0 }}
             transition={{ duration: 0.5, delay: delay + 0.25, ease: E }}
@@ -204,9 +204,9 @@ function TimelineStep({ num, title, timing, body, icon, delay = 0, last = false 
         transition={{ duration: 0.6, delay: delay + 0.1, ease: E }}
       >
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-xs font-black text-blue-400 font-mono">Step {num}</span>
+          <span className="text-xs font-black text-lime-400 font-mono">Step {num}</span>
           {timing && (
-            <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/25">{timing}</span>
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#5edc1f]/15 text-green-300 border border-[#5edc1f]/25">{timing}</span>
           )}
         </div>
         <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1.5">{title}</h3>
@@ -233,9 +233,9 @@ export default function BrokersPage() {
 
       {/* Aurora */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none hidden dark:block">
-        <div className="br-a absolute top-[-10%] left-[-4%] w-[55vw] h-[55vw] rounded-full bg-blue-700/12 blur-[130px]" />
-        <div className="br-b absolute bottom-[-10%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-cyan-800/10 blur-[120px]" />
-        <div className="br-a absolute top-[42%] left-[28%] w-[38vw] h-[38vw] rounded-full bg-indigo-800/7 blur-[140px]" style={{ animationDelay: "7s" }} />
+        <div className="br-a absolute top-[-10%] left-[-4%] w-[55vw] h-[55vw] rounded-full bg-green-700/12 blur-[130px]" />
+        <div className="br-b absolute bottom-[-10%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-green-900/10 blur-[120px]" />
+        <div className="br-a absolute top-[42%] left-[28%] w-[38vw] h-[38vw] rounded-full bg-green-900/7 blur-[140px]" style={{ animationDelay: "7s" }} />
       </div>
 
       <Navbar />
@@ -246,8 +246,8 @@ export default function BrokersPage() {
         <div className="absolute inset-0 pointer-events-none opacity-[0.025] hidden dark:block"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(59,130,246,1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(59,130,246,1) 1px, transparent 1px)
+              linear-gradient(rgba(94, 220, 31,1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(94, 220, 31,1) 1px, transparent 1px)
             `,
             backgroundSize: "60px 60px",
           }}
@@ -263,9 +263,9 @@ export default function BrokersPage() {
             {/* Left */}
             <motion.div style={{ y: heroY }}>
               <Reveal delay={0.05}>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-500/35 bg-blue-500/10 mb-6">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-                  <span className="text-xs text-blue-300 font-medium tracking-wide">Broker Partnership Program</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#5edc1f]/35 bg-[#5edc1f]/10 mb-6">
+                  <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" />
+                  <span className="text-xs text-green-300 font-medium tracking-wide">Broker Partnership Program</span>
                 </div>
               </Reveal>
 
@@ -274,7 +274,7 @@ export default function BrokersPage() {
                   Rewrite the Rules
                   <br />
                   of{" "}
-                  <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-300 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-lime-400 via-lime-300 to-green-300 bg-clip-text text-transparent">
                     Brokerage.
                   </span>
                 </h1>
@@ -296,7 +296,7 @@ export default function BrokersPage() {
                     { v: "−40%",  l: "Acq. Cost" },
                   ].map((s, i) => (
                     <div key={i} className="text-center p-3 rounded-xl border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/[0.025]">
-                      <p className="text-lg font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">{s.v}</p>
+                      <p className="text-lg font-black bg-gradient-to-r from-lime-400 to-lime-300 bg-clip-text text-transparent">{s.v}</p>
                       <p className="text-[10px] text-gray-500 mt-0.5">{s.l}</p>
                     </div>
                   ))}
@@ -307,7 +307,7 @@ export default function BrokersPage() {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-gray-900 dark:text-white font-bold text-sm hover:from-blue-400 hover:to-cyan-400 transition-all shadow-lg shadow-blue-900/30"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-gradient-to-r from-[#5edc1f] to-lime-400 text-gray-900 dark:text-white font-bold text-sm hover:from-lime-400 hover:to-lime-400 transition-all shadow-lg shadow-green-900/30"
                   >
                     Book a meeting with us
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 16 16">
@@ -328,12 +328,12 @@ export default function BrokersPage() {
             <Reveal delay={0.2} dir="right">
               <div className="flex justify-center">
                 <div className="relative">
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/12 to-cyan-900/8 blur-2xl scale-110" />
-                  <div className="relative rounded-3xl border border-blue-500/20 bg-gray-50 dark:bg-white/[0.02] p-8">
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#4cc015]/12 to-green-900/8 blur-2xl scale-110" />
+                  <div className="relative rounded-3xl border border-[#5edc1f]/20 bg-gray-50 dark:bg-white/[0.02] p-8">
                     <BrokerNetwork />
                     <div className="mt-4 text-center">
                       <p className="text-xs text-gray-500 uppercase tracking-widest font-mono">B2B Infrastructure</p>
-                      <p className="text-sm font-semibold text-blue-300">Your Broker × KoveTrade Network</p>
+                      <p className="text-sm font-semibold text-green-300">Your Broker × KoveTrade Network</p>
                     </div>
                   </div>
                 </div>
@@ -347,10 +347,10 @@ export default function BrokersPage() {
       <section id="why" className="py-20 px-4 border-t border-gray-100 dark:border-white/5 scroll-mt-20">
         <div className="max-w-6xl mx-auto">
           <Reveal className="text-center mb-14">
-            <p className="text-xs text-blue-400 font-mono uppercase tracking-widest mb-3">Partnership Benefits</p>
+            <p className="text-xs text-lime-400 font-mono uppercase tracking-widest mb-3">Partnership Benefits</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-3">
               Why Partner With{" "}
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-lime-400 to-lime-300 bg-clip-text text-transparent">
                 KoveTrade?
               </span>
             </h2>
@@ -391,8 +391,8 @@ export default function BrokersPage() {
               },
             ].map((c, i) => {
               const col = c.color === "blue"
-                ? { border: "border-blue-500/20", bg: "bg-blue-500/5", glow: "bg-blue-500/15", stat: "from-blue-400 to-cyan-400" }
-                : { border: "border-cyan-500/20", bg: "bg-cyan-500/5", glow: "bg-cyan-500/12", stat: "from-cyan-400 to-blue-400" };
+                ? { border: "border-[#5edc1f]/20", bg: "bg-[#5edc1f]/5", glow: "bg-[#5edc1f]/15", stat: "from-lime-400 to-lime-300" }
+                : { border: "border-lime-400/20", bg: "bg-lime-400/5", glow: "bg-lime-400/12", stat: "from-lime-300 to-lime-400" };
               return (
                 <Reveal key={i} delay={i * 0.1}>
                   <div className={`relative rounded-3xl border ${col.border} ${col.bg} p-7 h-full overflow-hidden group hover:scale-[1.02] transition-transform`}>
@@ -419,10 +419,10 @@ export default function BrokersPage() {
             {/* Steps */}
             <div>
               <Reveal>
-                <p className="text-xs text-blue-400 font-mono uppercase tracking-widest mb-3">Process</p>
+                <p className="text-xs text-lime-400 font-mono uppercase tracking-widest mb-3">Process</p>
                 <h2 className="text-3xl md:text-4xl font-bold mb-10">
                   How it{" "}
-                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-lime-400 to-lime-300 bg-clip-text text-transparent">
                     works.
                   </span>
                 </h2>
@@ -452,7 +452,7 @@ export default function BrokersPage() {
               <Reveal delay={0.35}>
                 <Link
                   href="/affiliate"
-                  className="inline-flex items-center gap-2 mt-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+                  className="inline-flex items-center gap-2 mt-2 text-sm font-semibold text-lime-400 hover:text-green-300 transition-colors"
                 >
                   Become an affiliate →
                 </Link>
@@ -463,8 +463,8 @@ export default function BrokersPage() {
             <Reveal delay={0.15} dir="right">
               <div className="sticky top-24 space-y-4">
                 {/* Timeline visual card */}
-                <div className="rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-950/40 to-cyan-950/20 p-8">
-                  <p className="text-xs text-blue-400 font-mono uppercase tracking-widest mb-6">Onboarding Timeline</p>
+                <div className="rounded-3xl border border-[#5edc1f]/20 bg-gradient-to-br from-green-950/40 to-green-950/20 p-8">
+                  <p className="text-xs text-lime-400 font-mono uppercase tracking-widest mb-6">Onboarding Timeline</p>
 
                   <div className="space-y-4">
                     {[
@@ -477,11 +477,11 @@ export default function BrokersPage() {
                       <div key={i}>
                         <div className="flex justify-between text-xs mb-1.5">
                           <span className="text-gray-700 dark:text-gray-300">{row.label}</span>
-                          <span className="text-blue-400 font-mono">{row.days}</span>
+                          <span className="text-lime-400 font-mono">{row.days}</span>
                         </div>
                         <div className="w-full h-2 rounded-full bg-gray-100 dark:bg-white/6 overflow-hidden">
                           <motion.div
-                            className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400"
+                            className="h-full rounded-full bg-gradient-to-r from-[#5edc1f] to-lime-300"
                             initial={{ width: "0%" }}
                             whileInView={{ width: `${row.fill}%` }}
                             viewport={{ once: true }}
@@ -492,8 +492,8 @@ export default function BrokersPage() {
                     ))}
                   </div>
 
-                  <div className="mt-6 p-4 rounded-2xl border border-blue-500/15 bg-blue-500/5">
-                    <p className="text-xs font-semibold text-blue-300 mb-1">⚡ Fastest in the industry</p>
+                  <div className="mt-6 p-4 rounded-2xl border border-[#5edc1f]/15 bg-[#5edc1f]/5">
+                    <p className="text-xs font-semibold text-green-300 mb-1">⚡ Fastest in the industry</p>
                     <p className="text-xs text-gray-500">Full onboarding completed in as little as 14 days — from signed agreement to live platform.</p>
                   </div>
                 </div>
@@ -507,10 +507,10 @@ export default function BrokersPage() {
       <section className="py-20 px-4 border-t border-gray-100 dark:border-white/5">
         <div className="max-w-6xl mx-auto">
           <Reveal className="text-center mb-14">
-            <p className="text-xs text-blue-400 font-mono uppercase tracking-widest mb-3">Solutions</p>
+            <p className="text-xs text-lime-400 font-mono uppercase tracking-widest mb-3">Solutions</p>
             <h2 className="text-3xl md:text-4xl font-bold">
               Our{" "}
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-lime-400 to-lime-300 bg-clip-text text-transparent">
                 B2B Solutions
               </span>
             </h2>
@@ -542,17 +542,17 @@ export default function BrokersPage() {
               },
             ].map((s, i) => {
               const col = s.color === "blue"
-                ? { border: "border-blue-500/20", bg: "bg-blue-500/5", pill: "bg-blue-500/15 text-blue-300 border-blue-500/25" }
-                : { border: "border-cyan-500/25", bg: "bg-cyan-500/8", pill: "bg-cyan-500/15 text-cyan-300 border-cyan-500/25" };
+                ? { border: "border-[#5edc1f]/20", bg: "bg-[#5edc1f]/5", pill: "bg-[#5edc1f]/15 text-green-300 border-[#5edc1f]/25" }
+                : { border: "border-lime-400/25", bg: "bg-lime-400/8", pill: "bg-lime-400/15 text-lime-300 border-lime-400/25" };
               return (
                 <Reveal key={i} delay={i * 0.1}>
-                  <div className={`relative rounded-3xl border p-8 h-full ${s.highlight ? "border-cyan-500/30 bg-gradient-to-br from-cyan-950/50 to-blue-950/30" : `${col.border} ${col.bg}`}`}>
+                  <div className={`relative rounded-3xl border p-8 h-full ${s.highlight ? "border-lime-400/30 bg-gradient-to-br from-green-950/50 to-green-950/30" : `${col.border} ${col.bg}`}`}>
                     {s.highlight && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-gray-900 dark:text-white text-[10px] font-bold uppercase tracking-wider">
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#5edc1f] to-lime-400 text-gray-900 dark:text-white text-[10px] font-bold uppercase tracking-wider">
                         Most Popular
                       </div>
                     )}
-                    <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-blue-500/8 blur-3xl pointer-events-none" />
+                    <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-[#5edc1f]/8 blur-3xl pointer-events-none" />
                     <div className="relative">
                       <span className="text-3xl block mb-4">{s.icon}</span>
                       <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">{s.title}</h3>
@@ -593,17 +593,17 @@ export default function BrokersPage() {
 
             {/* Main CTA */}
             <Reveal dir="left">
-              <div className="relative rounded-3xl overflow-hidden border border-blue-500/25 h-full">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-950/80 via-cyan-950/60 to-indigo-950/50" />
-                <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-blue-500/12 blur-3xl" />
-                <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-cyan-500/10 blur-3xl" />
+              <div className="relative rounded-3xl overflow-hidden border border-[#5edc1f]/25 h-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-green-950/80 via-green-950/60 to-green-950/50" />
+                <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-[#5edc1f]/12 blur-3xl" />
+                <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-lime-400/10 blur-3xl" />
 
                 {/* Animated connection lines */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                   {[20, 50, 80].map((left, i) => (
                     <motion.div
                       key={i}
-                      className="absolute w-px bg-gradient-to-b from-transparent via-blue-400/30 to-transparent"
+                      className="absolute w-px bg-gradient-to-b from-transparent via-lime-400/30 to-transparent"
                       style={{ left: `${left}%`, height: "100%" }}
                       animate={{ y: ["-100%", "100%"] }}
                       transition={{ repeat: Infinity, duration: 4 + i * 0.8, delay: i * 1.2, ease: "linear" }}
@@ -612,12 +612,12 @@ export default function BrokersPage() {
                 </div>
 
                 <div className="relative p-10">
-                  <div className="w-14 h-14 rounded-2xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center mx-auto mb-5 text-2xl">
+                  <div className="w-14 h-14 rounded-2xl bg-[#5edc1f]/15 border border-[#5edc1f]/30 flex items-center justify-center mx-auto mb-5 text-2xl">
                     🏦
                   </div>
                   <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
                     Ready to transform your{" "}
-                    <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-lime-400 to-lime-300 bg-clip-text text-transparent">
                       Brokerage?
                     </span>
                   </h2>
@@ -628,7 +628,7 @@ export default function BrokersPage() {
                   <div className="flex justify-center">
                     <Link
                       href="/contact"
-                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-gray-900 dark:text-white font-bold text-sm hover:from-blue-400 hover:to-cyan-400 transition-all shadow-lg shadow-blue-900/30"
+                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#5edc1f] to-lime-400 text-gray-900 dark:text-white font-bold text-sm hover:from-lime-400 hover:to-lime-400 transition-all shadow-lg shadow-green-900/30"
                     >
                       Get started now →
                     </Link>
@@ -654,18 +654,18 @@ export default function BrokersPage() {
                 <div className="space-y-3">
                   <a
                     href="mailto:support@kovetrade.com"
-                    className="flex items-center gap-3 px-5 py-4 rounded-2xl border border-blue-500/20 bg-blue-500/6 hover:bg-blue-500/12 hover:border-blue-500/35 transition-all group"
+                    className="flex items-center gap-3 px-5 py-4 rounded-2xl border border-[#5edc1f]/20 bg-[#5edc1f]/6 hover:bg-[#5edc1f]/12 hover:border-[#5edc1f]/35 transition-all group"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center flex-shrink-0">
-                      <svg className="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 20 20">
+                    <div className="w-10 h-10 rounded-xl bg-[#5edc1f]/15 flex items-center justify-center flex-shrink-0">
+                      <svg className="w-5 h-5 text-lime-400" fill="none" viewBox="0 0 20 20">
                         <path d="M3 5h14v11a1 1 0 01-1 1H4a1 1 0 01-1-1V5zm0 0l7 6 7-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
                     <div>
                       <p className="text-xs text-gray-500">Email our team</p>
-                      <p className="text-sm font-semibold text-blue-300 group-hover:text-blue-200 transition-colors">support@kovetrade.com</p>
+                      <p className="text-sm font-semibold text-green-300 group-hover:text-green-200 transition-colors">support@kovetrade.com</p>
                     </div>
-                    <svg className="w-4 h-4 text-gray-600 group-hover:text-blue-400 transition-colors ml-auto" fill="none" viewBox="0 0 16 16">
+                    <svg className="w-4 h-4 text-gray-600 group-hover:text-lime-400 transition-colors ml-auto" fill="none" viewBox="0 0 16 16">
                       <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </a>
@@ -689,7 +689,7 @@ export default function BrokersPage() {
                   </Link>
 
                   <div className="pt-2 text-center">
-                    <p className="text-xs text-gray-600">We respond within <span className="text-blue-400 font-semibold">24 hours</span> on business days.</p>
+                    <p className="text-xs text-gray-600">We respond within <span className="text-lime-400 font-semibold">24 hours</span> on business days.</p>
                   </div>
                 </div>
               </div>

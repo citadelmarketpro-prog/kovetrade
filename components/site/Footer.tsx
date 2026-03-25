@@ -90,19 +90,22 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="relative border-t border-gray-100 dark:border-white/8 bg-white dark:bg-[#06070f] text-gray-900 dark:text-white overflow-hidden">
+    <footer className="relative border-t border-gray-100 dark:border-[#5edc1f]/[0.08] bg-white dark:bg-[#070f08] text-gray-900 dark:text-white overflow-hidden">
       {/* Top gradient bar */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/60 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#5edc1f]/60 to-transparent" />
 
       {/* Subtle grid texture — dark mode only */}
       <div
-        className="pointer-events-none absolute inset-0 hidden dark:block opacity-[0.03]"
+        className="pointer-events-none absolute inset-0 hidden dark:block opacity-[0.025]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.4) 1px, transparent 1px)",
+            "linear-gradient(rgba(94,220,31,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(94,220,31,.3) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
         }}
       />
+
+      {/* Subtle green glow top-left */}
+      <div className="pointer-events-none absolute top-0 left-0 w-[500px] h-[300px] rounded-full bg-[#5edc1f]/[0.04] blur-[100px] hidden dark:block" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* ── Main grid ── */}
@@ -115,7 +118,7 @@ const Footer = () => {
                 <span className="text-3xl font-black tracking-tight text-gray-900 dark:text-white">
                   Kove
                 </span>
-                <span className="text-3xl font-black tracking-tight text-blue-500">
+                <span className="text-3xl font-black tracking-tight text-[#5edc1f]">
                   Trade
                 </span>
               </Link>
@@ -124,8 +127,6 @@ const Footer = () => {
                 share your strategies, and grow your portfolio together.
               </p>
             </div>
-
-           
 
             {/* Regulator badges */}
             <div>
@@ -136,9 +137,9 @@ const Footer = () => {
                 {regulators.map((r) => (
                   <div
                     key={r.code}
-                    className="flex flex-col rounded-lg border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/[0.03] px-3 py-2"
+                    className="flex flex-col rounded-lg border border-gray-200 dark:border-[#5edc1f]/[0.1] bg-gray-50 dark:bg-[#5edc1f]/[0.03] px-3 py-2 hover:border-[#5edc1f]/30 dark:hover:border-[#5edc1f]/25 transition-colors"
                   >
-                    <span className="text-xs font-bold text-blue-500">
+                    <span className="text-xs font-bold text-[#5edc1f]">
                       {r.code}
                     </span>
                     <span className="text-[10px] text-gray-500 dark:text-gray-400">
@@ -165,7 +166,7 @@ const Footer = () => {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-sm text-gray-600 dark:text-gray-400 transition-colors hover:text-blue-500 dark:hover:text-blue-400"
+                        className="text-sm text-gray-600 dark:text-gray-400 transition-colors hover:text-[#5edc1f] dark:hover:text-lime-400"
                       >
                         {link.label}
                       </Link>
@@ -178,7 +179,7 @@ const Footer = () => {
         </div>
 
         {/* ── Disclaimer ── */}
-        <div className="border-t border-gray-100 dark:border-white/8 py-8 space-y-4 text-[11px] leading-relaxed text-gray-400 dark:text-gray-500">
+        <div className="border-t border-gray-100 dark:border-[#5edc1f]/[0.06] py-8 space-y-4 text-[11px] leading-relaxed text-gray-400 dark:text-gray-500">
           <p>
             <span className="font-semibold text-gray-500 dark:text-gray-400">Disclaimer:</span>{" "}
             KoveTrade (Europe) Ltd., authorised and regulated by the Cyprus
@@ -204,21 +205,21 @@ const Footer = () => {
         </div>
 
         {/* ── Bottom bar ── */}
-        <div className="border-t border-gray-100 dark:border-white/8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="border-t border-gray-100 dark:border-[#5edc1f]/[0.06] py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-gray-400 dark:text-gray-500">
             &copy; 2006–2026 KoveTrade — Your Social Investment Network. All
             rights reserved.
           </p>
           <div className="flex items-center gap-4 text-xs text-gray-400 dark:text-gray-500">
-            <Link href="/terms" className="hover:text-blue-500 transition-colors">
+            <Link href="/terms" className="hover:text-[#5edc1f] transition-colors">
               Terms
             </Link>
             <span className="text-gray-300 dark:text-gray-700">·</span>
-            <Link href="/privacy" className="hover:text-blue-500 transition-colors">
+            <Link href="/privacy" className="hover:text-[#5edc1f] transition-colors">
               Privacy
             </Link>
             <span className="text-gray-300 dark:text-gray-700">·</span>
-            <Link href="/cookies" className="hover:text-blue-500 transition-colors">
+            <Link href="/cookies" className="hover:text-[#5edc1f] transition-colors">
               Cookies
             </Link>
           </div>

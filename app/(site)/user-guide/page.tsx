@@ -191,10 +191,10 @@ function StepCard({ num, title, body, delay = 0 }: { num: number; title: string;
       transition={{ duration: 0.55, delay, ease: E }}
     >
       <div className="flex flex-col items-center flex-shrink-0">
-        <div className="w-9 h-9 rounded-xl bg-sky-500/15 border border-sky-500/35 flex items-center justify-center">
-          <span className="text-sm font-black bg-gradient-to-b from-sky-400 to-indigo-400 bg-clip-text text-transparent">{num}</span>
+        <div className="w-9 h-9 rounded-xl bg-[#5edc1f]/15 border border-[#5edc1f]/35 flex items-center justify-center">
+          <span className="text-sm font-black bg-gradient-to-b from-lime-400 to-emerald-400 bg-clip-text text-transparent">{num}</span>
         </div>
-        {num < 5 && <div className="w-px flex-1 bg-gradient-to-b from-sky-500/30 to-transparent mt-1.5 min-h-[20px]" />}
+        {num < 5 && <div className="w-px flex-1 bg-gradient-to-b from-[#5edc1f]/30 to-transparent mt-1.5 min-h-[20px]" />}
       </div>
       <div className="pb-5">
         <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">{title}</p>
@@ -209,10 +209,10 @@ function CheckItem({ text, delay = 0, color = "sky" }: { text: string; delay?: n
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
   const clrs: Record<string, string> = {
-    sky:    "bg-sky-500/15 border-sky-400/35 text-sky-400",
-    indigo: "bg-indigo-500/15 border-indigo-400/35 text-indigo-400",
+    sky:    "bg-[#5edc1f]/15 border-lime-400/35 text-lime-400",
+    indigo: "bg-[#5edc1f]/15 border-[#5edc1f]/35 text-lime-400",
     emerald:"bg-emerald-500/15 border-emerald-400/35 text-emerald-400",
-    violet: "bg-violet-500/15 border-violet-400/35 text-violet-400",
+    violet: "bg-[#5edc1f]/15 border-[#5edc1f]/35 text-lime-400",
   };
   return (
     <motion.div
@@ -237,14 +237,14 @@ function GuideSection({ id, icon, title, accent = "sky", children }: {
   id: string; icon: string; title: string; accent?: string; children: React.ReactNode;
 }) {
   const accentMap: Record<string, string> = {
-    sky:    "text-sky-400 border-sky-500/20 bg-sky-500/8",
-    indigo: "text-indigo-400 border-indigo-500/20 bg-indigo-500/8",
-    violet: "text-violet-400 border-violet-500/20 bg-violet-500/8",
+    sky:    "text-lime-400 border-[#5edc1f]/20 bg-[#5edc1f]/8",
+    indigo: "text-lime-400 border-[#5edc1f]/20 bg-[#5edc1f]/8",
+    violet: "text-lime-400 border-[#5edc1f]/20 bg-[#5edc1f]/10",
     emerald:"text-emerald-400 border-emerald-500/20 bg-emerald-500/8",
     amber:  "text-amber-400 border-amber-500/20 bg-amber-500/8",
-    rose:   "text-rose-400 border-rose-500/20 bg-rose-500/8",
-    cyan:   "text-cyan-400 border-cyan-500/20 bg-cyan-500/8",
-    blue:   "text-blue-400 border-blue-500/20 bg-blue-500/8",
+    rose:   "text-lime-400 border-rose-500/20 bg-rose-500/8",
+    cyan:   "text-lime-300 border-lime-400/20 bg-lime-400/8",
+    blue:   "text-lime-400 border-[#5edc1f]/20 bg-[#5edc1f]/8",
   };
   const a = accentMap[accent] ?? accentMap.sky;
   return (
@@ -294,9 +294,9 @@ export default function UserGuidePage() {
 
       {/* Aurora */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none hidden dark:block">
-        <div className="ug-a absolute top-[-10%] left-[-4%] w-[55vw] h-[55vw] rounded-full bg-sky-700/10 blur-[120px]" />
-        <div className="ug-b absolute bottom-[-10%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-indigo-700/10 blur-[110px]" />
-        <div className="ug-a absolute top-[42%] left-[30%] w-[36vw] h-[36vw] rounded-full bg-blue-800/7 blur-[130px]" style={{ animationDelay: "7s" }} />
+        <div className="ug-a absolute top-[-10%] left-[-4%] w-[55vw] h-[55vw] rounded-full bg-green-700/10 blur-[120px]" />
+        <div className="ug-b absolute bottom-[-10%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-green-800/10 blur-[110px]" />
+        <div className="ug-a absolute top-[42%] left-[30%] w-[36vw] h-[36vw] rounded-full bg-green-800/7 blur-[130px]" style={{ animationDelay: "7s" }} />
       </div>
 
       <Navbar />
@@ -318,9 +318,9 @@ export default function UserGuidePage() {
             {/* Left */}
             <motion.div style={{ y: heroY }}>
               <Reveal delay={0.05}>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-sky-500/35 bg-sky-500/10 mb-6">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-                  <span className="text-xs text-sky-300 font-medium tracking-wide">KoveTrade User Guide</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#5edc1f]/35 bg-[#5edc1f]/10 mb-6">
+                  <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" />
+                  <span className="text-xs text-lime-300 font-medium tracking-wide">KoveTrade User Guide</span>
                 </div>
               </Reveal>
 
@@ -329,7 +329,7 @@ export default function UserGuidePage() {
                   Everything you need
                   <br />
                   to{" "}
-                  <span className="bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-lime-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent">
                     get started
                   </span>
                   <br />
@@ -350,12 +350,12 @@ export default function UserGuidePage() {
                   {["Create", "Find", "Copy", "Earn"].map((s, i) => (
                     <React.Fragment key={i}>
                       <div className="flex items-center gap-1.5 flex-shrink-0">
-                        <div className="w-6 h-6 rounded-full bg-sky-500/20 border border-sky-500/40 flex items-center justify-center">
-                          <span className="text-[10px] font-bold text-sky-400">{i + 1}</span>
+                        <div className="w-6 h-6 rounded-full bg-[#5edc1f]/20 border border-[#5edc1f]/40 flex items-center justify-center">
+                          <span className="text-[10px] font-bold text-lime-400">{i + 1}</span>
                         </div>
                         <span className="text-xs font-medium text-gray-600 dark:text-gray-400">{s}</span>
                       </div>
-                      {i < 3 && <div className="w-6 h-px bg-sky-500/25 flex-shrink-0" />}
+                      {i < 3 && <div className="w-6 h-px bg-[#5edc1f]/25 flex-shrink-0" />}
                     </React.Fragment>
                   ))}
                 </div>
@@ -365,7 +365,7 @@ export default function UserGuidePage() {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link
                     href="/register"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-bold text-sm hover:from-sky-400 hover:to-indigo-500 transition-all shadow-lg shadow-sky-900/30"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#5edc1f] to-green-700 text-white font-bold text-sm hover:from-lime-400 hover:to-green-600 transition-all shadow-lg shadow-green-900/30"
                   >
                     Get Started
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 16 16">
@@ -386,12 +386,12 @@ export default function UserGuidePage() {
             <Reveal delay={0.2} dir="right">
               <div className="flex justify-center">
                 <div className="relative">
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-sky-600/10 to-indigo-900/8 blur-2xl scale-110" />
-                  <div className="relative rounded-3xl border border-sky-500/20 bg-gray-50 dark:bg-white/[0.02] p-8">
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#4cc015]/10 to-green-900/8 blur-2xl scale-110" />
+                  <div className="relative rounded-3xl border border-[#5edc1f]/20 bg-gray-50 dark:bg-white/[0.02] p-8">
                     <CopyFlowHero />
                     <div className="mt-4 text-center">
                       <p className="text-xs text-gray-500 uppercase tracking-widest font-mono">Live replication</p>
-                      <p className="text-sm font-semibold text-sky-300">Leader trades → Your account</p>
+                      <p className="text-sm font-semibold text-lime-300">Leader trades → Your account</p>
                     </div>
                   </div>
                 </div>
@@ -407,7 +407,7 @@ export default function UserGuidePage() {
           <div className="flex gap-2 min-w-max">
             {NAV.map((n) => (
               <a key={n.id} href={`#${n.id}`}
-                className="text-xs px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-sky-300 hover:border-sky-500/40 hover:bg-sky-500/8 transition-all whitespace-nowrap"
+                className="text-xs px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-lime-300 hover:border-[#5edc1f]/40 hover:bg-[#5edc1f]/8 transition-all whitespace-nowrap"
               >
                 {n.label}
               </a>
@@ -454,8 +454,8 @@ export default function UserGuidePage() {
             <StepCard num={5} title="Start Copy Trading!" body="You are fully set up. Browse leaders and start replicating trades in seconds." delay={0.33} />
           </div>
           <Reveal delay={0.1} dir="right">
-            <div className="rounded-3xl border border-sky-500/20 bg-gradient-to-br from-sky-950/40 to-indigo-950/30 p-7">
-              <p className="text-xs text-sky-400 font-mono uppercase tracking-widest mb-4">Quick Tips</p>
+            <div className="rounded-3xl border border-[#5edc1f]/20 bg-gradient-to-br from-green-950/40 to-green-950/30 p-7">
+              <p className="text-xs text-lime-400 font-mono uppercase tracking-widest mb-4">Quick Tips</p>
               <div className="space-y-3">
                 {[
                   { icon: "🔐", tip: "Use a strong unique password — at least 12 characters with symbols" },
@@ -490,11 +490,11 @@ export default function UserGuidePage() {
             { icon: "⚙️", label: "Settings", desc: "Manage your account, security preferences, notification settings, and AutoGuard™ config", color: "indigo" },
           ].map((item, i) => {
             const clrs: Record<string, string> = {
-              sky:    "border-sky-500/20 bg-sky-500/5 text-sky-400",
+              sky:    "border-[#5edc1f]/20 bg-[#5edc1f]/5 text-lime-400",
               yellow: "border-yellow-500/20 bg-yellow-500/5 text-yellow-400",
               emerald:"border-emerald-500/20 bg-emerald-500/5 text-emerald-400",
-              violet: "border-violet-500/20 bg-violet-500/5 text-violet-400",
-              indigo: "border-indigo-500/20 bg-indigo-500/5 text-indigo-400",
+              violet: "border-[#5edc1f]/20 bg-[#5edc1f]/10 text-lime-400",
+              indigo: "border-[#5edc1f]/20 bg-[#5edc1f]/5 text-lime-400",
             };
             return (
               <Reveal key={i} delay={i * 0.08}>
@@ -524,14 +524,14 @@ export default function UserGuidePage() {
             <CheckItem text="Read profiles — understand each leader's strategy, preferred instruments, and trading style" delay={0.2} color="indigo" />
           </div>
           <Reveal delay={0.15} dir="right">
-            <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-6">
-              <p className="text-xs text-indigo-400 font-mono uppercase tracking-widest mb-4">Key Metrics to Compare</p>
+            <div className="rounded-2xl border border-[#5edc1f]/20 bg-[#5edc1f]/5 p-6">
+              <p className="text-xs text-lime-400 font-mono uppercase tracking-widest mb-4">Key Metrics to Compare</p>
               <div className="space-y-2.5">
                 {[
                   { label: "Total Return",   value: "+212%",  bar: 80,  c: "bg-emerald-500" },
-                  { label: "Win Rate",       value: "74.2%",  bar: 74,  c: "bg-sky-500" },
+                  { label: "Win Rate",       value: "74.2%",  bar: 74,  c: "bg-[#5edc1f]" },
                   { label: "Max Drawdown",   value: "-8.4%",  bar: 15,  c: "bg-rose-500" },
-                  { label: "Risk Score",     value: "Low",    bar: 25,  c: "bg-violet-500" },
+                  { label: "Risk Score",     value: "Low",    bar: 25,  c: "bg-[#5edc1f]" },
                 ].map((m, i) => (
                   <div key={i}>
                     <div className="flex justify-between text-xs mb-1">
@@ -570,16 +570,16 @@ export default function UserGuidePage() {
             { num: "4", icon: "✅", label: "Confirm & Go", desc: "Confirm your settings — all future trades by this leader will replicate in your account" },
           ].map((s, i) => (
             <Reveal key={i} delay={i * 0.1}>
-              <div className="relative rounded-2xl border border-sky-500/15 bg-sky-500/5 p-5 hover:border-sky-500/30 hover:bg-sky-500/10 transition-all">
+              <div className="relative rounded-2xl border border-[#5edc1f]/15 bg-[#5edc1f]/5 p-5 hover:border-[#5edc1f]/30 hover:bg-[#5edc1f]/10 transition-all">
                 {i < 3 && (
-                  <div className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-6 h-6 rounded-full border border-sky-500/30 bg-[#060b14] items-center justify-center">
-                    <svg className="w-3 h-3 text-sky-500" fill="none" viewBox="0 0 12 12">
+                  <div className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-6 h-6 rounded-full border border-[#5edc1f]/30 bg-[#060b14] items-center justify-center">
+                    <svg className="w-3 h-3 text-[#5edc1f]" fill="none" viewBox="0 0 12 12">
                       <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                 )}
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl font-black bg-gradient-to-b from-sky-400 to-indigo-400 bg-clip-text text-transparent">{s.num}</span>
+                  <span className="text-2xl font-black bg-gradient-to-b from-lime-400 to-emerald-400 bg-clip-text text-transparent">{s.num}</span>
                   <span className="text-xl">{s.icon}</span>
                 </div>
                 <p className="text-sm font-bold text-gray-900 dark:text-white mb-1.5">{s.label}</p>
@@ -616,8 +616,8 @@ export default function UserGuidePage() {
               <div className="space-y-3">
                 {[
                   { leader: "AlphaWave",   alloc: 40, ret: "+28.4%", risk: "Low",    color: "bg-emerald-500" },
-                  { leader: "FX_Titan",    alloc: 30, ret: "+51.2%", risk: "Med",    color: "bg-sky-500" },
-                  { leader: "OptionsEdge", alloc: 20, ret: "+19.7%", risk: "Low",    color: "bg-violet-500" },
+                  { leader: "FX_Titan",    alloc: 30, ret: "+51.2%", risk: "Med",    color: "bg-[#5edc1f]" },
+                  { leader: "OptionsEdge", alloc: 20, ret: "+19.7%", risk: "Low",    color: "bg-[#5edc1f]" },
                   { leader: "SwingMaster", alloc: 10, ret: "+8.1%",  risk: "Low",    color: "bg-amber-500" },
                 ].map((p, i) => (
                   <div key={i}>
@@ -660,11 +660,11 @@ export default function UserGuidePage() {
             { icon: "📱", label: "E-Wallets",         desc: "Popular e-wallet services", speed: "Instant" },
           ].map((m, i) => (
             <Reveal key={i} delay={i * 0.08}>
-              <div className="rounded-2xl border border-blue-500/15 bg-blue-500/5 p-5 hover:border-blue-500/30 transition-all">
+              <div className="rounded-2xl border border-[#5edc1f]/15 bg-[#5edc1f]/5 p-5 hover:border-[#5edc1f]/30 transition-all">
                 <span className="text-2xl block mb-3">{m.icon}</span>
                 <p className="text-sm font-bold text-gray-900 dark:text-white mb-1">{m.label}</p>
                 <p className="text-xs text-gray-500 mb-2">{m.desc}</p>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/25">{m.speed}</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#5edc1f]/15 text-lime-400 border border-[#5edc1f]/25">{m.speed}</span>
               </div>
             </Reveal>
           ))}
@@ -717,11 +717,11 @@ export default function UserGuidePage() {
             { icon: "🌐", label: "Community",      desc: "Join our trading community for peer support and strategy discussions", cta: "Join now", href: "#" },
           ].map((ch, i) => (
             <Reveal key={i} delay={i * 0.08}>
-              <div className="rounded-2xl border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/[0.025] p-5 hover:border-sky-500/20 hover:bg-sky-500/5 transition-all flex flex-col">
+              <div className="rounded-2xl border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/[0.025] p-5 hover:border-[#5edc1f]/20 hover:bg-[#5edc1f]/5 transition-all flex flex-col">
                 <span className="text-2xl mb-3">{ch.icon}</span>
                 <p className="text-sm font-bold text-gray-900 dark:text-white mb-1.5">{ch.label}</p>
                 <p className="text-xs text-gray-500 leading-relaxed flex-1 mb-4">{ch.desc}</p>
-                <a href={ch.href} className="text-xs text-sky-400 font-semibold hover:text-sky-300 transition-colors">
+                <a href={ch.href} className="text-xs text-lime-400 font-semibold hover:text-lime-300 transition-colors">
                   {ch.cta} →
                 </a>
               </div>
@@ -734,17 +734,17 @@ export default function UserGuidePage() {
       <section className="py-16 px-4 border-t border-gray-100 dark:border-white/5">
         <div className="max-w-3xl mx-auto">
           <Reveal>
-            <div className="relative rounded-3xl overflow-hidden border border-sky-500/20">
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-950/70 via-blue-950/50 to-indigo-950/40" />
-              <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-sky-500/10 blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-indigo-500/10 blur-3xl" />
+            <div className="relative rounded-3xl overflow-hidden border border-[#5edc1f]/20">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-950/70 via-green-950/50 to-green-950/40" />
+              <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-[#5edc1f]/10 blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-[#5edc1f]/10 blur-3xl" />
 
               {/* Animated dots */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 {[15, 40, 65, 85].map((left, i) => (
                   <motion.div
                     key={i}
-                    className="absolute w-1.5 h-1.5 rounded-full bg-sky-400/50"
+                    className="absolute w-1.5 h-1.5 rounded-full bg-lime-400/50"
                     style={{ left: `${left}%`, top: "20%" }}
                     animate={{ y: [0, -40, 0], opacity: [0.3, 1, 0.3] }}
                     transition={{ repeat: Infinity, duration: 3.5 + i * 0.5, delay: i * 0.9 }}
@@ -753,13 +753,13 @@ export default function UserGuidePage() {
               </div>
 
               <div className="relative p-10 text-center">
-                <div className="w-14 h-14 rounded-2xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center mx-auto mb-5 text-2xl">
+                <div className="w-14 h-14 rounded-2xl bg-[#5edc1f]/15 border border-[#5edc1f]/30 flex items-center justify-center mx-auto mb-5 text-2xl">
                   🚀
                 </div>
 
                 <h2 className="text-2xl md:text-4xl font-bold mb-3">
                   Ready to Start{" "}
-                  <span className="bg-gradient-to-r from-sky-400 to-indigo-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-lime-400 to-emerald-400 bg-clip-text text-transparent">
                     Copy Trading?
                   </span>
                 </h2>
@@ -771,7 +771,7 @@ export default function UserGuidePage() {
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Link
                     href="/register"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-bold text-sm hover:from-sky-400 hover:to-indigo-500 transition-all shadow-lg shadow-sky-900/30"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#5edc1f] to-green-700 text-white font-bold text-sm hover:from-lime-400 hover:to-green-600 transition-all shadow-lg shadow-green-900/30"
                   >
                     Get Started →
                   </Link>

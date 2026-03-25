@@ -282,13 +282,13 @@ export default function KYCVerificationPage() {
   }, [mounted, setValue, getValues, router]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-[#0a1628] dark:via-[#0d1b2a] dark:to-[#1b263b] text-gray-900 dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-[#070f08] text-gray-900 dark:text-white transition-colors duration-300">
       {/* Banner Section */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative bg-blue-500 dark:bg-blue-600 rounded-2xl overflow-hidden px-6 sm:px-10 py-8 sm:py-12 min-h-[180px] sm:min-h-[220px]"
+          className="relative bg-[#5edc1f] dark:bg-[#5edc1f] rounded-2xl overflow-hidden px-6 sm:px-10 py-8 sm:py-12 min-h-[180px] sm:min-h-[220px]"
         >
           {/* Background chart line SVG */}
           <svg
@@ -318,7 +318,7 @@ export default function KYCVerificationPage() {
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
                   Complete Your Profile
                 </h1>
-                <p className="mt-2 text-sm sm:text-base text-blue-100">
+                <p className="mt-2 text-sm sm:text-base text-lime-100">
                   Verify your identity to unlock all trading features
                 </p>
               </div>
@@ -354,7 +354,7 @@ export default function KYCVerificationPage() {
                   transition={{ duration: 0.3 }}
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-lg ${
                     index <= currentStage
-                      ? "bg-blue-500 dark:bg-blue-600"
+                      ? "bg-[#5edc1f] dark:bg-[#5edc1f]"
                       : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
                   }`}
                 >
@@ -366,7 +366,7 @@ export default function KYCVerificationPage() {
               </div>
               {index < stages.length - 1 && (
                 <div className={`h-1 flex-1 transition-all duration-500 ${
-                  index < currentStage ? "bg-blue-500 dark:bg-blue-600" : "bg-gray-200 dark:bg-gray-700"
+                  index < currentStage ? "bg-[#5edc1f] dark:bg-[#5edc1f]" : "bg-gray-200 dark:bg-gray-700"
                 }`} />
               )}
             </div>
@@ -384,10 +384,10 @@ export default function KYCVerificationPage() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.3 }}
-              className="bg-white dark:bg-[#1a2744] rounded-2xl p-6 sm:p-8 border border-gray-200 dark:border-white/10 shadow-lg"
+              className="bg-white dark:bg-white/[0.03] rounded-2xl p-6 sm:p-8 border border-gray-200 dark:border-white/10 shadow-lg"
             >
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 rounded-full bg-blue-500 dark:bg-blue-600 flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-[#5edc1f] dark:bg-[#5edc1f] flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
                   {currentStage + 1}
                 </div>
                 <div className="flex-1">
@@ -403,7 +403,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Title</label>
                     <select
                       {...register("title")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                     >
                       <option value="">Select Title</option>
                       <option value="mr">Mr.</option>
@@ -422,7 +422,7 @@ export default function KYCVerificationPage() {
                         type="text"
                         {...register("first_name")}
                         placeholder="John"
-                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                       />
                       {errors.first_name && <p className="text-red-500 text-sm mt-1">{errors.first_name.message}</p>}
                     </div>
@@ -432,7 +432,7 @@ export default function KYCVerificationPage() {
                         type="text"
                         {...register("last_name")}
                         placeholder="Doe"
-                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                       />
                       {errors.last_name && <p className="text-red-500 text-sm mt-1">{errors.last_name.message}</p>}
                     </div>
@@ -443,7 +443,7 @@ export default function KYCVerificationPage() {
                     <input
                       type="date"
                       {...register("dob")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                     />
                     {errors.dob && <p className="text-red-500 text-sm mt-1">{errors.dob.message}</p>}
                   </div>
@@ -457,7 +457,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Currency</label>
                     <select
                       {...register("currency")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                     >
                       <option value="">Select Currency</option>
                       <option value="USD">USD - US Dollar</option>
@@ -474,7 +474,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Status of Employment</label>
                     <select
                       {...register("status_of_employment")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                     >
                       <option value="">Select Employment Status</option>
                       <option value="employed">Employed</option>
@@ -490,7 +490,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Source of Income</label>
                     <select
                       {...register("source_of_income")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                     >
                       <option value="">Select Source of Income</option>
                       <option value="salary">Salary</option>
@@ -508,7 +508,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Industry</label>
                     <select
                       {...register("industry")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                     >
                       <option value="">Select Industry</option>
                       <option value="technology">Technology</option>
@@ -536,7 +536,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Annual Amount (USD)</label>
                     <select
                       {...register("annual_amount")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                     >
                       <option value="">Select Annual Income Range</option>
                       <option value="0-15k">Up to $15,000</option>
@@ -554,7 +554,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Estimated Net Worth (USD)</label>
                     <select
                       {...register("estimated_net_worth")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                     >
                       <option value="">Select Net Worth Range</option>
                       <option value="0-50k">Up to $50,000</option>
@@ -578,7 +578,7 @@ export default function KYCVerificationPage() {
                       type="text"
                       {...register("address")}
                       placeholder="123 Main Street"
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                     />
                     {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>}
                   </div>
@@ -590,7 +590,7 @@ export default function KYCVerificationPage() {
                         type="text"
                         {...register("city")}
                         placeholder="New York"
-                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                       />
                       {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>}
                     </div>
@@ -600,7 +600,7 @@ export default function KYCVerificationPage() {
                         type="text"
                         {...register("region")}
                         placeholder="NY"
-                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                       />
                       {errors.region && <p className="text-red-500 text-sm mt-1">{errors.region.message}</p>}
                     </div>
@@ -612,7 +612,7 @@ export default function KYCVerificationPage() {
                       type="text"
                       {...register("postal_code")}
                       placeholder="10001"
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                     />
                     {errors.postal_code && <p className="text-red-500 text-sm mt-1">{errors.postal_code.message}</p>}
                   </div>
@@ -623,7 +623,7 @@ export default function KYCVerificationPage() {
                       type="tel"
                       {...register("phone")}
                       placeholder={countryCallingCode ? `${countryCallingCode} 234 567 8900` : "+1 234 567 8900"}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                     />
                     {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
                     {countryCallingCode && <p className="text-xs text-gray-500 mt-1">Country code {countryCallingCode} detected</p>}
@@ -638,7 +638,7 @@ export default function KYCVerificationPage() {
                     <label className="block text-sm font-medium mb-2">Identification Type</label>
                     <select
                       {...register("id_type")}
-                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-[#0d1829] border-gray-300 dark:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg px-4 py-3 bg-white dark:bg-white/[0.04] border-gray-300 dark:border-[#5edc1f]/15 focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                     >
                       <option value="">Select ID Type</option>
                       <option value="passport">Passport</option>
@@ -656,9 +656,9 @@ export default function KYCVerificationPage() {
                       <div
                         {...getRootPropsFront()}
                         className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all ${
-                          isDragActiveFront ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
+                          isDragActiveFront ? "border-[#5edc1f] bg-[#5edc1f]/8 dark:bg-[#5edc1f]/10"
                             : uploadingFront ? "border-gray-400 bg-gray-100/50 dark:bg-gray-800/50 cursor-not-allowed"
-                            : "border-gray-300 dark:border-gray-600/50 hover:border-blue-400"
+                            : "border-gray-300 dark:border-[#5edc1f]/15 hover:border-[#5edc1f]"
                         }`}
                       >
                         <input {...getInputPropsFront()} />
@@ -671,7 +671,7 @@ export default function KYCVerificationPage() {
                         <Image src={idFrontPreview} alt="ID Front" fill className="object-cover" />
                         {uploadingFront && (
                           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm flex flex-col items-center justify-center z-10">
-                            <Loader2 className="w-10 h-10 text-blue-400 animate-spin mb-3" />
+                            <Loader2 className="w-10 h-10 text-lime-400 animate-spin mb-3" />
                             <p className="text-white font-medium text-sm">Uploading image...</p>
                           </div>
                         )}
@@ -700,9 +700,9 @@ export default function KYCVerificationPage() {
                       <div
                         {...getRootPropsBack()}
                         className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all ${
-                          isDragActiveBack ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
+                          isDragActiveBack ? "border-[#5edc1f] bg-[#5edc1f]/8 dark:bg-[#5edc1f]/10"
                             : uploadingBack ? "border-gray-400 bg-gray-100/50 dark:bg-gray-800/50 cursor-not-allowed"
-                            : "border-gray-300 dark:border-gray-600/50 hover:border-blue-400"
+                            : "border-gray-300 dark:border-[#5edc1f]/15 hover:border-[#5edc1f]"
                         }`}
                       >
                         <input {...getInputPropsBack()} />
@@ -715,7 +715,7 @@ export default function KYCVerificationPage() {
                         <Image src={idBackPreview} alt="ID Back" fill className="object-cover" />
                         {uploadingBack && (
                           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm flex flex-col items-center justify-center z-10">
-                            <Loader2 className="w-10 h-10 text-blue-400 animate-spin mb-3" />
+                            <Loader2 className="w-10 h-10 text-lime-400 animate-spin mb-3" />
                             <p className="text-white font-medium text-sm">Uploading image...</p>
                           </div>
                         )}
@@ -738,9 +738,9 @@ export default function KYCVerificationPage() {
                   </div>
 
                   {/* Privacy & Security Section */}
-                  <div className="bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-700/50 rounded-xl p-6 mt-8">
+                  <div className="bg-[#5edc1f]/8 dark:bg-[#5edc1f]/10 border-2 border-[#5edc1f]/30 dark:border-[#5edc1f]/30 rounded-xl p-6 mt-8">
                     <div className="flex items-start gap-4 mb-4">
-                      <div className="w-10 h-10 rounded-full bg-blue-500 dark:bg-blue-600 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-[#5edc1f] dark:bg-[#5edc1f] flex items-center justify-center flex-shrink-0">
                         <Shield className="w-5 h-5 text-white" />
                       </div>
                       <div>
@@ -751,19 +751,19 @@ export default function KYCVerificationPage() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 ml-14">
                       <div className="flex items-center gap-2">
-                        <Lock className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                        <Lock className="w-4 h-4 text-[#5edc1f] dark:text-lime-400 flex-shrink-0" />
                         <span className="text-xs text-gray-700 dark:text-gray-300">SSL encryption</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                        <CheckCircle2 className="w-4 h-4 text-[#5edc1f] dark:text-lime-400 flex-shrink-0" />
                         <span className="text-xs text-gray-700 dark:text-gray-300">Two-factor authentication</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Shield className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                        <Shield className="w-4 h-4 text-[#5edc1f] dark:text-lime-400 flex-shrink-0" />
                         <span className="text-xs text-gray-700 dark:text-gray-300">Regular security audits</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <FileCheck className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                        <FileCheck className="w-4 h-4 text-[#5edc1f] dark:text-lime-400 flex-shrink-0" />
                         <span className="text-xs text-gray-700 dark:text-gray-300">GDPR compliant</span>
                       </div>
                     </div>
@@ -786,7 +786,7 @@ export default function KYCVerificationPage() {
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="flex-1 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+                    className="flex-1 bg-[#5edc1f] hover:bg-[#4cc015] text-white py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
                   >
                     Continue <ArrowRight className="w-5 h-5" />
                   </button>
@@ -794,7 +794,7 @@ export default function KYCVerificationPage() {
                   <button
                     type="submit"
                     disabled={loading || uploadingFront || uploadingBack}
-                    className="flex-1 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex-1 bg-[#5edc1f] hover:bg-[#4cc015] text-white py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {loading ? (
                       <>

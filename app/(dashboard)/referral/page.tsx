@@ -198,7 +198,7 @@ export default function ReferralPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-5 h-5 border-2 border-[#5edc1f] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -219,7 +219,7 @@ export default function ReferralPage() {
               fetchReferralData();
               fetchReferrals();
             }}
-            className="w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-all"
+            className="w-full px-4 py-2 bg-[#5edc1f] hover:bg-[#4cc015] text-white rounded-lg font-medium transition-all"
           >
             Try Again
           </button>
@@ -236,7 +236,7 @@ export default function ReferralPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-800 rounded-2xl p-6 sm:p-8 text-white shadow-2xl"
+          className="bg-gradient-to-br from-[#4cc015] to-green-800 dark:from-[#4cc015] dark:to-green-900 rounded-2xl p-6 sm:p-8 text-white shadow-2xl"
         >
           <div className="flex items-center gap-3 mb-4">
             <div className="p-3 bg-white/20 rounded-full">
@@ -245,7 +245,7 @@ export default function ReferralPage() {
             <h1 className="text-sm sm:text-base font-bold">Reward Center</h1>
           </div>
 
-          <p className="text-blue-50 dark:text-blue-100 text-sm sm:text-base mb-6">
+          <p className="text-lime-50 dark:text-lime-100 text-sm sm:text-base mb-6">
             Invite friends and earn rewards! Get{" "}
             <span className="font-bold text-lg">
               {referralData?.referral_bonus_rate || 10}%
@@ -257,8 +257,8 @@ export default function ReferralPage() {
             {/* Total Referrals */}
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
               <div className="flex items-center gap-2 mb-2">
-                <Users className="w-5 h-5 text-blue-200" />
-                <p className="text-sm text-blue-100">Total Referrals</p>
+                <Users className="w-5 h-5 text-lime-200" />
+                <p className="text-sm text-lime-100">Total Referrals</p>
               </div>
               <p className="text-xl sm:text-2xl font-bold">
                 {referralData?.total_referrals || 0}
@@ -268,8 +268,8 @@ export default function ReferralPage() {
             {/* Total Earnings */}
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
               <div className="flex items-center gap-2 mb-2">
-                <DollarSign className="w-5 h-5 text-blue-200" />
-                <p className="text-sm text-blue-100">Total Earned</p>
+                <DollarSign className="w-5 h-5 text-lime-200" />
+                <p className="text-sm text-lime-100">Total Earned</p>
               </div>
               <p className="text-xl sm:text-2xl font-bold">
                 $
@@ -290,10 +290,10 @@ export default function ReferralPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-white dark:bg-[#1a2744] border border-gray-200 dark:border-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-8"
+          className="bg-white dark:bg-white/[0.04] border border-gray-200 dark:border-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-8"
         >
           <div className="flex items-center gap-3 mb-6">
-            <Share2 className="w-6 h-6 text-blue-500" />
+            <Share2 className="w-6 h-6 text-[#5edc1f]" />
             <h2 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">
               Your Referral Link
             </h2>
@@ -301,14 +301,14 @@ export default function ReferralPage() {
 
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-3">
-              <div className="flex-1 bg-gray-50 dark:bg-[#0f1c35] border border-gray-200 dark:border-white/10 rounded-lg px-4 py-3 overflow-x-auto">
+              <div className="flex-1 bg-gray-50 dark:bg-[#040d05] border border-gray-200 dark:border-white/10 rounded-lg px-4 py-3 overflow-x-auto">
                 <p className="text-sm text-gray-700 dark:text-gray-300 font-mono whitespace-nowrap">
                   {referralData?.referral_link || ""}
                 </p>
               </div>
               <button
                 onClick={handleCopyLink}
-                className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-all shadow-sm whitespace-nowrap"
+                className="flex items-center justify-center gap-2 px-6 py-3 bg-[#5edc1f] hover:bg-[#4cc015] text-white rounded-lg font-medium transition-all shadow-sm whitespace-nowrap"
               >
                 {copied ? (
                   <>
@@ -325,14 +325,14 @@ export default function ReferralPage() {
             </div>
 
             {/* Referral Code Display */}
-            <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg p-4">
+            <div className="bg-[#5edc1f]/8 dark:bg-[#5edc1f]/10 border border-[#5edc1f]/25 dark:border-[#5edc1f]/30 rounded-lg p-4">
               <div className="flex items-center justify-between flex-wrap gap-3">
                 <div className="flex-1 min-w-0">
                   <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">
                     Your Referral Code
                   </p>
                   {referralData?.referral_code ? (
-                    <p className="text-sm font-bold text-blue-600 dark:text-blue-400 font-mono break-all">
+                    <p className="text-sm font-bold text-[#5edc1f] dark:text-lime-400 font-mono break-all">
                       {referralData.referral_code}
                     </p>
                   ) : (
@@ -346,7 +346,7 @@ export default function ReferralPage() {
                 <button
                   onClick={generateReferralCode}
                   disabled={generating}
-                  className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm flex items-center gap-2 whitespace-nowrap"
+                  className="px-4 py-2 bg-[#5edc1f] hover:bg-[#4cc015] text-white rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm flex items-center gap-2 whitespace-nowrap"
                 >
                   {generating ? (
                     <>
@@ -387,7 +387,7 @@ export default function ReferralPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-white dark:bg-[#1a2744] border border-gray-200 dark:border-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-8"
+          className="bg-white dark:bg-white/[0.04] border border-gray-200 dark:border-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-8"
         >
           <h2 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-6">
             Complete tasks & earn!!!
@@ -400,10 +400,10 @@ export default function ReferralPage() {
 
           <div className="space-y-4">
             {/* Task 1: Refer a Friend */}
-            <div className="bg-gray-50 dark:bg-[#0f1c35] border border-gray-200 dark:border-white/10 rounded-xl p-4 sm:p-6">
+            <div className="bg-gray-50 dark:bg-[#040d05] border border-gray-200 dark:border-white/10 rounded-xl p-4 sm:p-6">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-blue-100 dark:bg-blue-500/20 rounded-full flex-shrink-0">
-                  <Users className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                <div className="p-3 bg-[#5edc1f]/10 dark:bg-[#5edc1f]/20 rounded-full flex-shrink-0">
+                  <Users className="w-6 h-6 text-[#5edc1f] dark:text-lime-400" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm sm:text-base font-bold text-yellow-600 dark:text-yellow-500 mb-2">
@@ -416,7 +416,7 @@ export default function ReferralPage() {
                   </p>
                   <button
                     onClick={handleShareClick}
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-all"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-[#5edc1f] hover:bg-[#4cc015] text-white rounded-lg text-sm font-medium transition-all"
                   >
                     <Share2 className="w-4 h-4" />
                     Share Link
@@ -426,10 +426,10 @@ export default function ReferralPage() {
             </div>
 
             {/* Task 2: First Deposit Bonus */}
-            <div className="bg-gray-50 dark:bg-[#0f1c35] border border-gray-200 dark:border-white/10 rounded-xl p-4 sm:p-6">
+            <div className="bg-gray-50 dark:bg-[#040d05] border border-gray-200 dark:border-white/10 rounded-xl p-4 sm:p-6">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-blue-100 dark:bg-blue-500/20 rounded-full flex-shrink-0">
-                  <DollarSign className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                <div className="p-3 bg-[#5edc1f]/10 dark:bg-[#5edc1f]/20 rounded-full flex-shrink-0">
+                  <DollarSign className="w-6 h-6 text-[#5edc1f] dark:text-lime-400" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm sm:text-base font-bold text-yellow-600 dark:text-yellow-500 mb-2">
@@ -442,7 +442,7 @@ export default function ReferralPage() {
 
                   <button
                     onClick={() => setShowDeposit(true)}
-                    className="inline-flex items-center mt-3 gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-all"
+                    className="inline-flex items-center mt-3 gap-2 px-4 py-2 bg-[#5edc1f] hover:bg-[#4cc015] text-white rounded-lg text-sm font-medium transition-all"
                   >
                     <DownloadCloud className="w-4 h-4" />
                     Deposit
@@ -458,7 +458,7 @@ export default function ReferralPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="bg-white dark:bg-[#1a2744] border border-gray-200 dark:border-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-8"
+          className="bg-white dark:bg-white/[0.04] border border-gray-200 dark:border-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-8"
         >
           <h2 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-6">
             Your Referrals ({referrals.length})
@@ -499,7 +499,7 @@ export default function ReferralPage() {
                     {referrals.map((referral) => (
                       <tr
                         key={referral.id}
-                        className="border-b border-gray-100 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-[#1e3a5f]/30 transition-colors"
+                        className="border-b border-gray-100 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-white/[0.04] transition-colors"
                       >
                         <td className="py-5 px-4 text-sm text-gray-700 dark:text-gray-300 font-medium">
                           {referral.first_name} {referral.last_name}
@@ -521,7 +521,7 @@ export default function ReferralPage() {
                             {referral.has_deposited ? "Deposited" : "Pending"}
                           </span>
                         </td>
-                        <td className="py-5 px-4 text-sm font-semibold text-blue-600 dark:text-blue-400">
+                        <td className="py-5 px-4 text-sm font-semibold text-[#5edc1f] dark:text-lime-400">
                           $
                           {parseFloat(referral.bonus_earned).toLocaleString(
                             undefined,
@@ -542,7 +542,7 @@ export default function ReferralPage() {
                 {referrals.map((referral) => (
                   <div
                     key={referral.id}
-                    className="bg-gray-50 dark:bg-[#0f1c35] border border-gray-200 dark:border-white/10 rounded-xl p-4 space-y-3"
+                    className="bg-gray-50 dark:bg-[#040d05] border border-gray-200 dark:border-white/10 rounded-xl p-4 space-y-3"
                   >
                     <div className="flex justify-between items-start">
                       <div>
@@ -577,7 +577,7 @@ export default function ReferralPage() {
                         <p className="text-xs text-gray-500 dark:text-gray-400">
                           Earned
                         </p>
-                        <p className="text-sm font-bold text-blue-600 dark:text-blue-400">
+                        <p className="text-sm font-bold text-[#5edc1f] dark:text-lime-400">
                           $
                           {parseFloat(referral.bonus_earned).toLocaleString(
                             undefined,
@@ -607,13 +607,13 @@ export default function ReferralPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="bg-white dark:bg-[#1a2744] rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 relative border border-gray-200 dark:border-white/10"
+            className="bg-white dark:bg-white/[0.04] rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 relative border border-gray-200 dark:border-white/10"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-[#1e3a5f]/50 transition-colors"
+              className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/[0.06] transition-colors"
               aria-label="Close modal"
             >
               <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
@@ -641,11 +641,11 @@ export default function ReferralPage() {
                     type="text"
                     value={referralData?.referral_link || ""}
                     readOnly
-                    className="flex-1 px-4 py-3 bg-gray-50 dark:bg-[#0f1c35] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 font-mono focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-4 py-3 bg-gray-50 dark:bg-[#040d05] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 font-mono focus:outline-none focus:ring-2 focus:ring-[#5edc1f]"
                   />
                   <button
                     onClick={handleModalCopy}
-                    className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-all shadow-sm flex items-center justify-center gap-2 whitespace-nowrap"
+                    className="px-6 py-3 bg-[#5edc1f] hover:bg-[#4cc015] text-white rounded-lg font-medium transition-all shadow-sm flex items-center justify-center gap-2 whitespace-nowrap"
                   >
                     {modalCopied ? (
                       <>
@@ -663,11 +663,11 @@ export default function ReferralPage() {
               </div>
 
               {/* Referral Code in Modal */}
-              <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg p-4">
+              <div className="bg-[#5edc1f]/8 dark:bg-[#5edc1f]/10 border border-[#5edc1f]/25 dark:border-[#5edc1f]/30 rounded-lg p-4">
                 <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">
                   Your Referral Code
                 </p>
-                <p className="text-xl font-bold text-blue-600 dark:text-blue-400 font-mono">
+                <p className="text-xl font-bold text-[#5edc1f] dark:text-lime-400 font-mono">
                   {referralData?.referral_code || "N/A"}
                 </p>
               </div>

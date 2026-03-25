@@ -12,4 +12,3 @@ export default function ProtectedLayout({
 }) {
   return <ProtectedShell>{children}</ProtectedShell>;
 }
-

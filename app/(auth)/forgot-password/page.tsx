@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
+
 import { motion } from "framer-motion";
 import { ArrowLeft, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -64,14 +64,14 @@ export default function ForgotPasswordPage() {
   if (emailSent) {
     return (
       <PagePreloader>
-        <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gradient-to-br dark:from-[#0a1628] dark:via-[#0d1b2a] dark:to-[#1b263b] px-8">
+        <div className="min-h-screen flex items-center justify-center px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="w-full max-w-md text-center space-y-6"
         >
-          <div className="w-20 h-20 bg-blue-100 dark:bg-blue-500/20 rounded-full flex items-center justify-center mx-auto">
-            <Mail className="w-10 h-10 text-blue-600" />
+          <div className="w-20 h-20 bg-[#5edc1f]/15 dark:bg-[#5edc1f]/20 rounded-full flex items-center justify-center mx-auto">
+            <Mail className="w-10 h-10 text-[#5edc1f]" />
           </div>
 
           <h1 className="text-2xl font-bold text-black dark:text-white">
@@ -86,7 +86,7 @@ export default function ForgotPasswordPage() {
 
           <div className="pt-4">
             <Link href="/login">
-              <Button className="w-full p-5 bg-blue-700 hover:bg-blue-600">
+              <Button className="w-full p-5 bg-[#5edc1f] hover:bg-[#4cc015] text-gray-900 font-bold">
                 Back to Login
               </Button>
             </Link>
@@ -96,7 +96,7 @@ export default function ForgotPasswordPage() {
             Didn&apos;t receive the email?{" "}
             <button
               onClick={() => setEmailSent(false)}
-              className="text-blue-500 hover:underline"
+              className="text-[#5edc1f] hover:underline"
             >
               Try again
             </button>
@@ -109,43 +109,23 @@ export default function ForgotPasswordPage() {
 
   return (
     <PagePreloader>
-      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gradient-to-br dark:from-[#0a1628] dark:via-[#0d1b2a] dark:to-[#1b263b] px-8">
+      <div className="min-h-screen flex items-center justify-center px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-md space-y-6"
+        className="w-full max-w-md space-y-6 dark:bg-white/[0.025] dark:backdrop-blur-sm dark:border dark:border-[#5edc1f]/10 dark:rounded-3xl dark:p-8 dark:shadow-2xl dark:shadow-black/40"
       >
         {/* Logo */}
-        <Link
-          href="/"
-          className="hidden dark:flex text-2xl md:text-4xl font-extrabold justify-center"
-        >
-          <Image
-            alt="logo"
-            src={"/logo_light.png"}
-            className="w-50"
-            width={1000}
-            height={250}
-          />
-        </Link>
-        <Link
-          href="/"
-          className="flex dark:hidden text-2xl md:text-4xl font-extrabold justify-center"
-        >
-          <Image
-            alt="logo"
-            src={"/logo_dark.png"}
-            className="w-50"
-            width={1000}
-            height={250}
-          />
+        <Link href="/" className="inline-flex items-baseline gap-0.5 justify-center mb-2">
+          <span className="text-3xl font-black tracking-tight text-gray-900 dark:text-white">Kove</span>
+          <span className="text-3xl font-black tracking-tight text-[#5edc1f]">Trade</span>
         </Link>
 
         <div className="space-y-2">
           <Link
             href="/login"
-            className="inline-flex items-center text-sm text-blue-500 hover:underline"
+            className="inline-flex items-center text-sm text-[#5edc1f] hover:underline"
           >
             <ArrowLeft className="w-4 h-4 mr-1" />
             Back to Login
@@ -168,10 +148,10 @@ export default function ForgotPasswordPage() {
               id="email"
               type="email"
               {...register("email")}
-              className={`peer w-full border rounded-md px-3 pt-5 pb-2 bg-white dark:bg-[#1e2d3d]/50 text-black dark:text-white focus:outline-none transition-all ${
+              className={`peer w-full border rounded-md px-3 pt-5 pb-2 bg-white dark:bg-white/[0.04] text-black dark:text-white focus:outline-none transition-all ${
                 errors.email
                   ? "border-red-500"
-                  : "border-gray-300 dark:border-gray-600/50"
+                  : "border-gray-300 dark:border-[#5edc1f]/15"
               }`}
               placeholder=" "
             />
@@ -195,7 +175,7 @@ export default function ForgotPasswordPage() {
           <Button
             disabled={loading}
             type="submit"
-            className="w-full py-6 bg-blue-700 hover:bg-blue-600 text-white rounded-md"
+            className="w-full py-6 bg-[#5edc1f] hover:bg-[#4cc015] text-gray-900 font-bold rounded-md"
           >
             {!loading ? (
               <span>Send Reset Link</span>
@@ -206,7 +186,7 @@ export default function ForgotPasswordPage() {
 
           <p className="text-center text-sm text-gray-600 dark:text-gray-400">
             Remember your password?{" "}
-            <Link href="/login" className="text-blue-500 hover:underline">
+            <Link href="/login" className="text-[#5edc1f] hover:underline">
               Sign in
             </Link>
           </p>
