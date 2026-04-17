@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import Script from "next/script";
+import Livechat from "@/components/Livechat";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -123,6 +124,7 @@ export default function RootLayout({
         >
           {children}
           <Toaster richColors position="top-right" />
+          <Livechat />
         </ThemeProvider>
 
         {/* LiveChat - Jovo */}
